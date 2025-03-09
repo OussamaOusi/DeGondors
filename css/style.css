@@ -59,6 +59,8 @@ main {
 main h1{
     color: #f4f4f4;
 }
+
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -84,4 +86,12 @@ main h1{
     margin-top: 10px;
     font-size: 16px;
     color: #333;
+}
+
+.quotecontainer {
+    border: 5px solid black;
+    border-radius: 20px;
+    height: 300px;
+    width: 300px;
+    color: white;
 }
