@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-radius: 40px;
+}
+
+.navbar .logo img {
+    height: 50px; /* Pas de hoogte van je logo aan */
+    border-radius: 50px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Ruimte tussen de knoppen */
+    list-style-type: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff5733; /* Verandert kleur bij hover */
+}
+main {
+    padding-top: 70px;
+    
+}
+
+main h1{
+    color: #f4f4f4;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.option {
+    text-align: center;
+    width: 30%;
+    border-width: 1px black;
+    color: white
+}
+
+.option img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.option p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
