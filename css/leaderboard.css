@@ -40,6 +40,8 @@ body > * {
 }
 
 .leaderboard_main {
+  background-image: url(../images/Backgroundjpg.jpg);
+  background-size:cover;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -58,7 +60,7 @@ body > * {
   gap: 15px;
   justify-content: space-evenly;
   max-width: 100%;
-  min-width: 300px;
+  min-width: 0px;
   padding: 1rem;
 }
 
