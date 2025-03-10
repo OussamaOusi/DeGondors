@@ -94,3 +94,25 @@ main h1{
     width: 300px;
     color: white;
 }
+
+.containerLandingpage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+
+.landingpageRow {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.landingpageRow img {
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+}
