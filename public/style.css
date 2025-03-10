@@ -1,16 +1,46 @@
-* {
+/* Algemene body stijlen */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden; /* Voorkomt horizontale scrollbar */
+    color: white; /* Standaard tekstkleur wit */
 }
 
+/* Home body stijlen */
+.home-body {
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg"); /* Zorg ervoor dat dit pad correct is */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Favorites body stijlen */
+.favorites-body {
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg"); /* Achtergrond voor favorieten pagina */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Blacklist body stijlen */
+.blacklist-body {
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg"); /* Achtergrond voor blacklist pagina */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Navbar stijlen */
 nav {
     display: flex;
     align-items: center;
     background-color: #333;
     padding: 0 1rem;
-    height: 60px; /* Pas dit aan naar de gewenste hoogte */
+    height: 60px;
 }
 
 .logo {
@@ -21,8 +51,8 @@ nav {
 }
 
 .logo img {
-    height: 80%; /* Behoudt de aspect ratio van het logo */
-    max-height: 50px; /* Maximale hoogte van het logo */
+    height: 80%;
+    max-height: 50px;
     width: auto;
 }
 
@@ -53,52 +83,58 @@ nav {
     background-color: #555;
     color: #ffd700;
 }
-.page {
-    display: none;
+
+/* Main content stijlen */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
 }
 
-.active-page {
-    display: block;
-}
-
-.character-header {
+.container {
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 2rem;
-    padding: 2rem;
-    background-color: #555;
-    color: white;
+    margin-top: 2rem;
+    flex-wrap: wrap; /* Zorgt ervoor dat items naar een nieuwe regel gaan als er niet genoeg ruimte is */
 }
 
-.quotes-section {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
-
-.quote {
-    background-color: white;
+.option {
+    background-color: rgba(0, 0, 0, 0.5); /* Donkere, transparante achtergrond */
+    padding: 1rem;
     border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px; /* Vaste breedte voor de game modes */
+    color: white; /* Witte tekst */
 }
 
-.blacklist-reason {
-    color: #ff4444;
+.option img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.option ul {
+    list-style-type: none;
+    padding: 0;
     margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
 }
 
+.option li {
+    margin: 0.5rem 0;
+}
+
+/* Footer stijlen */
 footer {
     background-color: #333;
     color: white;
     text-align: center;
     padding: 1rem;
-    position: fixed;
-    bottom: 0;
     width: 100%;
 }
 body .favoritebody{
