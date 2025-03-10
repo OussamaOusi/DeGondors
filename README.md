@@ -58,6 +58,15 @@ De API die we gebruiken is: [The One API](https://the-one-api.dev/documentation)
 
 ---
 
+## Blitz Mode
+
+- In de **Blitz** modus:
+  - Per correcte combinatie krijgt de gebruiker **1 punt**.
+  - Na 60 seconden stopt de gamemode.
+  - De gebruiker krijgt ook te zien wat de **high score** was.
+
+---
+
 ## Favorieten
 
 In het gedeelte **Favorieten** staan de favoriete quotes van de gebruiker:
