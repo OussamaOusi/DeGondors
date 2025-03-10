@@ -137,21 +137,33 @@ footer {
     padding: 1rem;
     width: 100%;
 }
-body .favoritebody{
-    background-color: #f4f4f4;
-}
-body .fullbody{
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    background-image: url("/images/Backgroundjpg.jpg");
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+/* Blitz specifieke stijlen */
+.blitz-body {
+    background-color: #1a1a1a;
+    color: white;
 }
 
-/* LEADERBOARD */
+.blitz-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    position: relative;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.question-counter {
+    background-color: #ffd700;
+    color: #333;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
 
 /* CONTACT */
 
@@ -162,7 +174,79 @@ body .fullbody{
     justify-content: center;
 }
 
+.quote-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    position: relative;
+}
 
+.quote-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+}
 
+.timer-circle {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    background-color: #ff4444;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
 
+.character-selection {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
 
+.character-selection h2 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.character-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+}
+
+.character-item {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.character-item:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+}
+
+.score-display {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.score-value {
+    color: #ffd700;
+    margin-left: 0.5rem;
+}
