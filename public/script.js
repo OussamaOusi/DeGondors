@@ -116,3 +116,15 @@ wrongLandingpageImgs.forEach(image => {
     image.addEventListener('click', () => alert('You are not authorized to view this project!'))
 });
 
+let timeLeft = 60;
+const timerElement = document.getElementById("timer");
+const countdown = setInterval(() => {
+    timeLeft--;
+    timerElement.textContent = timeLeft;
+
+    if(timeLeft <= 0){
+        clearInterval(countdown);
+        alert("Out of time!");
+    }
+}, 1000);
+
