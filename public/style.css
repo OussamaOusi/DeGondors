@@ -5,10 +5,6 @@
     font-family: Arial, sans-serif;
 }
 
-body {
-    background-color: #f0f0f0;
-}
-
 nav {
     background-color: #333;
     padding: 1rem;
@@ -82,3 +78,25 @@ footer {
     bottom: 0;
     width: 100%;
 }
+body .favoritebody{
+    background-color: #f4f4f4;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
