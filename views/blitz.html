@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/public/style.css">
     <title>Blitz</title>
 </head>
-<body>
+<body class="fullbody">
     <header>
         <nav class="navbar">
             <section class="logo">
                 <img src="/images/Logo.jpg" alt="">
             </section>
             <ul class="nav-links">
-                <li><a class="active" href="home.html">home</a></li>
-                <li><a href="highscore.html">highscores</a></li>
-                <li><a href="favorite.html">favoriete quotes</a></li>
-                <li><a href="blacklist.html">blacklisted quotes</a></li>
+                <a href="/views/home.html">Quiz</a>
+                <a href="/views/highscore.html">Highscores</a>
+                <a href="/views/favorites.html" class="active">Favorite quotes</a>
+                <a href="/views/blacklist.html">Blacklisted quotes</a>
+                <a href="/views/">Contact</a>
             </ul>
         </nav>
     </header>
@@ -36,7 +37,7 @@
         </section>
         <section>
             <button onclick="fetchQuote()">Haal een quote op</button>
-            <script src="dist/script.js"></script>
+            <script src="/public/script.js"></script>
         </section>
     </main>
 </body>

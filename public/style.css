@@ -81,7 +81,7 @@ footer {
 body .favoritebody{
     background-color: #f4f4f4;
 }
-body {
+body .fullbody{
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     background-image: url("/images/Backgroundjpg.jpg");
