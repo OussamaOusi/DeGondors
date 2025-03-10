@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/public/style.css">
     <title>Home</title>
 </head>
-<body>
+<body  class="fullbody">
     <header>
         <nav class="navbar">
             <section class="logo">
                 <img src="/images/Logo.jpg" alt="">
             </section>
             <ul class="nav-links">
-              <li><a class="active" href="home.html">home</a></li>
-              <li><a href="highscore.html">highscores</a></li>
-              <li><a href="favorites.html">favoriete quotes</a></li>
-              <li><a href="blacklist.html">blacklisted quotes</a></li>
+                <a href="/views/home.html">Quiz</a>
+                <a href="/views/highscore.html">Highscores</a>
+                <a href="/views/favorites.html" class="active">Favorite quotes</a>
+                <a href="/views/blacklist.html">Blacklisted quotes</a>
+                <a href="/views/">Contact</a>
             </ul>
         </nav>
     </header>
@@ -24,7 +25,7 @@
         <h1>Kies je quizmodus</h1>
         <section class="container">
             <article class="option">
-                <a href="10rounds.html">
+                <a href="/views/10rounds.html">
                     <img src="/images/10 rounds.jpg" alt="10rounds">
                 </a>
                 <ul>
@@ -34,7 +35,7 @@
                 </ul>
             </article>
             <article class="option">
-                <a href="blitz.html">
+                <a href="/views/blitz.html">
                     <img src="/images/Blitz.jpg" alt="Blitz">
                 </a>
                 <ul>
@@ -43,7 +44,7 @@
                 </ul>
             </article>
             <article class="option">
-                <a href="suddendeath.html">
+                <a href="/views/suddendeath.html">
                     <img src="/images/Sudden Death.jpg" alt="SuddenDeath">
                 </a>
                 <ul>
