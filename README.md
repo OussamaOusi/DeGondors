@@ -1,40 +1,82 @@
-# DeGondors
+# Project Beschrijving
 
-Gemeenschappelijk.
-De gebruiker komt op een landing page terecht waar alle uit te kiezen projecten staan.
-	Deze hebben minstens de naam van het project en een afbeelding.
-De gebruiker kiest het project dat door de groep gemaakt is.
-Ben je nog niet ingelogd dan krijg je de melding dat je eerst moet inloggen.
-LET OP: blacklists en favorieten zijn gebruiker gebonden 
-(gebruiker a kan dus een andere favoriete karakters hebben dan gebruiker b)
-	Als de gebruiker op een ander project klikt krijgt hij een melding dat hij hier niet aan kan deelnemen. (mag hard coded zijn)
-De gebruiker komt op de landing page van het project terecht.
-API
-https://the-one-api.dev/documentation
-Quotes quiz
-De gebruiker kiest om de quiz te starten
-Het systeem geeft een quote die ergens in Lord of The Rings voorkomt
-Het systeem geeft 3 mogelijke karakters en films waarin deze quote voorkomt.
-	Je kan vragen een thumbs up geven: favoriten (opgeslagen in database)
-	Je kan vragen een thumbs down geven: blacklisten (opgeslagen in database)
-		Je moet een reden geven waarom je ze blacklist
-		Deze zullen niet meer voorkomen in de quizen
-De gebruiker kiest de juiste combinatie.
-	10 rounds
-		Per goede combinatie 1 punt,  als 1 stukje juist is 0,5
-		Na 10 vragen stopt het spel en komt de eindscore op het scherm
-			Je krijgt ook te zien wat de high score was
-	Sudden Death
-		Per goede combinatie 1 punt
-		Bij een fout (half)antwoord krijg je te zien hoeveel er na elkaar goed waren 
-			Je krijgt ook te zien wat de high score was
-Favorites
-Hier staan je favoriete quotes opgelijst met de naam van het karakter van wie de quote komt.
-Je kan quotes verwijderen of ze allemaal afprinten naar een tekstbestand in volgend formaat:
-<Quote> - <Karakternaam>
-<Quote> - <Karakternaam>
-Je kan per karakter dat voorkomt in de quotes zien hoeveel quotes deze heeft. Klik je op de karakternaam dan krijg je enkel deze quotes te zien.
-De naam is ook een hyperlink naar https://lotr.fandom.com/wiki/ <naam karakter>
-Blacklists
-Hier staan al je geblackliste quotes. Deze komen niet voor in de quiz, je kan de reden zien en aanpassen.
-Je kan een geblackliste quote verwijderen.
+## Gemeenschappelijk
+
+- De gebruiker komt op een **landing page** terecht waar alle uit te kiezen projecten staan. Deze projecten bevatten minimaal:
+  - De naam van het project
+  - Een afbeelding
+
+- De gebruiker kiest het project dat door de groep is gemaakt.
+
+- **Let op**: Blacklists en favorieten zijn gebruiker gebonden.
+  - Gebruiker A kan andere favoriete karakters hebben dan gebruiker B.
+
+- Als de gebruiker nog niet is ingelogd, krijgt hij een melding dat hij eerst moet inloggen.
+
+- **Bij klikken op een ander project**:
+  - De gebruiker krijgt een melding dat hij hier niet aan kan deelnemen (dit kan hardcoded zijn).
+
+- De gebruiker komt vervolgens op de landing page van het gekozen project terecht.
+
+---
+
+## API Integratie
+
+De API die we gebruiken is: [The One API](https://the-one-api.dev/documentation).
+
+---
+
+## Quiz Functionaliteiten
+
+### Starten van de Quiz
+
+1. De gebruiker kiest om de quiz te starten.
+2. Het systeem geeft een quote die ergens in *Lord of the Rings* voorkomt.
+3. Het systeem biedt **3 mogelijke karakters** en **films** waarin deze quote voorkomt.
+4. De gebruiker kan:
+   - Een **thumbs-up** geven (deze wordt toegevoegd aan de favorieten in de database).
+   - Een **thumbs-down** geven (deze wordt toegevoegd aan de blacklists in de database).
+     - De gebruiker moet een reden geven voor de blacklist.
+     - Deze quotes komen niet meer voor in de quiz.
+
+### Score & Beoordeling
+
+- Het quizspel bestaat uit **10 rounds**.
+  - Per correcte combinatie krijgt de gebruiker **1 punt**.
+  - Als één onderdeel correct is, krijgt de gebruiker **0,5 punt**.
+- Na de 10 vragen stopt het spel en wordt de **eindscore** op het scherm weergegeven.
+- De gebruiker krijgt ook te zien wat de **high score** was.
+
+---
+
+## Sudden Death Mode
+
+- In de **Sudden Death** modus:
+  - Per correcte combinatie krijgt de gebruiker **1 punt**.
+  - Bij een fout (half goed antwoord) krijgt de gebruiker te zien hoeveel antwoorden hij of zij goed had na elkaar.
+  - De gebruiker krijgt ook te zien wat de **high score** was.
+
+---
+
+## Favorieten
+
+In het gedeelte **Favorieten** staan de favoriete quotes van de gebruiker:
+
+- Elke quote wordt weergegeven met de naam van het karakter van wie de quote komt.
+- De gebruiker kan:
+  - Quotes verwijderen.
+  - Alle quotes afprinten naar een tekstbestand in het volgende formaat:
+    - `- [Quote text]`
+- Per karakter kan de gebruiker zien hoeveel quotes dit karakter heeft.
+  - Als je op de karakternaam klikt, krijg je enkel de quotes van dit specifieke karakter te zien.
+  - De naam van het karakter is ook een hyperlink naar de Fandom-pagina van dit karakter: [https://lotr.fandom.com/wiki/](https://lotr.fandom.com/wiki/).
+
+---
+
+## Blacklists
+
+In het gedeelte **Blacklists** staan de geblackliste quotes van de gebruiker:
+
+- Deze quotes komen niet voor in de quiz.
+- De gebruiker kan de reden voor de blacklist zien en deze aanpassen.
+- De gebruiker kan een geblackliste quote verwijderen.
