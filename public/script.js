@@ -110,3 +110,9 @@ function fetchQuote() {
     });
 }
 fetchQuote();
+
+const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
+wrongLandingpageImgs.forEach(image => {
+    image.addEventListener('click', () => alert('You are not authorized to view this project!'))
+});
+
