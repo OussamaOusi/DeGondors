@@ -128,3 +128,22 @@ const countdown = setInterval(() => {
     }
 }, 1000);
 
+const registeredUser = {
+    username: "admin",
+    password: "admin"
+};
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+    const errorMessage = document.getElementById("error-message").value;
+
+    if(username == registeredUser.username && password == registeredUser.password){
+        alert("Login successful!");
+        window.location.href = "./index.html";
+    } else {
+        errorMessage.textContent = "Invalid username or password. Please try again.";
+    }
+});
