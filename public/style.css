@@ -199,6 +199,17 @@ footer {
     font-size: 1.2rem;
 }
 
+/* CONTACT */
+
+.contact_form {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*---------*/
+
 .quote-box {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 2rem;
