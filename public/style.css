@@ -291,3 +291,150 @@ footer {
     font-weight: bold;
 }
 /* Blitz */
+/* LandingPage index.html */
+.indexBody{
+    font-family: Arial, sans-serif;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.containerLandingpage {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.landingpageRow {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.landingpageRow img {
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+}
+/* Registration Page */
+.registrationBody{
+    font-family: Arial, sans-serif;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;    
+  }
+.registration-article {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .registration-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .registration-form label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .registration-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .registration-form button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .registration-form button:hover {
+    background-color: #45a049;
+  }
+
+  /* Loginpage Styling */
+  .loginBody{
+    font-family: Arial, sans-serif;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;    
+  }
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+  }
+  
+  .login-article {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+  }
+  
+  /* LoginForm Styling */
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form label {
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .login-form button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .login-form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 15px;
+  }
