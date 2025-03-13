@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/style.css">
-    <title>Blitz</title>
+    <title>Quote Blitz</title>
 </head>
-<body class="fullbody">
+<body class="blitz-body">
     <header>
         <nav>
             <section class="logo">
@@ -21,29 +21,47 @@
             </section>
         </nav>
     </header>
+
     <main>
         <section class="blitz-container">
-            <p id="quote-text"></p>
-            <section class="quote-box">
-                <button id="button1" class="choices button1">Optie 1</button>
-                <button id="button2" class="choices button2">Optie 2</button>
-                <button id="button3" class="choices button3">Optie 3</button>
-                <button id="button4" class="choices button4">Optie 4</button>
-                <section class="timer-container">
-                    <article id="timer" class="timer">60</article>
-                    <script src="timerscript.js"></script>
-                </section>
+            <!-- Header met vraagnummer -->
+            <div class="quiz-header">
+                <h1>Quote Blitz</h1>
+                <div class="question-counter">1</div>
+            </div>
+
+            <!-- Quote en timer -->
+            <div class="quote-box">
+                <p id="quote-text" class="quote-text"></p>
+                <div class="timer-circle">
+                    <span id="timer">60</span>s
+                </div>
+            </div>
+
+            <!-- Karakterkeuzes -->
+            <section class="character-selection">
+                <h2>Wie zei het?</h2>
+                <div class="character-grid">
+                    <button id="button1" class="character-button">Optie 1</button>
+                    <button id="button2" class="character-button">Optie 2</button>
+                    <button id="button3" class="character-button">Optie 3</button>
+                    <button id="button4" class="character-button">Optie 4</button>
+                </div>
             </section>
 
-            <section class="score-display">
+            <!-- Score display -->
+            <div class="score-display">
                 <span class="score-text">Score:</span>
-                <span class="score-value">3/7</span>
-            </section>
+                <span id="score-value" class="score-value">0/0</span>
+            </div>
         </section>
         <section>
             <button onclick="fetchQuote()">Haal een quote op</button>
             <script src="/public/script.js"></script>
         </section>
     </main>
+
+    <script src="/public/timerscript.js"></script>
+    <script src="/public/script.js"></script>
 </body>
 </html>
