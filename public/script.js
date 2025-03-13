@@ -111,11 +111,13 @@ function fetchQuote() {
 }
 fetchQuote();
 
+//Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
 wrongLandingpageImgs.forEach(image => {
     image.addEventListener('click', () => alert('You are not authorized to view this project!'))
 });
 
+//Timer 
 let timeLeft = 60;
 const timerElement = document.getElementById("timer");
 const countdown = setInterval(() => {
@@ -133,17 +135,50 @@ const registeredUser = {
     password: "admin"
 };
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+//Login form 
+const loginForm = document.getElementById("loginForm");
+if(loginForm){
+    loginForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+    
+        const username = document.getElementById("loginUsername").value;
+        const password = document.getElementById("loginPassword").value;
+        const errorMessage = document.getElementById("error-message");
+        // console.log(username);
+        // console.log(password); 
+        // console.log(errorMessage);
+    
+        if(username === registeredUser.username && password === registeredUser.password){
+            alert("Login successful!");
+            window.location.href = "../index.html";
+        } else {
+            console.log("foute login")
+            if(errorMessage){
+                errorMessage.textContent = "Invalid username or password. Please try again.";
+            }
+        }
+    })
+};
 
-    const username = document.getElementById("loginUsername").value;
-    const password = document.getElementById("loginPassword").value;
-    const errorMessage = document.getElementById("error-message").value;
 
-    if(username == registeredUser.username && password == registeredUser.password){
-        alert("Login successful!");
-        window.location.href = "./index.html";
-    } else {
-        errorMessage.textContent = "Invalid username or password. Please try again.";
-    }
-});
+//Registration Form
+const registrationForm = document.getElementById("registrationForm");
+if(registrationForm){
+    registrationForm.addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        alert("Registration successful!");
+        window.location.href = "../index.html";
+    })
+};
+
+
+
+// // Toggle password visibility
+// const togglePassword = document.getElementById('togglePassword');
+// const passwordField = document.getElementById('loginPassword');
+
+// togglePassword.addEventListener('click', function() {
+//   // Toggle the input type between password and text
+//   const type = passwordField.type === 'password' ? 'text' : 'password';
+//   passwordField.type = type;
+// });
