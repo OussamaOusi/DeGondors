@@ -18,22 +18,43 @@ body {
     background-position: center;
 }
 
+h1{
+    color: white;
+}
+
 /* Favorites */
+/* Favorietenpagina specifieke stijlen */
 .favorites-body {
-    background-color: #f4f4f4;
-    background-image: url("/images/Backgroundjpg.jpg"); /* Achtergrond voor favorieten pagina */
+    background-color: #1a1a1a; /* Donkere achtergrond */
+    background-image: url("/images/RingBackground.jpg"); /* Achtergrond voor favorieten pagina */
     background-size: cover;
     background-position: center;
+    color: white; /* Witte tekst voor betere leesbaarheid */
 }
 
 .character-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-    padding: 2rem;
-    background-color: #555;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: rgba(65, 54, 32, 0.8);  /* Donkere, transparante achtergrond */
     color: white;
+}
+
+.nav-button {
+    background-color: #ffd700;
+    color: #333;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #ffcc00;
 }
 
 .quotes-section {
@@ -43,13 +64,51 @@ body {
 }
 
 .quote {
-    background-color: white;
+    background-color: transparent; /* Doorzichtige achtergrond */
+    border: 2px solid rgba(255, 255, 255); /* Border die bij de achtergrond past */
     border-radius: 8px;
-    padding: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.quote-title {
+    color: white; /* Witte tekst */
     margin-bottom: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.25rem;
+}
+
+.quote-text {
+    color: white; /* Witte tekst */
+    line-height: 1.6;
+    margin: 0;
 }
 /* Favorites */
+
+/* Blacklist */
+
+.blacklist-reason {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Subtiele lijn boven de reden */
+}
+
+.blacklist-reason h4 {
+    color: white; /* Witte kleur voor de titel */
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase; /* Titel in hoofdletters */
+    letter-spacing: 1px; /* Meer ruimte tussen letters */
+}
+
+.blacklist-reason p {
+    color: white; /* Witte tekst */
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic; /* Cursieve tekst voor een creatieve touch */
+    opacity: 0.9; /* Licht transparant voor een subtiel effect */
+}
+
+/* Blacklist */
 
 /* Blacklist body stijlen */
 .blacklist-body {
@@ -163,6 +222,8 @@ footer {
     color: white;
     text-align: center;
     padding: 1rem;
+    position: fixed;
+    bottom: 0;
     width: 100%;
 }
 /* Footer */

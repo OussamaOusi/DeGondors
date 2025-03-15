@@ -94,7 +94,7 @@ function fetchQuote() {
             console.log("Json response data:");
             console.log(data);
             const randomQuote = data.docs[Math.floor(Math.random() * data.docs.length)].dialog;
-            const quoteElement = document.getElementById('quote');
+            const quoteElement = document.getElementById('quote-text');
             console.log("Opgehaalde quote");
             console.log(quoteElement);
             if (quoteElement) {
@@ -102,7 +102,7 @@ function fetchQuote() {
             }
         }
         catch (error) {
-            const quoteElement = document.getElementById('quote');
+            const quoteElement = document.getElementById('quote-text');
             if (quoteElement) {
                 quoteElement.innerText = `Fout: ${error.message}`;
             }
