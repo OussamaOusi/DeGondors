@@ -6,7 +6,7 @@
     <title>Contact</title>
     <link rel="stylesheet" href="../public/style.css">
 </head>
-<body>
+<body class="contact-body">
     <nav>
         <section class="logo">
             <img src="/images/Logo.jpg" alt="Website Logo">
@@ -19,15 +19,48 @@
             <a href="/views/contact.html"class="active">Contact</a>
         </section>
     </nav>
-
     <main class="contact_main">
-        <h1>Contact us!</h1>
+
+        <section class="cards-container">
+            <!-- Card 1 -->
+            <article class="card">
+                <img src="/images/profileOussamapng.png" alt="Person 1" class="card-image">
+                <section class="card-text">
+                    <h3>Oussama Amezian</h3>
+                    <p>Student Graduaat Programmeren</p>
+                    <p>AP Hogeschool</p>
+                </section>
+            </article>
+    
+            <!-- Card 2 -->
+            <article class="card">
+                <img src="/images/ProfileSalim.png" alt="Person 2" class="card-image">
+                <section class="card-text">
+                    <h3>Salim Chatar</h3>
+                    <p>Student Graduaat Programmeren</p>
+                    <p>AP Hogeschool</p>
+                </section>
+            </article>
+    
+            <!-- Card 3 -->
+            <article class="card">
+                <img src="/images/ProfileRobin.png" alt="Person 3" class="card-image">
+                <section class="card-text">
+                    <h3>Robin Segers</h3>
+                    <p>Student Graduaat Programmeren</p>
+                    <p>AP Hogeschool</p>
+                </section>
+            </article>
+        </section>
+
+        <h1>Contacteer ons!</h1>
         <section class="contact_section">
             <form class="contact_form" action="">
                 <label for="contact_email">E-mail:</label>
                 <input type="email" name="contact_email" id="contactEmail">
-                <label for="contact_message">Describe your issue:</label>
+                <label for="contact_message">Laat hier je bericht achter:</label>
                 <input type="text" name="contact_message" id="contactMessage">
+                <button>Verzend</button>
             </form>
         </section>
     </main>

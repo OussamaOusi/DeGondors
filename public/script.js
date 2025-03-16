@@ -114,7 +114,7 @@ fetchQuote();
 //Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
 wrongLandingpageImgs.forEach(image => {
-    image.addEventListener('click', () => alert('You are not authorized to view this project!'))
+    image.addEventListener('click', () => alert('Je hebt geen toegang tot dit project!'))
 });
 
 //Timer 
@@ -126,7 +126,7 @@ const countdown = setInterval(() => {
 
     if(timeLeft <= 0){
         clearInterval(countdown);
-        alert("Out of time!");
+        alert("De tijd is om!");
     }
 }, 1000);
 
@@ -149,12 +149,12 @@ if(loginForm){
         // console.log(errorMessage);
     
         if(username === registeredUser.username && password === registeredUser.password){
-            alert("Login successful!");
+            alert("Proficiat, je bent ingelogd!");
             window.location.href = "../index.html";
         } else {
             console.log("foute login")
             if(errorMessage){
-                errorMessage.textContent = "Invalid username or password. Please try again.";
+                errorMessage.textContent = "Foute gebruikersnaam of wachtwoord. Probeer opnieuw";
             }
         }
     })
@@ -170,6 +170,27 @@ if(registrationForm){
         window.location.href = "../index.html";
     })
 };
+
+// //Leaflet
+// document.addEventListener("DOMContentLoaded", function() {
+//     var campusLocation = { lat: 51.2194, lng: 4.4028 };
+
+//     // Ensure the map container is available before initializing the map
+//     var map = L.map('map').setView(campusLocation, 13);
+
+//     // Add the OpenStreetMap tile layer
+//     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//     }).addTo(map);
+
+//     // Add a marker to the map
+//     L.marker(campusLocation).addTo(map)
+//         .bindPopup('AP Hogeschool Campus Spoor Noord - Ellermanstraat')
+//         .openPopup();
+// });
+
+
+
 
 // // Toggle password visibility
 // const togglePassword = document.getElementById('togglePassword');

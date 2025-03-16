@@ -209,7 +209,46 @@ footer {
     bottom: 0;
     width: 100%;
 }
+/* Footer */
+/* 10rounds */
+.d10rounds-body{
+    background-color: #1a1a1a;
+    color: rgb(219, 172, 0);
+    min-height: 100vh;
+    background-image: url("/images/RingBackground.jpg");
+    background-size: cover;
+}
 
+.answer-container {
+    display: flex; /* Arrange the items side by side */
+    justify-content: space-between; /* Space between the items */
+    gap: 20px; /* Optional: space between cards */
+    padding: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px; /* Ensure the container doesn't get too wide */
+    margin: 0 auto; /* Center the container */
+    background-color: transparent; /* Doorzichtige achtergrond */
+    border: 2px solid rgba(255, 255, 255); /* Border die bij de achtergrond past */
+    border-radius: 8px;
+}
+
+.answer-vert {
+    display: flex; /* Arrange the items in a column */
+    flex-direction: column; /* Stack the cards vertically */
+    gap: 20px; /* Space between the cards */
+    padding: 20px;
+    align-items: center; /* Center the cards horizontally */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.answer-selection {
+    width: 40%; /* Each card takes up 32% of the container width (for 3 cards in a row) */
+    border-radius: 8px;
+    overflow: hidden; /* Prevent content from overflowing */
+    text-align: center;
+    padding: 10px;
+}
 /* Blitz */
 .blitz-body {
     background-color: #1a1a1a;
@@ -241,6 +280,88 @@ footer {
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+/* CONTACT */
+.contact-body{
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.cards-container {
+    display: flex; /* Arrange the items side by side */
+    justify-content: space-between; /* Space between the items */
+    gap: 20px; /* Optional: space between cards */
+    padding: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.card {
+    background-color: white;
+    width: 20%; /* Each card will take up 30% of the container width */
+    border-radius: 8px;
+    overflow: hidden; /* Prevent content from overflowing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+    background-color: transparent;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 150px;
+    object-fit: cover; /* Ensure images cover the area */
+}
+
+.card-text {
+    margin-top: 10px;
+}
+
+.card-text h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #c8b8b8;
+}
+
+.card-text p {
+    color: #ffefef;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column; /* Stack cards on small screens */
+        align-items: center; /* Center the items */
+    }
+
+    .card {
+        width: 80%; /* Cards take up more space on smaller screens */
+        margin-bottom: 20px; /* Add some space between stacked cards */
+    }
+}
+
+.contact_form {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#contactEmail{
+    width: 250px;
+}
+
+#contactMessage{
+    height: 100px;
+    width: 250px;
+}
+
+/*---------*/
 
 .quote-box {
     background-color: rgba(255, 255, 255, 0.1);
@@ -307,6 +428,32 @@ footer {
     transform: translateY(-2px);
 }
 
+.character-button:focus {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.movie-button {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.movie-button:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.movie-button:focus {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
 .score-display {
     position: fixed;
     bottom: 20px;
@@ -323,6 +470,15 @@ footer {
     font-weight: bold;
 }
 
+/* Blitz */
+
+/*Leaderboard*/
+.leaderboardBody{
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    color:white ;
+}
+
 /* LandingPage index.html */
 .indexBody {
     font-family: Arial, sans-serif;
@@ -330,7 +486,7 @@ footer {
     background-size: cover;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     height: 100vh;
 }
 
