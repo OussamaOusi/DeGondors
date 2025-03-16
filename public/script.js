@@ -171,8 +171,6 @@ if(registrationForm){
     })
 };
 
-
-
 // // Toggle password visibility
 // const togglePassword = document.getElementById('togglePassword');
 // const passwordField = document.getElementById('loginPassword');
