@@ -261,18 +261,66 @@ footer {
 }
 
 /* CONTACT */
-.contactBody {    
-    font-family: Arial, sans-serif;
+.contact-body{
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    color: white;
     margin: 0;
     padding: 0;
-    text-align: center;
-    /* background-image: url("/images/Backgroundjpg.jpg"); */
 }
 
-.contactBody h1 {
-    margin-top: 20px;
-    font-size: 24px;
-    color: black;
+.cards-container {
+    display: flex; /* Arrange the items side by side */
+    justify-content: space-between; /* Space between the items */
+    gap: 20px; /* Optional: space between cards */
+    padding: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.card {
+    background-color: white;
+    width: 20%; /* Each card will take up 30% of the container width */
+    border-radius: 8px;
+    overflow: hidden; /* Prevent content from overflowing */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 10px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* Ensure images cover the area */
+}
+
+.card-text {
+    margin-top: 10px;
+}
+
+.card-text h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.card-text p {
+    color: #666;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column; /* Stack cards on small screens */
+        align-items: center; /* Center the items */
+    }
+
+    .card {
+        width: 80%; /* Cards take up more space on smaller screens */
+        margin-bottom: 20px; /* Add some space between stacked cards */
+    }
 }
 
 .contact_form {
@@ -282,56 +330,13 @@ footer {
     justify-content: center;
 }
 
-.contact-header{
-    text-align: center;
-    padding: 40px 20px;
-    background-color: #0066cc;
-    color: white;
+#contactEmail{
+    width: 250px;
 }
 
-.contact-header h1 {
-    margin: 0;
-    font-size: 36px;
-}
-
-.contact-header p {
-    font-size: 18px;
-}
-
-.contact-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
-
-.contact-info {
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 40px;
-    width: 100%;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-info {
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 40px;
-    width: 100%;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-form {
-    background-color: white;
-    padding: 20px;
-    width: 100%;
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+#contactMessage{
+    height: 100px;
+    width: 250px;
 }
 
 /*---------*/
@@ -423,7 +428,7 @@ footer {
 .leaderboardBody{
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
-    color: white;
+    color:white ;
 }
 
 /* LandingPage index.html */

@@ -171,6 +171,25 @@ if(registrationForm){
     })
 };
 
+//Leaflet
+document.addEventListener("DOMContentLoaded", function() {
+    var campusLocation = { lat: 51.2194, lng: 4.4028 };
+
+    // Ensure the map container is available before initializing the map
+    var map = L.map('map').setView(campusLocation, 13);
+
+    // Add the OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker to the map
+    L.marker(campusLocation).addTo(map)
+        .bindPopup('AP Hogeschool Campus Spoor Noord - Ellermanstraat')
+        .openPopup();
+});
+
+
 
 
 // // Toggle password visibility
