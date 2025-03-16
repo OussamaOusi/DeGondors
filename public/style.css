@@ -298,6 +298,15 @@ footer {
     font-size: 1.2rem;
 }
 
+/* Suddendeath */
+.suddendeath-body{
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
 /* CONTACT */
 .contact-body{
     background-image: url("/images/Backgroundjpg.jpg");
