@@ -7,6 +7,11 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     color: black;
+    text-shadow: 
+        -1px -1px 0 black,  
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
 }
 
 h1 {
@@ -216,10 +221,16 @@ footer {
 /* 10rounds */
 .d10rounds-body{
     font-family: 'Cinzel', serif;
+    font-weight: bolder;
     background-color: #1a1a1a;
-    color: rgb(219, 172, 0);
+    color: #d7c30c;
+    text-shadow: 
+        -1px -1px 0 black,  
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
     min-height: 100vh;
-    background-image: url("/images/RingBackground.jpg");
+    background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
 }
 
