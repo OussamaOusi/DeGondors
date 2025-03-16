@@ -287,12 +287,13 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 10px;
+    background-color: transparent;
 }
 
 .card img {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 150px;
     object-fit: cover; /* Ensure images cover the area */
 }
 
@@ -303,11 +304,11 @@ footer {
 .card-text h3 {
     margin: 0;
     font-size: 18px;
-    color: #333;
+    color: #c8b8b8;
 }
 
 .card-text p {
-    color: #666;
+    color: #ffefef;
     font-size: 16px;
 }
 
