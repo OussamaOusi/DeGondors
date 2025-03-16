@@ -1,4 +1,3 @@
-/* Algemene body stijlen */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,39 +5,41 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow-x: hidden; /* Voorkomt horizontale scrollbar */
-    color: black; /* Standaard tekstkleur wit */
+    overflow-x: hidden;
+    color: black;
 }
 
-/* Home body stijlen */
-.home-body {
-    background-color: #f4f4f4;
-    background-image: url("/images/Backgroundjpg.jpg"); /* Zorg ervoor dat dit pad correct is */
-    background-size: cover;
-    background-position: center;
-}
-
-h1{
+h1 {
     color: white;
 }
 
-/* Favorites */
-/* Favorietenpagina specifieke stijlen */
-.favorites-body {
-    background-color: #1a1a1a; /* Donkere achtergrond */
-    background-image: url("/images/RingBackground.jpg"); /* Achtergrond voor favorieten pagina */
+.home-body {
+    background-color: #f4f4f4;
+    background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     background-position: center;
-    color: white; /* Witte tekst voor betere leesbaarheid */
 }
 
+/* Favorietenpagina */
+.favorites-body {
+    background-color: #1a1a1a;
+    background-image: url("/images/RingBackground.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+.favorites-body .quote {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
 .character-header {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background-color: rgba(65, 54, 32, 0.8);  /* Donkere, transparante achtergrond */
+    background-color: rgba(43, 35, 19, 0.8);
     color: white;
 }
 
@@ -64,110 +65,95 @@ h1{
 }
 
 .quote {
-    background-color: transparent; /* Doorzichtige achtergrond */
-    border: 2px solid rgba(255, 255, 255); /* Border die bij de achtergrond past */
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255);
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
 }
 
 .quote-title {
-    color: white; /* Witte tekst */
+    color: white;
     margin-bottom: 1rem;
     font-size: 1.25rem;
 }
 
 .quote-text {
-    color: white; /* Witte tekst */
+    color: white;
     line-height: 1.6;
     margin: 0;
 }
-/* Favorites */
 
 /* Blacklist */
-
 .blacklist-reason {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Subtiele lijn boven de reden */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .blacklist-reason h4 {
-    color: white; /* Witte kleur voor de titel */
+    color: white;
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
-    text-transform: uppercase; /* Titel in hoofdletters */
-    letter-spacing: 1px; /* Meer ruimte tussen letters */
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .blacklist-reason p {
-    color: white; /* Witte tekst */
+    color: white;
     line-height: 1.6;
     margin: 0;
-    font-style: italic; /* Cursieve tekst voor een creatieve touch */
-    opacity: 0.9; /* Licht transparant voor een subtiel effect */
+    font-style: italic;
+    opacity: 0.9;
 }
 
-/* Blacklist */
-
-/* Blacklist body stijlen */
 .blacklist-body {
     background-color: #f4f4f4;
-    background-image: url("/images/Backgroundjpg.jpg"); /* Achtergrond voor blacklist pagina */
+    background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     background-position: center;
 }
-
+.blacklist-body .quote {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+}
 /* Navbar */
 nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    background-color: #333;
-    padding: 0 1rem;
-    height: 60px;
-}
-
-.logo {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    margin-right: 2rem;
+    background-color: #413620;
+    padding: 1rem;
+    position: relative;
 }
 
 .logo img {
-    height: 80%;
-    max-height: 50px;
+    height: 50px;
     width: auto;
 }
 
 .nav-links {
     display: flex;
+    gap: 1rem;
     align-items: center;
-    height: 100%;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin-right: 2rem;
     font-size: 1.1rem;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
     transition: background-color 0.3s;
 }
 
 .nav-links a:hover {
-    background-color: #444;
     color: #ffd700;
 }
 
 .nav-links a.active {
-    background-color: #555;
-    color: #ffd700;
+    color: #9F7833;
 }
-/* Navbar */
 
 /* Main */
 main {
@@ -185,17 +171,17 @@ main {
     justify-content: center;
     gap: 2rem;
     margin-top: 2rem;
-    flex-wrap: wrap; /* Zorgt ervoor dat items naar een nieuwe regel gaan als er niet genoeg ruimte is */
+    flex-wrap: wrap;
 }
 
 .option {
-    background-color: rgba(0, 0, 0, 0.5); /* Donkere, transparante achtergrond */
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 250px; /* Vaste breedte voor de game modes */
-    color: white; /* Witte tekst */
+    width: 250px;
+    color: white;
 }
 
 .option img {
@@ -214,15 +200,12 @@ main {
     margin: 0.5rem 0;
 }
 
-/* Main */
-
 /* Footer */
 footer {
-    background-color: #333;
+    background-color: #413620;
     color: white;
     text-align: center;
     padding: 1rem;
-    position: fixed;
     bottom: 0;
     width: 100%;
 }
@@ -408,7 +391,7 @@ footer {
     position: absolute;
     top: -25px;
     right: -25px;
-    background-color: #ff4444;
+    background-color: #413620;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -417,7 +400,7 @@ footer {
     justify-content: center;
     font-size: 1.5rem;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .character-selection {
@@ -506,7 +489,7 @@ footer {
 }
 
 /* LandingPage index.html */
-.indexBody{
+.indexBody {
     font-family: Arial, sans-serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -536,43 +519,45 @@ footer {
     height: 200px;
     border-radius: 8px;
 }
+
 /* Registration Page */
-.registrationBody{
+.registrationBody {
     font-family: Arial, sans-serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;    
-  }
+    height: 100vh;
+}
+
 .registration-article {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 300px;
-  }
-  
-  .registration-form {
+}
+
+.registration-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .registration-form label {
+}
+
+.registration-form label {
     margin-bottom: 5px;
     font-size: 14px;
-  }
-  
-  .registration-form input {
+}
+
+.registration-form input {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-  }
-  
-  .registration-form button {
+}
+
+.registration-form button {
     padding: 12px;
     background-color: #4CAF50;
     color: white;
@@ -580,59 +565,58 @@ footer {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  .registration-form button:hover {
-    background-color: #45a049;
-  }
+}
 
-  /* Loginpage Styling */
-  .loginBody{
+.registration-form button:hover {
+    background-color: #45a049;
+}
+
+/* Loginpage Styling */
+.loginBody {
     font-family: Arial, sans-serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;    
-  }
+    height: 100vh;
+}
+
 .login-section {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     padding: 20px;
-  }
-  
-  .login-article {
+}
+
+.login-article {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 300px;
-  }
-  
-  /* LoginForm Styling */
+}
 
-  .login-form {
+.login-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .login-form label {
+}
+
+.login-form label {
     margin-bottom: 5px;
     font-size: 14px;
-  }
-  
-  .login-form input {
+}
+
+.login-form input {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-  }
-  
-  .login-form button {
+}
+
+.login-form button {
     padding: 12px;
     background-color: #4CAF50;
     color: white;
@@ -640,15 +624,147 @@ footer {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  .login-form button:hover {
+}
+
+.login-form button:hover {
     background-color: #45a049;
-  }
-  
-  /* Error message styling */
-  .error-message {
+}
+
+.error-message {
     color: red;
     text-align: center;
     margin-top: 15px;
-  }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    /* Navbar */
+    nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .logo {
+        margin-bottom: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .nav-links a {
+        padding: 0.5rem;
+    }
+
+    /* Header */
+    .character-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+
+    .nav-button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    /* Quotes sectie */
+    .quotes-section {
+        padding: 0 0.5rem;
+    }
+
+    .quote {
+        padding: 1rem;
+    }
+
+    .quote-title {
+        font-size: 1.1rem;
+    }
+
+    .quote-text {
+        font-size: 0.9rem;
+    }
+
+    /* Blitz */
+    .blitz-container {
+        padding: 0.5rem;
+    }
+
+    .quiz-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .character-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Landing Page */
+    .landingpageRow {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .landingpageRow img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Registration en Login */
+    .registration-article, .login-article {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra kleine schermen */
+    .character-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .quote-title {
+        font-size: 1rem;
+    }
+
+    .quote-text {
+        font-size: 0.8rem;
+    }
+
+    .blacklist-reason h4 {
+        font-size: 0.9rem;
+    }
+
+    .blacklist-reason p {
+        font-size: 0.8rem;
+    }
+
+    /* Blitz */
+    .timer-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+
+    .character-button {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    /* Landing Page */
+    .containerLandingpage {
+        padding: 1rem;
+    }
+
+    /* Registration en Login */
+    .registration-form input, .login-form input {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .registration-form button, .login-form button {
+        padding: 10px;
+        font-size: 14px;
+    }
+}

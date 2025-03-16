@@ -15,7 +15,7 @@
             <section class="nav-links">
                 <a href="/views/home.html" class="active">Quiz</a>
                 <a href="/views/leaderboards.html">Leaderboards</a>
-                <a href="/views/favorites.html">Favorite quotes</a>
+                <a href="/views/favorites.html">Favorited quotes</a>
                 <a href="/views/blacklist.html">Blacklisted quotes</a>
                 <a href="/views/contact.html">Contact</a>
             </section>
@@ -23,38 +23,34 @@
     </header>
 
     <main>
-        <section class="blitz-container">
-            <!-- Header met vraagnummer -->
-            <div class="quiz-header">
+        <article class="blitz-container">
+            <header class="quiz-header">
                 <h1>Quote Blitz</h1>
-                <div class="question-counter">1</div>
-            </div>
+                <p class="question-counter">1</p>
+            </header>
 
-            <!-- Quote en timer -->
-            <div class="quote-box">
-                <p id="quote-text" class="quote-text"></p>
-                <div class="timer-circle">
-                    <span id="timer">60</span>s
-                </div>
-            </div>
+            <section class="quote-box">
+                <blockquote id="quote-text" class="quote-text"></blockquote>
+                <article class="timer-circle">
+                    <time id="timer">60</time>s
+                </article>
+            </section>
 
-            <!-- Karakterkeuzes -->
             <section class="character-selection">
                 <h2>Wie zei het?</h2>
-                <div class="character-grid">
+                <menu class="character-grid">
                     <button id="button1" class="character-button">Optie 1</button>
                     <button id="button2" class="character-button">Optie 2</button>
                     <button id="button3" class="character-button">Optie 3</button>
                     <button id="button4" class="character-button">Optie 4</button>
-                </div>
+                </menu>
             </section>
 
-            <!-- Score display -->
-            <div class="score-display">
-                <span class="score-text">Score:</span>
-                <span id="score-value" class="score-value">0/0</span>
-            </div>
-        </section>
+            <aside class="score-display">
+                <p class="score-text">Score: <output id="score-value" class="score-value">0/0</output></p>
+            </aside>
+        </article>
+
         <section>
             <button onclick="fetchQuote()" hidden>Haal een quote op</button>
             <script src="/public/script.js"></script>
