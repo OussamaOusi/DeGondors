@@ -114,7 +114,7 @@ fetchQuote();
 //Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
 wrongLandingpageImgs.forEach(image => {
-    image.addEventListener('click', () => alert('You are not authorized to view this project!'))
+    image.addEventListener('click', () => alert('Je hebt geen toegang tot dit project!'))
 });
 
 //Timer 
@@ -126,7 +126,7 @@ const countdown = setInterval(() => {
 
     if(timeLeft <= 0){
         clearInterval(countdown);
-        alert("Out of time!");
+        alert("De tijd is om!");
     }
 }, 1000);
 
@@ -149,12 +149,12 @@ if(loginForm){
         // console.log(errorMessage);
     
         if(username === registeredUser.username && password === registeredUser.password){
-            alert("Login successful!");
+            alert("Proficiat, je bent ingelogd!");
             window.location.href = "../index.html";
         } else {
             console.log("foute login")
             if(errorMessage){
-                errorMessage.textContent = "Invalid username or password. Please try again.";
+                errorMessage.textContent = "Foute gebruikersnaam of wachtwoord. Probeer opnieuw";
             }
         }
     })
