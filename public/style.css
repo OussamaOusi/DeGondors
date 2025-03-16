@@ -227,7 +227,42 @@ footer {
     width: 100%;
 }
 /* Footer */
+/* 10rounds */
+.d10rounds-body{
+    background-color: #1a1a1a;
+    color: white;
+    min-height: 100vh;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+}
 
+.answer-container {
+    display: flex; /* Arrange the items side by side */
+    justify-content: space-between; /* Space between the items */
+    gap: 20px; /* Optional: space between cards */
+    padding: 20px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px; /* Ensure the container doesn't get too wide */
+    margin: 0 auto; /* Center the container */
+}
+
+.answer-vert {
+    display: flex; /* Arrange the items in a column */
+    flex-direction: column; /* Stack the cards vertically */
+    gap: 20px; /* Space between the cards */
+    padding: 20px;
+    align-items: center; /* Center the cards horizontally */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+
+.answer-selection {
+    width: 40%; /* Each card takes up 32% of the container width (for 3 cards in a row) */
+    border-radius: 8px;
+    overflow: hidden; /* Prevent content from overflowing */
+    text-align: center;
+    padding: 10px;
+}
 /* Blitz */
 .blitz-body {
     background-color: #1a1a1a;
@@ -403,6 +438,32 @@ footer {
 }
 
 .character-button:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.character-button:focus {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.movie-button {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.movie-button:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.movie-button:focus {
     background-color: rgba(255, 215, 0, 0.2);
     transform: translateY(-2px);
 }
