@@ -230,9 +230,9 @@ footer {
 /* 10rounds */
 .d10rounds-body{
     background-color: #1a1a1a;
-    color: white;
+    color: rgb(219, 172, 0);
     min-height: 100vh;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/RingBackground.jpg");
     background-size: cover;
 }
 
@@ -244,6 +244,9 @@ footer {
     flex-wrap: wrap; /* Allow wrapping on smaller screens */
     max-width: 1200px; /* Ensure the container doesn't get too wide */
     margin: 0 auto; /* Center the container */
+    background-color: transparent; /* Doorzichtige achtergrond */
+    border: 2px solid rgba(255, 255, 255); /* Border die bij de achtergrond past */
+    border-radius: 8px;
 }
 
 .answer-vert {
