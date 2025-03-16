@@ -14,6 +14,7 @@ h1 {
 }
 
 .home-body {
+    font-family: 'Cinzel', serif;
     background-color: #f4f4f4;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -22,6 +23,7 @@ h1 {
 
 /* Favorietenpagina */
 .favorites-body {
+    font-family: 'Cinzel', serif;
     background-color: #1a1a1a;
     background-image: url("/images/RingBackground.jpg");
     background-size: cover;
@@ -110,6 +112,7 @@ h1 {
 }
 
 .blacklist-body {
+    font-family: 'Cinzel', serif;
     background-color: #f4f4f4;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -216,7 +219,8 @@ footer {
 
 /* Footer */
 /* 10rounds */
-.d10rounds-body {
+.d10rounds-body{
+    font-family: 'Cinzel', serif;
     background-color: #1a1a1a;
     color: rgb(219, 172, 0);
     min-height: 100vh;
@@ -272,6 +276,7 @@ footer {
 
 /* Blitz */
 .blitz-body {
+    font-family: 'Cinzel', serif;
     background-color: #1a1a1a;
     color: white;
     min-height: 100vh;
@@ -302,8 +307,19 @@ footer {
     font-size: 1.2rem;
 }
 
+/* Suddendeath */
+.suddendeath-body{
+    font-family: 'Cinzel', serif;
+    background-image: url("/images/Backgroundjpg.jpg");
+    background-size: cover;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
 /* CONTACT */
-.contact-body {
+.contact-body{
+    font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     color: white;
@@ -506,7 +522,8 @@ footer {
 /* Blitz */
 
 /*Leaderboard*/
-.leaderboardBody {
+.leaderboardBody{
+    font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     color: white;
@@ -568,7 +585,7 @@ th {
 
 /* LandingPage index.html */
 .indexBody {
-    font-family: Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
@@ -600,7 +617,7 @@ th {
 
 /* Registration Page */
 .registrationBody {
-    font-family: Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
@@ -651,7 +668,7 @@ th {
 
 /* Loginpage Styling */
 .loginBody {
-    font-family: Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
