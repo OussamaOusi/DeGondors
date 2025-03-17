@@ -112,7 +112,7 @@ fetchQuote();
 //Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
 wrongLandingpageImgs.forEach(image => {
-    image.addEventListener('click', () => alert('Je hebt geen toegang tot dit project!'))
+    image.addEventListener('click', () => alert('Je hebt geen toegang tot dit spel!'))
 });
 
 //Timer 
