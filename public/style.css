@@ -230,46 +230,31 @@ footer {
 
 .answer-container {
     display: flex;
-    /* Arrange the items side by side */
     justify-content: space-between;
-    /* Space between the items */
     gap: 20px;
-    /* Optional: space between cards */
     padding: 20px;
     flex-wrap: wrap;
-    /* Allow wrapping on smaller screens */
     max-width: 1200px;
-    /* Ensure the container doesn't get too wide */
     margin: 0 auto;
-    /* Center the container */
     background-color: transparent;
-    /* Doorzichtige achtergrond */
     border: 2px solid rgba(255, 255, 255);
-    /* Border die bij de achtergrond past */
     border-radius: 8px;
 }
 
 .answer-vert {
     display: flex;
-    /* Arrange the items in a column */
     flex-direction: column;
-    /* Stack the cards vertically */
     gap: 20px;
-    /* Space between the cards */
     padding: 20px;
     align-items: center;
-    /* Center the cards horizontally */
     max-width: 1200px;
     margin: 0 auto;
-    /* Center the container */
 }
 
 .answer-selection {
     width: 40%;
-    /* Each card takes up 32% of the container width (for 3 cards in a row) */
     border-radius: 8px;
     overflow: hidden;
-    /* Prevent content from overflowing */
     text-align: center;
     padding: 10px;
 }
@@ -329,26 +314,19 @@ footer {
 
 .cards-container {
     display: flex;
-    /* Arrange the items side by side */
     justify-content: space-between;
-    /* Space between the items */
     gap: 20px;
-    /* Optional: space between cards */
     padding: 20px;
     flex-wrap: wrap;
-    /* Allow wrapping on smaller screens */
     max-width: 1200px;
     margin: 0 auto;
-    /* Center the container */
 }
 
 .card {
     background-color: white;
     width: 20%;
-    /* Each card will take up 30% of the container width */
     border-radius: 8px;
     overflow: hidden;
-    /* Prevent content from overflowing */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 10px;
@@ -360,7 +338,6 @@ footer {
     height: auto;
     border-radius: 150px;
     object-fit: cover;
-    /* Ensure images cover the area */
 }
 
 .card-text {
@@ -381,16 +358,12 @@ footer {
 @media (max-width: 768px) {
     .cards-container {
         flex-direction: column;
-        /* Stack cards on small screens */
         align-items: center;
-        /* Center the items */
     }
 
     .card {
         width: 80%;
-        /* Cards take up more space on smaller screens */
         margin-bottom: 20px;
-        /* Add some space between stacked cards */
     }
 }
 
@@ -592,7 +565,6 @@ th {
     background-size: cover;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     height: 100vh;
 }
 
