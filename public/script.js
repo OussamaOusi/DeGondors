@@ -169,6 +169,7 @@ if(registrationForm){
     })
 };
 
+/*
 // Likebutton
 document.getElementById('like-button').onclick = function() {
     window.location.href = './favorites.html';
@@ -178,6 +179,8 @@ document.getElementById('like-button').onclick = function() {
 document.getElementById('dislike-button').onclick = function() {
     window.location.href = './blacklist.html';
 }
+*/
+
 // //Leaflet
 // document.addEventListener("DOMContentLoaded", function() {
 //     var campusLocation = { lat: 51.2194, lng: 4.4028 };
