@@ -171,6 +171,17 @@ if(registrationForm){
     })
 };
 
+// Likebutton
+document.getElementById('like-button').onclick = function() {
+    // Redirect to the desired page (e.g., 'anotherpage.html')
+    window.location.href = './favorites.html';
+}
+
+// Dislikebutton
+document.getElementById('dislike-button').onclick = function() {
+    // Redirect to the desired page (e.g., 'anotherpage.html')
+    window.location.href = './blacklist.html';
+}
 // //Leaflet
 // document.addEventListener("DOMContentLoaded", function() {
 //     var campusLocation = { lat: 51.2194, lng: 4.4028 };

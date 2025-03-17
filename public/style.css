@@ -264,6 +264,34 @@ footer {
     text-align: center;
     padding: 10px;
 }
+
+.reviewbutton-container{
+    position: absolute;
+    padding: 1rem;
+    float: right;
+    z-index: 1;
+}
+
+.like-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    border-radius: 20px;
+}
+.dislike-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    border-radius: 20px;
+}
+.like-btn:hover{
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+.dislike-btn:hover{
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
 /* Blitz */
 .blitz-body {
     font-family: 'Cinzel', serif;
