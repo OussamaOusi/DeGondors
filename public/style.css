@@ -219,7 +219,7 @@ footer {
 
 /* Footer */
 /* 10rounds */
-.d10rounds-body{
+.d10rounds-body {
     font-family: 'Cinzel', serif;
     background-color: #1a1a1a;
     color: rgb(219, 172, 0);
@@ -280,7 +280,7 @@ footer {
     background-color: #1a1a1a;
     color: white;
     min-height: 100vh;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
     background-size: cover;
 }
 
@@ -308,7 +308,7 @@ footer {
 }
 
 /* Suddendeath */
-.suddendeath-body{
+.suddendeath-body {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -318,7 +318,7 @@ footer {
 }
 
 /* CONTACT */
-.contact-body{
+.contact-body {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -428,9 +428,10 @@ footer {
 }
 
 .timer-circle {
-    position: absolute;
-    top: -25px;
-    right: -25px;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 999;
     background-color: #413620;
     width: 80px;
     height: 80px;
@@ -439,8 +440,9 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 3px solid #f1c40f;
 }
 
 .character-selection {
@@ -522,7 +524,7 @@ footer {
 /* Blitz */
 
 /*Leaderboard*/
-.leaderboardBody{
+.leaderboardBody {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -826,11 +828,11 @@ th {
     .leaderboards-container {
         grid-template-columns: 1fr;
     }
-    
+
     .leaderboard {
         margin-bottom: 1.5rem;
     }
-    
+
     .game-mode {
         font-size: 1.1rem;
     }
@@ -875,6 +877,8 @@ th {
 
     /* Blitz */
     .timer-circle {
+        top: 60px;
+        right: 10px;
         width: 60px;
         height: 60px;
         font-size: 1.2rem;
