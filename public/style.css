@@ -35,11 +35,13 @@ h1 {
     background-position: center;
     color: white;
 }
+
 .favorites-body .quote {
     background-color: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(5px);
 }
+
 .character-header {
     display: flex;
     justify-content: center;
@@ -121,11 +123,13 @@ h1 {
     background-size: cover;
     background-position: center;
 }
+
 .blacklist-body .quote {
     background-color: rgba(0, 0, 0, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(5px);
 }
+
 /* Navbar */
 nav {
     display: flex;
@@ -217,9 +221,10 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
 /* Footer */
 /* 10rounds */
-.d10rounds-body{
+.d10rounds-body {
     font-family: 'Cinzel', serif;
     font-weight: bolder;
     background-color: #1a1a1a;
@@ -235,32 +240,32 @@ footer {
 }
 
 .answer-container {
-    display: flex; /* Arrange the items side by side */
-    justify-content: space-between; /* Space between the items */
-    gap: 20px; /* Optional: space between cards */
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
     padding: 20px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    max-width: 1200px; /* Ensure the container doesn't get too wide */
-    margin: 0 auto; /* Center the container */
-    background-color: transparent; /* Doorzichtige achtergrond */
-    border: 2px solid rgba(255, 255, 255); /* Border die bij de achtergrond past */
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255);
     border-radius: 8px;
 }
 
 .answer-vert {
-    display: flex; /* Arrange the items in a column */
-    flex-direction: column; /* Stack the cards vertically */
-    gap: 20px; /* Space between the cards */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 20px;
-    align-items: center; /* Center the cards horizontally */
+    align-items: center;
     max-width: 1200px;
-    margin: 0 auto; /* Center the container */
+    margin: 0 auto;
 }
 
 .answer-selection {
-    width: 40%; /* Each card takes up 32% of the container width (for 3 cards in a row) */
+    width: 40%;
     border-radius: 8px;
-    overflow: hidden; /* Prevent content from overflowing */
+    overflow: hidden;
     text-align: center;
     padding: 10px;
 }
@@ -298,7 +303,7 @@ footer {
     background-color: #1a1a1a;
     color: white;
     min-height: 100vh;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
     background-size: cover;
 }
 
@@ -327,7 +332,7 @@ footer {
 }
 
 /* Suddendeath */
-.suddendeath-body{
+.suddendeath-body {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -337,7 +342,7 @@ footer {
 }
 
 /* CONTACT */
-.contact-body{
+.contact-body {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
@@ -347,20 +352,20 @@ footer {
 }
 
 .cards-container {
-    display: flex; /* Arrange the items side by side */
-    justify-content: space-between; /* Space between the items */
-    gap: 20px; /* Optional: space between cards */
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
     padding: 20px;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-wrap: wrap;
     max-width: 1200px;
-    margin: 0 auto; /* Center the container */
+    margin: 0 auto;
 }
 
 .card {
     background-color: white;
-    width: 20%; /* Each card will take up 30% of the container width */
+    width: 20%;
     border-radius: 8px;
-    overflow: hidden; /* Prevent content from overflowing */
+    overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding: 10px;
@@ -371,7 +376,7 @@ footer {
     width: 100%;
     height: auto;
     border-radius: 150px;
-    object-fit: cover; /* Ensure images cover the area */
+    object-fit: cover;
 }
 
 .card-text {
@@ -391,28 +396,28 @@ footer {
 
 @media (max-width: 768px) {
     .cards-container {
-        flex-direction: column; /* Stack cards on small screens */
-        align-items: center; /* Center the items */
+        flex-direction: column;
+        align-items: center;
     }
 
     .card {
-        width: 80%; /* Cards take up more space on smaller screens */
-        margin-bottom: 20px; /* Add some space between stacked cards */
+        width: 80%;
+        margin-bottom: 20px;
     }
 }
 
 .contact_form {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#contactEmail{
+#contactEmail {
     width: 250px;
 }
 
-#contactMessage{
+#contactMessage {
     height: 100px;
     width: 250px;
 }
@@ -435,9 +440,10 @@ footer {
 }
 
 .timer-circle {
-    position: absolute;
-    top: -25px;
-    right: -25px;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 999;
     background-color: #413620;
     width: 80px;
     height: 80px;
@@ -446,8 +452,9 @@ footer {
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 3px solid #f1c40f;
 }
 
 .character-selection {
@@ -529,11 +536,65 @@ footer {
 /* Blitz */
 
 /*Leaderboard*/
-.leaderboardBody{
+.leaderboardBody {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
-    color:white ;
+    color: white;
+}
+
+.leaderboards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+}
+
+.page-header {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: rgba(43, 35, 19, 0.8);
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.game-mode {
+    background-color: #413620;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+
+}
+
+.leaderboard {
+    background: #7F5539;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    color: #FFD791;
+}
+
+th {
+    color: white;
 }
 
 /* LandingPage index.html */
@@ -543,7 +604,6 @@ footer {
     background-size: cover;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
     height: 100vh;
 }
 
@@ -686,7 +746,15 @@ footer {
 }
 
 /* Media queries */
+
+@media (max-width: 1024px) {
+    .leaderboards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+
     /* Navbar */
     nav {
         flex-direction: column;
@@ -762,12 +830,42 @@ footer {
     }
 
     /* Registration en Login */
-    .registration-article, .login-article {
+    .registration-article,
+    .login-article {
         width: 90%;
+    }
+
+    /* Leaderboard */
+
+    .leaderboards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .leaderboard {
+        margin-bottom: 1.5rem;
+    }
+
+    .game-mode {
+        font-size: 1.1rem;
+    }
+
+    /* Leaderboard */
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-links a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
+
     /* Extra kleine schermen */
     .character-header h1 {
         font-size: 1.5rem;
@@ -791,6 +889,8 @@ footer {
 
     /* Blitz */
     .timer-circle {
+        top: 60px;
+        right: 10px;
         width: 60px;
         height: 60px;
         font-size: 1.2rem;
@@ -807,13 +907,35 @@ footer {
     }
 
     /* Registration en Login */
-    .registration-form input, .login-form input {
+    .registration-form input,
+    .login-form input {
         padding: 8px;
         font-size: 12px;
     }
 
-    .registration-form button, .login-form button {
+    .registration-form button,
+    .login-form button {
         padding: 10px;
         font-size: 14px;
     }
+
+    /* Leaderboard */
+
+    .page-header {
+        font-size: 1.5rem;
+        padding: 1rem;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th,
+    td {
+        min-width: 100px;
+    }
+
+    /* Leaderboard */
 }
