@@ -62,8 +62,6 @@ function initializePage() {
 
     updateContent();
 }
-
-// Initialize when page loads
 document.addEventListener('DOMContentLoaded', initializePage);
 
 "use strict";
@@ -171,7 +169,15 @@ if(registrationForm){
     })
 };
 
+// Likebutton
+document.getElementById('like-button').onclick = function() {
+    window.location.href = './favorites.html';
+}
 
+// Dislikebutton
+document.getElementById('dislike-button').onclick = function() {
+    window.location.href = './blacklist.html';
+}
 // //Leaflet
 // document.addEventListener("DOMContentLoaded", function() {
 //     var campusLocation = { lat: 51.2194, lng: 4.4028 };

@@ -7,6 +7,11 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     color: black;
+    text-shadow: 
+        -1px -1px 0 black,  
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
 }
 
 h1 {
@@ -221,10 +226,16 @@ footer {
 /* 10rounds */
 .d10rounds-body {
     font-family: 'Cinzel', serif;
+    font-weight: bolder;
     background-color: #1a1a1a;
-    color: rgb(219, 172, 0);
+    color: #d7c30c;
+    text-shadow: 
+        -1px -1px 0 black,  
+        1px -1px 0 black,
+        -1px 1px 0 black,
+        1px 1px 0 black;
     min-height: 100vh;
-    background-image: url("/images/RingBackground.jpg");
+    background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
 }
 
@@ -259,6 +270,33 @@ footer {
     padding: 10px;
 }
 
+.reviewbutton-container{
+    position: absolute;
+    padding: 1rem;
+    float: right;
+    z-index: 1;
+}
+
+.like-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    border-radius: 20px;
+}
+.dislike-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    border-radius: 20px;
+}
+.like-btn:hover{
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
+.dislike-btn:hover{
+    background-color: rgba(255, 215, 0, 0.2);
+    transform: translateY(-2px);
+}
 /* Blitz */
 .blitz-body {
     font-family: 'Cinzel', serif;
@@ -285,6 +323,7 @@ footer {
 
 .question-counter {
     background-color: #ffd700;
+    text-shadow: none;
     color: #333;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
@@ -297,7 +336,7 @@ footer {
     font-family: 'Cinzel', serif;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
-    color: white;
+    color: #d7c30c;
     margin: 0;
     padding: 0;
 }
@@ -592,6 +631,7 @@ th {
 /* Registration Page */
 .registrationBody {
     font-family: 'Cinzel', serif;
+    text-shadow: none;
     background-image: url("/images/Backgroundjpg.jpg");
     background-size: cover;
     display: flex;
