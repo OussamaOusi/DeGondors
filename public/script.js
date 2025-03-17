@@ -171,6 +171,7 @@ if(registrationForm){
     })
 };
 
+
 // //Leaflet
 // document.addEventListener("DOMContentLoaded", function() {
 //     var campusLocation = { lat: 51.2194, lng: 4.4028 };
