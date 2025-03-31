@@ -119,7 +119,7 @@ h1 {
 .blacklist-body {
     font-family: 'Cinzel', serif;
     background-color: #f4f4f4;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/One\ Ring\ Inscription.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -235,7 +235,7 @@ footer {
         -1px 1px 0 black,
         1px 1px 0 black;
     min-height: 100vh;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/green\ background.jpg");
     background-size: cover;
 }
 
@@ -337,92 +337,11 @@ footer {
 /* Suddendeath */
 .suddendeath-body {
     font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/lotr-concept-art.jpg");
     background-size: cover;
     color: #d7c30c;
     margin: 0;
     padding: 0;
-}
-
-/* CONTACT */
-.contact-body {
-    font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
-    background-size: cover;
-    color: white;
-    margin: 0;
-    padding: 0;
-}
-
-.cards-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    padding: 20px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.card {
-    background-color: white;
-    width: 20%;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 10px;
-    background-color: transparent;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
-    border-radius: 150px;
-    object-fit: cover;
-}
-
-.card-text {
-    margin-top: 10px;
-}
-
-.card-text h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #c8b8b8;
-}
-
-.card-text p {
-    color: #ffefef;
-    font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        width: 80%;
-        margin-bottom: 20px;
-    }
-}
-
-.contact_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#contactEmail {
-    width: 250px;
-}
-
-#contactMessage {
-    height: 100px;
-    width: 250px;
 }
 
 /*---------*/
