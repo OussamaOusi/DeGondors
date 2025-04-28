@@ -48,16 +48,20 @@ async function createInitialUser() {
 
 export async function login(email: string, password: string) {
     if (email === "" || password === ""){
-        throw new Error("Eamil and password required");
+        console.log("geen paswoord of email")
+        throw new Error("Email and password required");
     }
     let user : User | null = await userCollection.findOne<User>({email: email});
     if (user) {
         if (await bcrypt.compare(password, user.password!)) {
+            console.log("User logged in")
             return user;
         } else {
+            console.log("password wrong")
             throw new Error("Password incorrect");
         }
     } else {
+        console.log("user not found")
         throw new Error("User not found");
     }
 }
