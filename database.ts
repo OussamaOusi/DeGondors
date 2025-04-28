@@ -45,3 +45,19 @@ async function createInitialUser() {
         role: "ADMIN"
     });
 }
+
+export async function login(email: string, password: string) {
+    if (email === "" || password === ""){
+        throw new Error("Eamil and password required");
+    }
+    let user : User | null = await userCollection.findOne<User>({email: email});
+    if (user) {
+        if (await bcrypt.compare(password, user.password!)) {
+            return user;
+        } else {
+            throw new Error("Password incorrect");
+        }
+    } else {
+        throw new Error("User not found");
+    }
+}
