@@ -523,13 +523,16 @@ th {
 /* LandingPage index.html */
 .indexBody {
     font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/landingspagina.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
     height: 100vh;
-}
 
+}
+.indexBodyNav{
+    background-color: rgb(123, 0, 255);
+}
 .containerLandingpage {
     display: flex;
     flex-direction: column;
