@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
+    <title>SuddenDeath</title>
+</head>
+<body class="suddendeath-body">
+    <header>
+        <nav>
+            <section class="logo">
+                <img src="/images/Logo.jpg" alt="Website Logo">
+            </section>
+            <section class="nav-links">
+                <a href="/views/home.ejs" class="active">Quiz</a>
+                <a href="/views/leaderboards.ejs">Leaderboards</a>
+                <a href="/views/favorites.ejs">Favorite quotes</a>
+                <a href="/views/blacklist.ejs">Blacklisted quotes</a>
+            </section>
+        </nav>
+    </header>
+    <main>
+        <section class="suddendeath-container">
+            <!-- Header met vraagnummer -->
+            <div class="quiz-header">
+                <h1>Suddendeath</h1>
+                <div class="question-counter">1</div>
+            </div>
+
+            <div class="reviewbutton-container">
+                <button class="like-btn" id="like-button">👍</button>
+                <button class="dislike-btn" id="dislike-button">👎</button>
+            </div>
+
+            <!-- Quote -->
+            <div class="quote-box">
+                <p id="quote-text" class="quote-text"></p>
+            </div>
+
+            <!-- Karakterkeuzes -->
+            <section class="answer-container">
+                <section class="answer-selection">
+                    <h2>Van welk karakter is de quote?</h2>
+                    <article class="answer-vert">
+                        <button id="button1" class="character-button">Optie 1</button>
+                        <button id="button2" class="character-button">Optie 2</button>
+                        <button id="button3" class="character-button">Optie 3</button>
+                    </article> 
+                </section>
+
+                <section class="answer-selection">
+                    <h2>Uit welke film is de quote?</h2>
+                    <article class="answer-vert">
+                        <button id="button4" class="movie-button">Optie 1</button>
+                        <button id="button5" class="movie-button">Optie 2</button>
+                        <button id="button6" class="movie-button">Optie 3</button>
+                    </article> 
+                </section>                                       
+            </section>
+
+            <!-- Score display -->
+            <div class="score-display">
+                <span class="score-text">Score:</span>
+                <span id="score-value" class="score-value">0/0</span>
+            </div>
+        </section>
+
+        <section>
+            <button onclick="fetchQuote()" hidden>Haal een quote op</button>
+            <script src="/public/script.js"></script>
+        </section>
+    </main>
+</body>
+</html>

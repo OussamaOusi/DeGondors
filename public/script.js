@@ -1,3 +1,7 @@
+// import { createAvatar } from '@dicebear/core';
+// import { createAvatar } from '@dicebear/collection';
+
+
 // Character data
 const characters = ['Gandalf', 'Aragorn', 'Frodo', 'Sam', 'Legolas'];
 const quotes = [
@@ -168,6 +172,14 @@ if(registrationForm){
         window.location.href = "../index.html";
     })
 };
+
+const GenerateAvatar = () => {
+    const avatar = createAvatar(funEmoji, { seed: "Robin" }).toDataUri();
+    console.log(avatar);
+    document.getElementById("avatarimg").src = avatar;
+}
+
+GenerateAvatar();
 
 /*
 // Likebutton
