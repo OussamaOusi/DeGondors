@@ -78,7 +78,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const apiKey = "RGcOPi2oQ79fO1Ai2PGE"; // Vervang met je eigen API-sleutel
+const apiKey = "RGcOPi2oQ79fO1Ai2PGE"; 
 const apiUrl = "https://the-one-api.dev/v2/quote";
 function fetchQuote() {
     return __awaiter(this, void 0, void 0, function* () {
