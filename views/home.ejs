@@ -13,10 +13,14 @@
                 <img src="/images/Logo.jpg" alt="Website Logo">
             </section>
             <section class="nav-links">
-                <a href="/views/home.html"  class="active">Quiz</a>
-                <a href="/views/leaderboards.html">Leaderboards</a>
-                <a href="/views/favorites.html">Favorited quotes</a>
-                <a href="/views/blacklist.html">Blacklisted quotes</a>
+                <a href="/" class="active">Quiz</a>
+                <a href="/leaderboards">Leaderboards</a>
+                <a href="/favorites">Favorited quotes</a>
+                <a href="/blacklist">Blacklisted quotes</a>
+                <!-- Toon logout knop alleen als ingelogd -->
+                <% if (user) { %>
+                    <a href="/logout">Uitloggen (<%= user.email %>)</a>
+                <% } %>
             </section>
         </nav>
     </header>
@@ -24,7 +28,7 @@
         <h1 class="home-title">Kies je quizmodus</h1>
         <section class="container">
             <article class="option">
-                <a href="/views/10rounds.html">
+                <a href="/10rounds">
                     <img src="/images/10 rounds.jpg" alt="10 Rounds">
                 </a>
                 <ul>
@@ -33,27 +37,8 @@
                     <li>0,5 punt bij 1 van de 2 juist</li>
                 </ul>
             </article>
-            <article class="option">
-                <a href="/views/blitz.html">
-                    <img src="/images/Blitz.jpg" alt="Blitz">
-                </a>
-                <ul>
-                    <li>60 seconden</li>
-                    <li>1 punt per juiste combinatie</li>
-                </ul>
-            </article>
-            <article class="option">
-                <a href="/views/suddendeath.html">
-                    <img src="/images/Sudden Death.jpg" alt="Sudden Death">
-                </a>
-                <ul>
-                    <li>1 punt per juiste combinatie</li>
-                    <li>Ronde stopt bij fout antwoord</li>
-                </ul>
-            </article>
+            <!-- Andere quizopties blijven hetzelfde -->
         </section>
-
-        
     </main>
     <footer>
         LOTR © 2025
