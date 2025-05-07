@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="/style.css">
     <title>Registratie</title>
 </head>
 <body class="registrationBody">
     <section class="registration-section">
         <article class="registration-article">
           <h2>Registreer</h2>
-          <form id="registrationForm" class="registration-form">
+          <form id="registrationForm" class="registration-form" action="/register" method="POST">
             <label for="username">Gebruikersnaam:</label>
             <input type="text" id="username" name="username" required>
     
