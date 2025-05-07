@@ -12,6 +12,8 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/css',express.static(path.join(__dirname, "css")));
+app.use('/images',express.static(path.join(__dirname, "images")));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
@@ -43,6 +45,9 @@ app.get("/registration", (req, res) => {
     res.render("registration");
 });
 
+app.get("/home", (req, res) => {
+    res.render("home"); // zorg dat je home.ejs in de views-map staat
+});
 app.post("/register", async (req, res) => {
     const { username, email, password, ["confirm-password"]: confirmPassword } = req.body;
 
