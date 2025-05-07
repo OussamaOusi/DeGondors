@@ -47,9 +47,15 @@ async function createInitialUser() {
 }
 
 export async function login(email: string, password: string) {
-    if (email === "" || password === ""){
-        console.log("geen paswoord of email")
-        throw new Error("Email and password required");
+    console.log("-- login() called met email =", email);
+    const totalUsers = await userCollection.countDocuments();
+    console.log(`-- users in collection: ${totalUsers}`);
+
+    const foundUser = await userCollection.findOne({ email });
+    console.log("-- findOne resultaat:", foundUser);
+
+    if (!foundUser) {
+        throw new Error("User not found");
     }
     let user : User | null = await userCollection.findOne<User>({email: email});
     if (user) {
@@ -64,4 +70,29 @@ export async function login(email: string, password: string) {
         console.log("user not found")
         throw new Error("User not found");
     }
+}
+
+export async function registerUser(username: string, email: string, password: string, confirmPassword: string) {
+    if (!username || !email || !password || !confirmPassword) {
+        throw new Error("Alle velden zijn verplicht.");
+    }
+
+    if (password !== confirmPassword) {
+        throw new Error("Wachtwoorden komen niet overeen.");
+    }
+
+    const existingUser = await userCollection.findOne({ email });
+    if (existingUser) {
+        throw new Error("Gebruiker bestaat al.");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await userCollection.insertOne({
+        email,
+        password: hashedPassword,
+        role: "USER",
+    });
+
+    return true;
 }

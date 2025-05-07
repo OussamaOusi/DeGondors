@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-import { connect, login } from "./database";
+import { connect, login, registerUser, userCollection } from "./database";
 import session from "./session";
 import { User } from "./types";
 import { secureMiddleware } from "./secureMiddleware";
@@ -10,10 +10,12 @@ const app = express();
 app.set("port", 3000);
 app.set("view engine", "ejs");
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
-app.get("/", secureMiddleware, async(req, res) =>  {
+app.get("/", async(req, res) =>  {
     res.render("index");
 });
 
@@ -36,6 +38,31 @@ app.post("/login", async (req,res) => {
         res.redirect("/login");
     }
 })
+
+app.get("/registration", (req, res) => {
+    res.render("registration");
+});
+
+app.post("/register", async (req, res) => {
+    const { username, email, password, ["confirm-password"]: confirmPassword } = req.body;
+
+    try {
+        await registerUser(username, email, password, confirmPassword);
+        res.redirect("/login");
+    } catch (err: any) {
+        console.error("Fout bij registreren:", err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+
+app.post("/logout", async(req, res) => {
+    console.log(">>> Voor destroy:", req.session);  
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
+    console.log(">>> Na destroy, req.session is:", req.session); 
+});
 
 app.listen(app.get("port"), async() => {
     try {
