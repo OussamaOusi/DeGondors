@@ -13,6 +13,7 @@ import roundsRouter from "./routes/roundsRouter";
 import blacklistRouter from "./routes/blacklistRouter";
 import favoritesRouter from "./routes/favoritesRouter";
 import leaderboardsRouter from "./routes/leaderboardsRouter";
+import profileRouter from "./routes/profileRouter";
 
 
 
@@ -31,7 +32,7 @@ app.use(session);
 
 
 
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, favoritesRouter, leaderboardsRouter);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, favoritesRouter, leaderboardsRouter, profileRouter);
 
 
 //sessions moet gefixt worden
