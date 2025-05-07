@@ -27,11 +27,6 @@ app.use(express.json());
 app.use('/', indexRoutes); // Webpagina's
 app.use('/api', apiRoutes); // API-endpoints (bijv. /api/quote)
 
-// 5. Fallback voor onbekende pagina's (optioneel)
-app.use((_req: Request, res: Response) => {
-  res.status(404).render('404'); // Zorg dat je een 404.ejs maakt
-});
-
 // 6. Server starten
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
