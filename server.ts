@@ -38,6 +38,7 @@ import { User } from "./types";
 import { secureMiddleware } from "./secureMiddleware";
 import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
+import registrationRouter from "./routes/registrationRouter"
 
 const app = express();
 
@@ -75,23 +76,6 @@ app.post("/login", async (req,res) => {
     }
 })
 
-app.get("/registration", (req, res) => {
-    res.render("registration");
-});
-
-app.post("/register", async (req, res) => {
-    const { username, email, password, ["confirm-password"]: confirmPassword } = req.body;
-
-    try {
-        await registerUser(username, email, password, confirmPassword);
-        res.redirect("/login");
-    } catch (err: any) {
-        console.error("Fout bij registreren:", err.message);
-        res.status(400).send(err.message);
-    }
-});
-
-
 app.post("/logout", async(req, res) => {
     console.log(">>> Voor destroy:", req.session);  
     req.session.destroy(() => {
@@ -100,6 +84,7 @@ app.post("/logout", async(req, res) => {
     console.log(">>> Na destroy, req.session is:", req.session); 
 });
 
+app.use("/", registrationRouter);
 app.use('/', indexRoutes); // Webpagina's
 app.use('/api', apiRoutes); // API-endpoints (bijv. /api/quote)
 
