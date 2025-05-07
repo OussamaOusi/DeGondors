@@ -13,11 +13,6 @@ router.get('/login', (_req: Request, res: Response) => {
   res.render('login');
 });
 
-// Registratiepagina
-router.get('/registration', (_req: Request, res: Response) => {
-  res.render('registration');
-});
-
 // Favorietenpagina
 router.get('/favorites', (_req: Request, res: Response) => {
   res.render('favorites');
