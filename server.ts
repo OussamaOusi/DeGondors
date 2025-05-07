@@ -39,6 +39,7 @@ import { secureMiddleware } from "./secureMiddleware";
 import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
+import registrationRouter from "./routes/registrationRouter"
 
 const app = express();
 
