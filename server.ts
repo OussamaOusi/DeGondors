@@ -40,6 +40,8 @@ import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
 import registrationRouter from "./routes/registrationRouter"
+import homeRouter from "./routes/homeRouter";
+
 
 const app = express();
 
@@ -55,11 +57,8 @@ app.use(session);
 
 
 
-app.use( loginRouter, indexRoutes, apiRoutes);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter);
 
-app.get("/", async(req, res) =>  {
-    res.render("index");
-});
 
 //sessions moet gefixt worden
 app.post("/logout", async(req, res) => {

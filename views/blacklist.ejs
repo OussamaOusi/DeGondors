@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blacklisted Quotes</title>
-    <link rel="stylesheet" href="../public/style.css">
-</head>
+<%- include("partials/header") %>
+
 <body class="blacklist-body">
     
-    <nav>
-        <section class="logo">
-            <img src="/images/Logo.jpg" alt="Website Logo">
-        </section>
-        <section class="nav-links">
-            <a href="/views/home.ejs" class="active">Quiz</a>
-            <a href="/views/leaderboards.ejs">Leaderboards</a>
-            <a href="/views/favorites.ejs">Favorite quotes</a>
-            <a href="/views/blacklist.ejs">Blacklisted quotes</a>
-        </section>
-    </nav>
+    <%- include("partials/nav") %>
 
     <header class="character-header">
         <button class="nav-button" id="prevBtn">← Vorige</button>
