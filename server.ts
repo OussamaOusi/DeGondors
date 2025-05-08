@@ -41,6 +41,7 @@ import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
 import registrationRouter from "./routes/registrationRouter"
 import homeRouter from "./routes/homeRouter";
+import tenRoundsRouter from "./routes/10roundsRouter";
 
 
 const app = express();
@@ -57,7 +58,7 @@ app.use(session);
 
 
 
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, tenRoundsRouter);
 
 
 //sessions moet gefixt worden
