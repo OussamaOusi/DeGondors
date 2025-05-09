@@ -96,8 +96,11 @@ function fetchQuote() {
             console.log("Json response data:");
             console.log(data);
             const randomQuote = data.docs[Math.floor(Math.random() * data.docs.length)].dialog;
+
             const quoteElement = document.getElementById('quote-text');
             console.log("Opgehaalde quote");
+            console.log(data[0])
+            console.log(randomQuote)
             console.log(quoteElement);
             if (quoteElement) {
                 quoteElement.innerText = `"${randomQuote}"`;
@@ -112,6 +115,8 @@ function fetchQuote() {
     });
 }
 fetchQuote();
+
+document.getElementById("fetchquotebutton").addEventListener("click", fetchQuote);
 
 //Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
@@ -173,13 +178,14 @@ if(registrationForm){
     })
 };
 
-const GenerateAvatar = () => {
+function GenerateAvatar() {
     const avatar = createAvatar(funEmoji, { seed: "Robin" }).toDataUri();
     console.log(avatar);
     document.getElementById("avatarimg").src = avatar;
 }
 
-GenerateAvatar();
+document.getElementById("generateAvatar").addEventListener("click", GenerateAvatar)
+
 
 /*
 // Likebutton
