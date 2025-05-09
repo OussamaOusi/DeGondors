@@ -5,4 +5,11 @@ export interface User {
     email: string;
     password?: string;
     role: "ADMIN" | "USER";
+    favorites?: QuoteWithData[];
+}
+
+export interface QuoteWithData {
+    quote: string;
+    character: string;
+    movie: string;
 }

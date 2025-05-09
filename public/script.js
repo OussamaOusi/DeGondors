@@ -181,45 +181,34 @@ const GenerateAvatar = () => {
 
 GenerateAvatar();
 
-/*
-// Likebutton
-document.getElementById('like-button').onclick = function() {
-    window.location.href = './favorites.html';
-}
+//like en dislike
+document.getElementById("like-button").addEventListener("click", () => {
+    const quote = document.getElementById("quote-text").innerText.trim();
+    const character = "Gandalf"; // Vul dit dynamisch in
+    const movie = "The Fellowship of the Ring"; // Vul dit dynamisch in
+    const round = 1; // Dit moet je dynamisch aanpassen per ronde
 
-// Dislikebutton
-document.getElementById('dislike-button').onclick = function() {
-    window.location.href = './blacklist.html';
-}
-*/
+    if (quote) {
+        fetch("/api/quotes/like", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quote, character, movie })
+        });
+    }
+});
 
-// //Leaflet
-// document.addEventListener("DOMContentLoaded", function() {
-//     var campusLocation = { lat: 51.2194, lng: 4.4028 };
+document.getElementById("dislike-button").addEventListener("click", () => {
+    const quote = document.getElementById("quote-text").innerText.trim();
+    const character = document.querySelector('.character-header h1').innerText;
+    const movie = "The Two Towers"; // Vul dit dynamisch in
+    const round = 1;
 
-//     // Ensure the map container is available before initializing the map
-//     var map = L.map('map').setView(campusLocation, 13);
-
-//     // Add the OpenStreetMap tile layer
-//     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//     }).addTo(map);
-
-//     // Add a marker to the map
-//     L.marker(campusLocation).addTo(map)
-//         .bindPopup('AP Hogeschool Campus Spoor Noord - Ellermanstraat')
-//         .openPopup();
-// });
-
-
-
-
-// // Toggle password visibility
-// const togglePassword = document.getElementById('togglePassword');
-// const passwordField = document.getElementById('loginPassword');
-
-// togglePassword.addEventListener('click', function() {
-//   // Toggle the input type between password and text
-//   const type = passwordField.type === 'password' ? 'text' : 'password';
-//   passwordField.type = type;
-// });
+    if (quote) {
+        fetch("/api/quotes/dislike", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quote, character, movie })
+        });
+    }
+});
+//Like en dislike
