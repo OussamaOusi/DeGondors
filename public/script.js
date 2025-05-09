@@ -79,11 +79,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE"; // Vervang met je eigen API-sleutel
-const apiUrl = "https://the-one-api.dev/v2/quote";
+const apiUrlQuote = "https://the-one-api.dev/v2/quote";
+const apiUrlCharacter = "https://the-one-api.dev/v2/character";
+
+var quoteData;
+var charData;
+
 function fetchQuote() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch(apiUrl, {
+            const response = yield fetch(apiUrlQuote, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${apiKey}`
@@ -92,14 +97,16 @@ function fetchQuote() {
             if (!response.ok) {
                 throw new Error("Er is een fout opgetreden bij het ophalen van de quote.");
             }
-            const data = yield response.json();
-            console.log("Json response data:");
+            const data = response.json();
+            console.log("Quote apicall jsondata: ")
             console.log(data);
-            const randomQuote = data.docs[Math.floor(Math.random() * data.docs.length)].dialog;
+            const randomQuoteData = data.docs[Math.floor(Math.random() * data.docs.length)];
+            quoteData = randomQuoteData;
+            const randomQuote = randomQuoteData.dialog;
 
             const quoteElement = document.getElementById('quote-text');
             console.log("Opgehaalde quote");
-            console.log(data[0])
+            console.log(randomQuoteData)
             console.log(randomQuote)
             console.log(quoteElement);
             if (quoteElement) {
@@ -115,6 +122,33 @@ function fetchQuote() {
     });
 }
 fetchQuote();
+
+function getCharacter() {
+    try {
+        const response = fetch(apiUrlCharacter, {
+            mehtod: 'GET',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error("Er is een fout opgetreden bij het ophalen van de karakters.");
+        }
+
+        const data = response.json();
+        console.log("Character apicall jsondata: ");
+        console.log(data);
+        charData = data.find(char => char._id === quoteData._id);
+        console.log(charData);
+    }
+    catch (error){
+        console.error("Error fetching character data:", error)
+    }
+};
+
+getCharacter();
+
+
 
 document.getElementById("fetchquotebutton").addEventListener("click", fetchQuote);
 
