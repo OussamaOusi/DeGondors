@@ -6,3 +6,11 @@ export interface User {
     password?: string;
     role: "ADMIN" | "USER";
 }
+
+export interface QuoteWithData {
+    quote: string;
+    characterId: string;
+    characterName: string;
+    wikiUrl: string;
+    movie?: string;
+}

@@ -10,6 +10,7 @@ export const MONGODB_URI = process.env.MONGODB_URI ?? "mongodb+srv://robinsegers
 export const client = new MongoClient(MONGODB_URI);
 
 export const userCollection = client.db("DeGondors").collection<User>("Users");
+export const favoriteQuotesCollection = client.db("DeGondors").collection("FavoriteQuotes");
 
 async function exit() {
     try {

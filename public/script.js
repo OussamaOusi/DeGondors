@@ -78,6 +78,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+/*
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE"; // Vervang met je eigen API-sleutel
 const apiUrlQuote = "https://the-one-api.dev/v2/quote";
 const apiUrlCharacter = "https://the-one-api.dev/v2/character";
@@ -151,6 +152,51 @@ getCharacter();
 
 
 document.getElementById("fetchquotebutton").addEventListener("click", fetchQuote);
+*/
+const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
+const quoteApi = "https://the-one-api.dev/v2/quote";
+const characterApi = "https://the-one-api.dev/v2/character";
+
+let currentQuoteData = null;
+let currentCharacterData = null;
+
+async function fetchRandomQuote() {
+  const quoteEl = document.getElementById("quote-text");
+  console.log("🔄 Ophalen quote…");
+  try {
+    const res = await fetch(quoteUrl, { headers:{Authorization:`Bearer ${apiKey}`} });
+    const data = await res.json();
+    const random = data.docs[Math.floor(Math.random()*data.docs.length)];
+    console.log("✅ Quote binnen:", random);
+    if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
+    currentQuote = random;
+    await fetchCharacter(random.character);
+  } catch (err) {
+    console.error("❌ Fout bij quote:", err);
+    if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
+  }
+}
+
+async function fetchCharacter(characterId) {
+    console.log("🔎 Ophalen character met ID:", characterId);
+    try {
+        const res = await fetch(characterUrl, {
+            headers: { Authorization: `Bearer ${apiKey}` },
+        });
+        const data = await res.json();
+        console.log("📦 Gehele character-response ontvangen:", data);
+
+        currentCharacter = data.docs.find(c => c._id === characterId);
+        console.log("✅ Character details gevonden:", currentCharacter);
+
+        // Je kunt de naam tonen op de pagina als je een element toevoegt met bv. id="character-name"
+        // document.getElementById("character-name").textContent = currentCharacter.name;
+    } catch (err) {
+        console.error("❌ Fout bij ophalen character:", err);
+    }
+}
+
+
 
 //Landingpage
 const wrongLandingpageImgs = document.querySelectorAll("#wrongImg");
@@ -220,6 +266,81 @@ function GenerateAvatar() {
 
 document.getElementById("generateAvatar").addEventListener("click", GenerateAvatar)
 
+//like
+async function fetchCharacter(characterId) {
+    console.log("🔎 Ophalen character met ID:", characterId);
+    try {
+        const res = await fetch(characterUrl, {
+            headers: { Authorization: `Bearer ${apiKey}` },
+        });
+        const data = await res.json();
+        console.log("📦 Gehele character-response ontvangen:", data);
+
+        currentCharacter = data.docs.find(c => c._id === characterId);
+        console.log("✅ Character details gevonden:", currentCharacter);
+
+        // Je kunt de naam tonen op de pagina als je een element toevoegt met bv. id="character-name"
+        // document.getElementById("character-name").textContent = currentCharacter.name;
+    } catch (err) {
+        console.error("❌ Fout bij ophalen character:", err);
+    }
+}
+
+async function likeQuote() {
+    if (!currentQuote || !currentCharacter) {
+        console.warn("⚠️ Geen quote of character geladen om te liken.");
+        return;
+    }
+
+    const favorite = {
+        quote: currentQuote.dialog,
+        characterId: currentCharacter._id,
+        characterName: currentCharacter.name,
+        wikiUrl: currentCharacter.wikiUrl,
+        movie: currentQuote.movie || "Onbekend",
+        round: 0, // optioneel
+    };
+
+    console.log("📤 Versturen van favorite:", favorite);
+
+    try {
+        const res = await fetch("/api/favorites/like", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(favorite),
+        });
+
+        if (res.ok) {
+            console.log("✅ Quote succesvol geliket en opgeslagen.");
+        } else {
+            console.error("❌ Fout bij opslaan favorite:", await res.text());
+        }
+    } catch (err) {
+        console.error("❌ Netwerkfout bij liken:", err);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const quoteEl = document.getElementById("quote-text");
+  const fetchBtn = document.getElementById("fetch");
+  const likeBtn  = document.getElementById("like-button");
+
+  if (!quoteEl) console.warn("⚠️ #quote-text niet gevonden");
+  if (!fetchBtn) console.warn("⚠️ #fetch niet gevonden");
+  if (!likeBtn) console.warn("⚠️ #like-button niet gevonden");
+
+  if (fetchBtn) {
+    fetchBtn.addEventListener("click", fetchRandomQuote);
+  }
+  if (likeBtn) {
+    likeBtn.addEventListener("click", likeQuote);
+  }
+
+  // Laad meteen een quote bij paginalaad
+  if (fetchBtn) fetchRandomQuote();
+});
 
 /*
 // Likebutton
