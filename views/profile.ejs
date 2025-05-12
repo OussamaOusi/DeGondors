@@ -8,37 +8,46 @@
     <main>
         <section class="profile-wrapper">
             <h1 class="profile-title">Mijn Profiel</h1>
-            <form method="POST" action="/profile/update" class="profile-form">
-                <div class="avatar-preview">
-                  <img id="avatarPreview" src="/images/avatars/<%= user?.avatar || 'aragorn' %>.png" alt="Avatar Preview">
+
+            <div class="profile-info">
+                <div class="profile-item">
+                    <span class="profile-label">Gebruikersnaam:</span>
+                    <span class="profile-value" id="usernameDisplay"><%= user?.username %></span>
+                    <button class="edit-btn" onclick="editField('username')">🖉</button>
                 </div>
-                <label for="username">Gebruikersnaam</label>
-                <input type="text" name="username" id="username" value="<%= user?.username %>" required>
 
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="<%= user?.email %>" required>
+                <div class="profile-item">
+                    <span class="profile-label">Email:</span>
+                    <span class="profile-value" id="emailDisplay"><%= user?.email %></span>
+                    <button class="edit-btn" onclick="editField('email')">🖉</button>
+                </div>
 
-                <label for="password">Nieuw wachtwoord</label>
-                <input type="password" name="password" id="password" placeholder="Laat leeg om niet te wijzigen">
+                <div class="profile-item">
+                    <span class="profile-label">Avatar:</span>
+                    <span class="profile-value" id="avatarDisplay"><%= user?.avatar %></span>
+                    <button class="edit-btn" onclick="editField('avatar')">🖉</button>
+                </div>
 
-                <label for="avatar">Profiel foto (kies je avatar)</label>
-                <select name="avatar" id="avatar">
-                    <option value="aragorn" <%= user?.avatar === 'aragorn' ? 'selected' : '' %>>Aragorn</option>
-                    <option value="legolas" <%= user?.avatar === 'legolas' ? 'selected' : '' %>>Legolas</option>
-                    <option value="gandalf" <%= user?.avatar === 'gandalf' ? 'selected' : '' %>>Gandalf</option>
-                    <option value="frodo" <%= user?.avatar === 'frodo' ? 'selected' : '' %>>Frodo</option>
-                </select>
-
-                <button type="submit" class="btn-save">Opslaan</button>
-            </form>
-
-            <div class="profile-actions">
-                <form method="POST" action="/logout">
-                    <button type="submit" class="btn-logout">Log uit</button>
+                <form id="editForm" method="POST" action="/profile/update" class="edit-form hidden">
+                    <input type="text" id="usernameInput" name="username" placeholder="Nieuwe gebruikersnaam">
+                    <input type="email" id="emailInput" name="email" placeholder="Nieuwe email">
+                    <select name="avatar" id="avatarInput">
+                        <option value="aragorn">Aragorn</option>
+                        <option value="legolas">Legolas</option>
+                        <option value="gandalf">Gandalf</option>
+                        <option value="frodo">Frodo</option>
+                    </select>
+                    <button type="submit" class="btn-save">Opslaan</button>
                 </form>
-                <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
-                    <button type="submit" class="btn-delete">Verwijder account</button>
-                </form>
+
+                <div class="profile-actions">
+                    <form method="POST" action="/logout">
+                        <button type="submit" class="btn-logout">Log uit</button>
+                    </form>
+                    <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
+                        <button type="submit" class="btn-delete">Verwijder account</button>
+                    </form>
+                </div>
             </div>
         </section>
     </main>
@@ -48,12 +57,17 @@
     </footer>
 
     <script>
-        const avatarSelect = document.getElementById('avatar');
-        const avatarPreview = document.getElementById('avatarPreview');
+        function editField(field) {
+            document.getElementById('editForm').classList.remove('hidden');
 
-        avatarSelect.addEventListener('change', function () {
-            avatarPreview.src = `/images/avatars/${this.value}.png`;
-        });
+            if (field === 'username') {
+                document.getElementById('usernameInput').value = document.getElementById('usernameDisplay').textContent;
+            } else if (field === 'email') {
+                document.getElementById('emailInput').value = document.getElementById('emailDisplay').textContent;
+            } else if (field === 'avatar') {
+                document.getElementById('avatarInput').value = document.getElementById('avatarDisplay').textContent.toLowerCase();
+            }
+        }
     </script>
 </body>
 </html>
