@@ -47,13 +47,57 @@ async function likeQuote() {
     console.error("❌ Network error bij like:", e);
   }
 }
+async function dislikeQuote() {
+  console.log("🔄 dislikeQuote() aangeroepen");
+  if (!currentQuote || !currentCharacter) {
+    console.warn("⚠️ Geen quote/character geladen");
+    return;
+  }
+
+  const reason = prompt("Waarom vind je deze quote niet leuk?");
+  console.log("📋 Prompt returned:", reason);
+  if (!reason) {
+    alert("Je moet een reden invullen.");
+    return;
+  }
+
+  const payload = {
+    quote: currentQuote.dialog,
+    characterId: currentCharacter._id,
+    characterName: currentCharacter.name,
+    wikiUrl: currentCharacter.wikiUrl,
+    movie: currentQuote.movie,
+    reason
+  };
+  console.log("📤 Sending dislike payload:", payload);
+
+  try {
+    const res = await fetch("/api/blacklist/dislike", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    console.log("↪ Server response status:", res.status);
+    console.log("↪ Server response body:", await res.text());
+  } catch (err) {
+    console.error("❌ Network error in dislikeQuote:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dislikeBtn = document.getElementById("dislike-button");
+  if (dislikeBtn) {
+    dislikeBtn.addEventListener("click", dislikeQuote);
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-
+  const dislikeBtn = document.getElementById("dislike-button");
+  
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
-
-  fetchRandomQuote(); // eerste quote direct
+  if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
+  fetchRandomQuote();
 });

@@ -11,6 +11,7 @@ export const client = new MongoClient(MONGODB_URI);
 
 export const userCollection = client.db("DeGondors").collection<User>("Users");
 export const favoriteQuotesCollection = client.db("DeGondors").collection("FavoriteQuotes");
+export const BlacklistQuotesCollection = client.db("DeGondors").collection("BlacklistQuotes");
 
 async function exit() {
     try {

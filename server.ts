@@ -7,10 +7,10 @@ import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
 import registrationRouter from "./routes/registrationRouter";
 import homeRouter from "./routes/homeRouter";
-import tenRoundsRouter from "./routes/10roundsRouter";
+import tenRoundsRouter from "./routes/roundsRouter";
 import roundsRouter from "./routes/roundsRouter";
 import blacklistRouter from "./routes/blacklistRouter";
-import favoritesRouter from "./routes/favoritesRouter";
+//import favoritesRouter from "./routes/favoritesRouter";
 import leaderboardsRouter from "./routes/leaderboardsRouter";
 import profileRouter from "./routes/profileRouter";
 import { ObjectId } from "mongodb";
@@ -39,7 +39,7 @@ app.post("/api/favorites/like", async (req: Request, res: Response): Promise<voi
     return;
   }
 
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, tenRoundsRouter, favoritesRouter);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, tenRoundsRouter);
   const { quote, characterId, characterName, wikiUrl, movie } = req.body;
   if (!quote || !characterId || !characterName || !wikiUrl) {
     res.status(400).send("Verplichte velden ontbreken");

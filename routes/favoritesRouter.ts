@@ -2,7 +2,7 @@ import express from "express";
 import { userCollection } from "../database";
 
 const router = express.Router();
-
+/*
 router.get("/favorites", async (req, res) => {
     const userId = req.session.user?._id;
     try {
@@ -27,3 +27,4 @@ router.post("/favorites", async (req, res) => {
         res.status(500).send("Fout bij toevoegen van favorite");
     }
 });
+*/
