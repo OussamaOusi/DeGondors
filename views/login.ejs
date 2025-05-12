@@ -1,22 +1,24 @@
 <%- include("partials/header") %>
-
+<%- include("partials/navIndex") %>
 <body class="loginBody">
-  <section class="login-section">
-    <article class="login-article">
-      <h2>Login</h2>
-      <form id="loginForm" class="login-form" action="/login" method="post">
-        <label for="email">Gebruikersnaam (email):</label>
-        <input type="email" id="loginEmail" name="email" required />
-
-        <label for="password">Wachtwoord:</label>
-        <input type="password" id="loginPassword" name="password" required />
-
-        <button type="submit">Login</button>
-      </form>
-      <p>Testtesttest</p>
-      <p id="error-message" class="error-message"></p>
-    </article>
-  </section>
+  <main>
+    <section class="login-section">
+      <article class="login-article">
+        <h2>Login</h2>
+        <form id="loginForm" class="login-form" action="/login" method="post">
+          <label for="email">Gebruikersnaam (email):</label>
+          <input type="email" id="loginEmail" name="email" required />
+  
+          <label for="password">Wachtwoord:</label>
+          <input type="password" id="loginPassword" name="password" required />
+  
+          <button type="submit">Login</button>
+        </form>
+        <p>Testtesttest</p>
+        <p id="error-message" class="error-message"></p>
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>

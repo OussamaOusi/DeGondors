@@ -27,7 +27,3 @@ router.post("/favorites", async (req, res) => {
         res.status(500).send("Fout bij toevoegen van favorite");
     }
 });
-
-
-
-export default router;
