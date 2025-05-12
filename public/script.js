@@ -200,7 +200,7 @@ document.getElementById("like-button").addEventListener("click", () => {
 document.getElementById("dislike-button").addEventListener("click", () => {
     const quote = document.getElementById("quote-text").innerText.trim();
     const character = document.querySelector('.character-header h1').innerText;
-    const movie = "The Two Towers"; // Vul dit dynamisch in
+    const movie = "The Two Towers";
     const round = 1;
 
     if (quote) {
