@@ -9,6 +9,9 @@
         <section class="profile-wrapper">
             <h1 class="profile-title">Mijn Profiel</h1>
             <form method="POST" action="/profile/update" class="profile-form">
+                <div class="avatar-preview">
+                  <img id="avatarPreview" src="/images/avatars/<%= user?.avatar || 'aragorn' %>.png" alt="Avatar Preview">
+                </div>
                 <label for="username">Gebruikersnaam</label>
                 <input type="text" name="username" id="username" value="<%= user?.username %>" required>
 
@@ -25,10 +28,6 @@
                     <option value="gandalf" <%= user?.avatar === 'gandalf' ? 'selected' : '' %>>Gandalf</option>
                     <option value="frodo" <%= user?.avatar === 'frodo' ? 'selected' : '' %>>Frodo</option>
                 </select>
-
-                <div class="avatar-preview">
-                    <img id="avatarPreview" src="/images/avatars/<%= user?.avatar || 'aragorn' %>.png" alt="Avatar Preview">
-                </div>
 
                 <button type="submit" class="btn-save">Opslaan</button>
             </form>
