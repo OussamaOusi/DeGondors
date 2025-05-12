@@ -67,6 +67,8 @@ function initializePage() {
 
 document.addEventListener('DOMContentLoaded', initializePage);
 
+
+
 // Fetch quote from backend
 async function fetchQuote() {
   try {

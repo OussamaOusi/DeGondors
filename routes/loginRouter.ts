@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import { login } from '../database';
 import { User } from '../types';
-import { secureMiddleware } from '../secureMiddleware';
 
 
     const router = express.Router();
