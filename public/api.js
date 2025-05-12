@@ -1,13 +1,54 @@
+
+
 // public/10rounds.js
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
 const quoteUrl = "https://the-one-api.dev/v2/quote";
 const characterUrl = "https://the-one-api.dev/v2/character";
+const movieUrl = "https://the-one-api.dev/v2/movie";
 
 let currentQuote = null;
 let currentCharacter = null;
+let currentMovie = null;
 let characterNames = null;
 let answerArray = null;
-let movieArray = ["The Fellowship Of The Ring","The Two Towers","The Return Of The King"];
+let movieArray = null;
+let movieData = null;
+let movieAnswerArray = null;
+let score = 0;
+let counter = 0;
+
+async function fetchMovies(){
+  try{
+
+    console.log("Fetching movie data")
+    const res = await fetch(movieUrl, {headers: { Authorization: `Bearer ${apiKey}`}});
+    const data = await res.json();
+    movieData = data;
+    console.log("MovieData");
+    console.log(data);
+
+    if (!data) {
+      movieArray = await data.docs.map(movie => movie.name)
+    }
+    movieArray = data.docs.map(movie => movie.name);
+    
+    console.log("Array movies");
+    console.log(movieArray);
+
+  }
+  catch (e) {
+    console.log("Fout bij het laden van de films");
+  }
+}
+
+async function insertMovies(){
+  if(!currentQuote || !movieArray || movieData){
+   currentMovie = await movieArray.find(quote => quote.movie === movieData.docs._id);
+  }
+
+  currentMovie = movieArray.find(quote => quote.movie === movieData.docs._id);
+  movieAnswerArray = [currentMovie, ...getRandomItems(movieArray)];
+}
 
 async function fetchRandomQuote() {
   const quoteEl = document.getElementById("quote-text");
@@ -42,12 +83,24 @@ async function fetchRandomQuote() {
     const button4 = document.getElementById("button4");
     const button5 = document.getElementById("button5");
     const button6 = document.getElementById("button6");
+    insertMovies();
 
-    shuffleArray(movieArray);
+    shuffleArray(movieAnswerArray);
+    console.log(" fetched movie data")
+    console.log(movieAnswerArray)
 
-    if(button4) button4.innerText = movieArray[0];
-    if(button5) button5.innerText = movieArray[1];
-    if(button6) button6.innerText = movieArray[2];
+
+    
+
+    if(button4) button4.innerText = movieAnswerArray[0];
+    if(button5) button5.innerText = movieAnswerArray[1];
+    if(button6) button6.innerText = movieAnswerArray[2];
+
+    document.querySelectorAll(".character-button").forEach(button => {
+      button.addEventListener("click", function() {
+          checkAnswer(this.innerText);
+      });
+  })
 
     console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
   } catch (e) {
@@ -55,6 +108,7 @@ async function fetchRandomQuote() {
     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
   }
 }
+
 
 async function likeQuote() {
   if (!currentQuote || !currentCharacter) return console.warn("Nog niets geladen om te liken");
@@ -87,18 +141,14 @@ function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
- function fillButtons(){
-  
-try{
-  // console.log("AnswerArray:")
-  // console.log(answerArray);
-  // //shuffleArray(answerArray);
-  // console.log("Shuffled answerArray")
-  // console.log(answerArray);
+function checkCharAnswer(selectedAnswer){
+  if(selectedAnswer === currentCharacter.name){
+      score = score + 0.5;
+  }
 }
-catch(e) {
-  console.error("fillButtons failed")
-}
+
+function checkMovieAnswer(selectedAnswer){
+ 
 }
 
 
@@ -106,13 +156,18 @@ catch(e) {
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
+
+  const scoreCounter = document.getElementById("score-value");
+  scoreCounter.innerText = `${score}/${counter}`;
+  
   
   
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
 
+  fetchMovies();
   fetchRandomQuote(); // eerste quote direct
 });
 
-fillButtons();
+

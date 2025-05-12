@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import session from "./session";
+import session from "./public/session";
 import { connect, favoriteQuotesCollection } from "./database";
 import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
