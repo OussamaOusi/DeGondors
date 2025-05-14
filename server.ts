@@ -1,83 +1,82 @@
-import express, { Request, Response } from "express";
+// // src/server.ts
+// import express, { Request, Response } from 'express';
+// import path from 'path';
+// import dotenv from 'dotenv';
+// import indexRoutes from './routes/indexRoutes';
+// import apiRoutes from './routes/apiRoutes'; // voor de /api/quote
+
+// dotenv.config(); // Laadt variabelen uit .env bestand
+
+// const app = express();
+// const PORT = process.env.PORT || 3000;
+
+// // 1. View engine instellen
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+
+// // 2. Static bestanden serveren
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/css', express.static(path.join(__dirname, 'css')));
+// app.use('/images', express.static(path.join(__dirname, 'images')));
+
+// // 3. Body parsers (voor formulieren / JSON)
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+
+// // 4. Routes koppelen
+// app.use('/', indexRoutes); // Webpagina's
+// app.use('/api', apiRoutes); // API-endpoints (bijv. /api/quote)
+
+// // 6. Server starten
+// app.listen(PORT, () => {
+//   console.log(`🚀 Server is running at http://localhost:${PORT}`);
+import express from "express";
 import path from "path";
+import { connect, login, registerUser, userCollection } from "./database";
 import session from "./session";
-import { connect, favoriteQuotesCollection } from "./database";
+import { User } from "./types";
+import { secureMiddleware } from "./secureMiddleware";
 import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
-import registrationRouter from "./routes/registrationRouter";
+import registrationRouter from "./routes/registrationRouter"
 import homeRouter from "./routes/homeRouter";
 import tenRoundsRouter from "./routes/roundsRouter";
-import roundsRouter from "./routes/roundsRouter";
-import blacklistRouter from "./routes/blacklistRouter";
-//import favoritesRouter from "./routes/favoritesRouter";
-import leaderboardsRouter from "./routes/leaderboardsRouter";
-import profileRouter from "./routes/profileRouter";
-import { ObjectId } from "mongodb";
+import blacklistRouter from "./routes/blacklistRouter"
+
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.set("port", 3000);
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
-// **Eerst** externe API’s
-app.use("/api", apiRoutes);
 
-// **Dan** je eigen “favorites” API + pagina
-app.post("/api/favorites/like", async (req: Request, res: Response): Promise<void> => {
-  const userId = req.session.user?._id;
-  if (!userId) {
-    res.status(401).send("Niet ingelogd");
-    return;
-  }
 
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, tenRoundsRouter);
-  const { quote, characterId, characterName, wikiUrl, movie } = req.body;
-  if (!quote || !characterId || !characterName || !wikiUrl) {
-    res.status(400).send("Verplichte velden ontbreken");
-    return;
-  }
+app.use("/api/blacklist", blacklistRouter);
 
-  try {
-    await favoriteQuotesCollection.updateOne(
-      { userId: new ObjectId(userId), quote },
-      {
-        $setOnInsert: {
-          userId: new ObjectId(userId),
-          quote,
-          characterId,
-          characterName,
-          wikiUrl,
-          movie,
-          createdAt: new Date(),
-        }
-      },
-      { upsert: true }
-    );
-    res.status(200).json({ success: true });  // **GEEN** `return` hier
-  } catch (err) {
-    console.error("DB-fout bij like:", err);
-    res.status(500).send("Kon niet opslaan");  // **GEEN** `return` hier
-  }
+//sessions moet gefixt worden
+app.post("/logout", async(req, res) => {
+    console.log(">>> Voor destroy:", req.session);  
+    req.session.destroy(() => {
+        res.redirect("/");
+    });
+    console.log(">>> Na destroy, req.session is:", req.session); 
 });
 
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, leaderboardsRouter, profileRouter);
-
-// **Logout**-route
-app.post("/logout", (req, res) => {
-  req.session.destroy(() => res.redirect("/"));
-});
-
-// Start server
-app.listen(PORT, async () => {
-  await connect();
-  console.log(`Server draait op http://localhost:${PORT}`);
+app.listen(app.get("port"), async() => {
+    try {
+        await connect();
+        console.log("Server started on http://localhost:" + app.get('port'));
+    } catch (e) {
+        console.log(e);
+        process.exit(1); 
+    }
 });

@@ -25,8 +25,7 @@ router.post("/dislike", async (req: Request, res: Response) => {
     characterName,
     wikiUrl,
     movie,
-    reason,            // sla de reden op
-    createdAt: new Date()
+    reason
   };
 
   try {
