@@ -43,9 +43,13 @@ async function fetchMovies(){
 
 async function insertMovies(){
   if(!currentQuote || !movieArray || movieData){
+    console.log("test")
    currentMovie = await movieArray.find(quote => quote.movie === movieData.docs._id);
   }
-
+  console.log("insert movie function:")
+  console.log(`current quote: ${currentQuote}`);
+  console.log(`movie array: ${movieArray}`);
+  console.log(`movie data: ${movieData}`);
   currentMovie = movieArray.find(quote => quote.movie === movieData.docs._id);
   movieAnswerArray = [currentMovie, ...getRandomItems(movieArray)];
 }
@@ -83,9 +87,9 @@ async function fetchRandomQuote() {
     const button4 = document.getElementById("button4");
     const button5 = document.getElementById("button5");
     const button6 = document.getElementById("button6");
-    insertMovies();
 
-    shuffleArray(movieAnswerArray);
+    await insertMovies();
+    //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
 
