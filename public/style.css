@@ -25,7 +25,7 @@ h1 {
     background-size: cover;
     background-position: center;
 }
-
+ /* profiel */
 
 .profile-body {
     font-family: 'Cinzel', serif;
@@ -653,11 +653,17 @@ th {
 /* LandingPage index.html */
 .indexBody {
     font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
-    background-size: cover;
+    background-image: url("/images/background.avif");
     display: flex;
     justify-content: center;
     height: 100vh;
+}
+
+.lotr-titel {
+    font-size: 3em; 
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 65px;
 }
 
 .containerLandingpage {
@@ -667,18 +673,63 @@ th {
     justify-content: center;
     align-items: center;
     color: white;
+    margin-bottom: 11%;
 }
+
 
 .landingpageRow {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .landingpageRow img {
     width: 300px;
     height: 200px;
     border-radius: 8px;
+}
+
+.index-header {
+    background-color: #a64dffbd;
+    padding: 40px 50px;
+}
+
+
+.index-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+.index-logo img {
+    height: 60px;
+}
+
+.index-nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.index-nav-links a,
+.index-nav-links button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.index-nav-links a:hover,
+.index-nav-links button:hover {
+    background-color: rgb(139, 0, 127);
+    transform: scale(1.1); /* Laat de knop iets groter worden bij hover */
 }
 
 /* Registration Page */
