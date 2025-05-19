@@ -1,4 +1,82 @@
+// async function setupCharacterButtons() {
+//   document.querySelectorAll(".character-button").forEach(button => {
+//     button.onclick = function() {
+//       checkCharAnswer(this.innerText);
+//       counter++;
+//       const scoreCounter = document.getElementById("score-value");
+//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+//       setTimeout(() => {
+//         fetchRandomQuote();
+//       }, 500);
+//     };
+//   });
+// }
 
+// async function setupMovieButtons() {
+//   document.querySelectorAll(".movie-button").forEach(button => {
+//     button.onclick = function() {
+//       checkMovieAnswer(this.innerText);
+//       counter++;
+//       const scoreCounter = document.getElementById("score-value");
+//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+//       setTimeout(() => {
+//         fetchRandomQuote();
+//       }, 500);
+//     };
+//   });
+// }
+
+// async function loadQuoteAndCharacters() {
+//   const quoteEl = document.getElementById("quote-text");
+//   try {
+//     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
+//     const data = await res.json();
+//     const random = data.docs[Math.floor(Math.random() * data.docs.length)];
+//     currentQuote = random;
+//     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
+
+//     // Fetch all characters
+//     const charListRes = await fetch(`${characterUrl}`, { headers:{Authorization:`Bearer ${apiKey}`} });
+//     const charListData = await charListRes.json();
+//     characterNames = charListData.docs.map(character => character.name);
+
+//     // Fetch the character for the quote
+//     const charRes = await fetch(`${characterUrl}/${random.character}`, { headers:{Authorization:`Bearer ${apiKey}`} });
+//     const charData = await charRes.json();
+//     currentCharacter = charData.docs[0];
+//     answerArray = [currentCharacter.name, ...getRandomItems(characterNames)];
+//     shuffleArray(answerArray);
+
+//     const button1 = document.getElementById("button1");
+//     const button2 = document.getElementById("button2");
+//     const button3 = document.getElementById("button3");
+//     if(button1) button1.innerText = answerArray[0];
+//     if(button2) button2.innerText = answerArray[1];
+//     if(button3) button3.innerText = answerArray[2];
+
+//     setupCharacterButtons();
+//   } catch (e) {
+//     console.error("❌ Fout bij laden quote/character:", e);
+//     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
+//   }
+// }
+
+// async function loadMoviesForQuote() {
+//   await insertMovies();
+//   const button4 = document.getElementById("button4");
+//   const button5 = document.getElementById("button5");
+//   const button6 = document.getElementById("button6");
+//   if(button4) button4.innerText = movieAnswerArray[0];
+//   if(button5) button5.innerText = movieAnswerArray[1];
+//   if(button6) button6.innerText = movieAnswerArray[2];
+//   setupMovieButtons();
+// }
+
+// async function fetchRandomQuote() {
+//   await loadQuoteAndCharacters();
+//   await loadMoviesForQuote();
+//   console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
+// }
 
 // public/10rounds.js
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
@@ -92,9 +170,27 @@ async function fetchRandomQuote() {
     //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
+    document.querySelectorAll(".movie-button").forEach(button => {
+      button.addEventListener("click", function() {
+        checkMovieAnswer(this.innerText);
+        // Update score/counter here
+        counter++;
+        const scoreCounter = document.getElementById("score-value");
+        if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+        setTimeout(() => {
+          fetchRandomQuote();
+        }, 500); // short delay for UX
+      });
+    });
 
-
-    
+    document.querySelectorAll(".character-button").forEach(button => {
+      button.addEventListener("click", function() {
+        checkCharAnswer(this.innerText);
+        // Update score/counter here
+        // const scoreCounter = document.getElementById("score-value");
+        // if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+      });
+    });  
 
     if(button4) button4.innerText = movieAnswerArray[0];
     if(button5) button5.innerText = movieAnswerArray[1];
