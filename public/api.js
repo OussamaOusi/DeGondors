@@ -37,7 +37,7 @@ async function likeQuote() {
   };
   console.log("📤 Like versturen:", favorite);
   try {
-    const res = await fetch("/api/favorites/like", {
+    const res = await fetch("/api/rounds/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(favorite)
@@ -72,7 +72,7 @@ async function dislikeQuote() {
   console.log("📤 Sending dislike payload:", payload);
 
   try {
-    const res = await fetch("/api/blacklist/dislike", {
+    const res = await fetch("/api/rounds/dislike", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)

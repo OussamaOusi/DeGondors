@@ -11,7 +11,6 @@ router.post("/dislike", async (req: Request, res: Response) => {
     return;
   }
 
-  // Haal nu ook 'reason' uit req.body
   const { quote, characterId, characterName, wikiUrl, movie, reason } = req.body;
   if (!quote || !characterId || !characterName || !wikiUrl || !reason) {
     res.status(400).send("Verplichte velden ontbreken (inclusief reden)");

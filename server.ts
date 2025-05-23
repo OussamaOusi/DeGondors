@@ -43,6 +43,8 @@ import registrationRouter from "./routes/registrationRouter"
 import homeRouter from "./routes/homeRouter";
 import tenRoundsRouter from "./routes/roundsRouter";
 import blacklistRouter from "./routes/blacklistRouter"
+import favoriteRouter from "./routes/favoritesRouter"
+import roundsLikeDislikeRouter from "./routes/roundsLikeDislikeRouter";
 
 
 const app = express();
@@ -58,9 +60,11 @@ app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
 
-
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, tenRoundsRouter);
-app.use("/api/blacklist", blacklistRouter);
+app.use("/api/rounds", roundsLikeDislikeRouter);
+app.use("/10rounds", tenRoundsRouter);
+app.use("/favorites", favoriteRouter);
+app.use("/blacklist", blacklistRouter);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, favoriteRouter);
 
 //sessions moet gefixt worden
 app.post("/logout", async(req, res) => {

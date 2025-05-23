@@ -373,3 +373,28 @@ document.getElementById("dislike-button").addEventListener("click", () => {
     }
 });
 //Like en dislike
+
+//like verwijderen
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".delete-fav").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const li = btn.closest("li");
+      const id = li.dataset.id;
+      if (!id) return;
+
+      if (!confirm("Weet je zeker dat je deze quote wilt verwijderen?")) return;
+
+      try {
+        const res = await fetch(`/favorites/${id}`, { method: "DELETE" });
+        const body = await res.json();
+        if (res.ok && body.success) {
+          li.remove();
+        } else {
+          alert(body.error || "Kon niet verwijderen");
+        }
+      } catch (e) {
+        console.error("Network error bij verwijderen:", e);
+      }
+    });
+  });
+});

@@ -1,42 +1,46 @@
-<%- include("partials/header") %>
+<%- include("partials/header", { title: "Favoriete Quotes", bodyClass: "lotr-favorites-body" }) %>
+<%- include("partials/nav") %>
 
-<body class="favorites-body">
-    
-    <%- include("partials/nav") %>
+<main class="favorites-page">
+  <div class="favorites-container">
+    <h1 class="favorites-title">Favoriete Quotes</h1>
 
-    <header class="character-header">
-        <button class="nav-button" id="prevBtn">← Vorige</button>
-        <h1>Gandalf</h1>
-        <button class="nav-button" id="nextBtn">Volgende →</button>
-    </header>
+    <% 
+      const groups = {};
+      favorites.forEach(fav => {
+        if (!groups[fav.characterName]) groups[fav.characterName] = [];
+        groups[fav.characterName].push(fav);
+      });
+      const filterName = filter;
+    %>
 
-    <main class="quotes-section">
-        <article class="quote">
-            <h3 class="quote-title">Quote 1</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
+    <% Object.entries(groups).forEach(([character, quotes]) => { %>
+      <section class="character-group">
+        <header class="group-header">
+          <% if (filterName === character) { %>
+            <h2 class="character-name"><%= character %> (<%= quotes.length %>)</h2>
+            <a href="/favorites" class="filter-reset">Alles</a>
+          <% } else { %>
+            <a href="/favorites?character=<%= encodeURIComponent(character) %>" class="character-name">
+              <%= character %> (<%= quotes.length %>)
+            </a>
+          <% } %>
+          <a href="https://lotr.fandom.com/wiki/<%= encodeURIComponent(character.replace(/ /g,'_')) %>" 
+             class="wiki-link" target="_blank" rel="noopener">Wiki</a>
+        </header>
 
-        <article class="quote">
-            <h3 class="quote-title">Quote 2</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
+        <ul class="quote-list">
+          <% quotes.forEach(fav => { %>
+            <li class="quote-item" data-id="<%= fav._id %>">
+              <p class="quote-text">“<%= fav.quote %>”</p>
+              <button class="btn delete-fav">Verwijder</button>
+            </li>
+          <% }) %>
+        </ul>
+      </section>
+    <% }) %>
+  </div>
+</main>
 
-        <article class="quote">
-            <h3 class="quote-title">Quote 3</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
-    </main>
-
-    <footer>
-        LOTR © 2025
-    </footer>
-
-    <script src="../public/script.js"></script>
-</body>
-</html>
+<%- include("partials/footer") %>
+<script src="/favorites.js" defer></script>
