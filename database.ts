@@ -99,10 +99,11 @@ export async function registerUser(username: string, email: string, password: st
     return true;
 }
 
-export async function saveScore(userId: ObjectId, score: number, date: Date = new Date()) {
+export async function saveScore(userId: ObjectId, score: number, mode: string, date: Date = new Date()) {
     await scoreCollection.insertOne({
         userId,
         score,
+        mode,
         date
     })
 }

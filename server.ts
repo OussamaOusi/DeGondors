@@ -70,13 +70,14 @@ app.post("/api/favorites/like", async (req: Request, res: Response): Promise<voi
 app.post("/api/scores", async (req, res) => {
   const userId = req.session.user?._id ;
   const {score} = req.body;
+  const mode = "10rounds";
   if (!userId) {
     res.status(401).send("Niet ingelogd");
     return;
   }
   
   try{
-    await saveScore(userId, score);
+    await saveScore(userId, score, mode);
     res.status(200).json({ message: "Score saved" });
   }
   catch (err) {
