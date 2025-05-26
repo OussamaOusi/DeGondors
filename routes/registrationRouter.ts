@@ -11,7 +11,9 @@ router.post("/register", async (req, res) => {
     const { username, email, password, ["confirm-password"]: confirmPassword } = req.body;
 
     try {
+        console.log("Registreren van gebruiker:", username);
         await registerUser(username, email, password, confirmPassword);
+        console.log("Gebruiker succesvol geregistreerd:", username);
         res.redirect("/login");
     } catch (err: any) {
         console.error("Fout bij registreren:", err.message);

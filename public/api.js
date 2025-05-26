@@ -121,16 +121,23 @@ async function fetchMovies(){
 }
 
 async function insertMovies(){
-  if(!currentQuote || !movieArray || movieData){
-    console.log("test")
-   currentMovie = await movieArray.find(quote => quote.movie === movieData.docs._id);
+  if(!currentQuote || !movieArray || !movieData){
+    console.log("insertMovies: missing data");
+    return;
   }
-  console.log("insert movie function:")
-  console.log(`current quote: ${currentQuote}`);
-  console.log(`movie array: ${movieArray}`);
-  console.log(`movie data: ${movieData}`);
-  currentMovie = movieArray.find(quote => quote.movie === movieData.docs._id);
-  movieAnswerArray = [currentMovie, ...getRandomItems(movieArray)];
+  // Find the movie object that matches the quote's movie ID
+  const movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  currentMovie = movieObj;
+  if (currentMovie) {
+    console.log("Current movie for quote:", currentMovie.name);
+    // Fill movieAnswerArray with the correct movie and random others
+    const otherMovies = movieData.docs.filter(m => m._id !== currentMovie._id).map(m => m.name);
+    movieAnswerArray = [currentMovie.name, ...getRandomItems(otherMovies)];
+    shuffleArray(movieAnswerArray);
+  } else {
+    console.log("No matching movie found for quote.");
+    movieAnswerArray = getRandomItems(movieArray, 3);
+  }
 }
 
 async function fetchRandomQuote() {
