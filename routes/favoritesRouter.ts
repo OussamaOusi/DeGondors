@@ -41,6 +41,21 @@ router.post("/like", async (req: Request, res: Response) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  const userId = req.session.user?._id;
+  
+  const favId = req.params.id;
+  try {
+    const result = await favoriteQuotesCollection.deleteOne({
+      _id: new ObjectId(favId),
+      userId: new ObjectId(userId)
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("DB-fout bij verwijderen:", err);
+    res.status(500).json({ error: "Serverfout" });
+  }
+});
 
 // GET /favorites?character=Naam
 router.get("/", secureMiddleware, async (req: Request, res: Response) => {
