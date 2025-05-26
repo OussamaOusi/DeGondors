@@ -109,7 +109,7 @@ async function fetchMovies(){
       movieArray = await data.docs.map(movie => movie.name)
     }
     movieArray = data.docs.map(movie => movie.name);
-    
+
     console.log("Array movies");
     console.log(movieArray);
 
@@ -154,53 +154,44 @@ async function fetchRandomQuote() {
     shuffleArray(answerArray);
     console.log("Answer array")
     console.log(answerArray)
-    const button1 = document.getElementById("button1");
-    const button2 = document.getElementById("button2");
-    const button3 = document.getElementById("button3");
-
-    if(button1) button1.innerText = answerArray[0];
-    if(button2) button2.innerText = answerArray[1];
-    if(button3) button3.innerText = answerArray[2];
-
-    const button4 = document.getElementById("button4");
-    const button5 = document.getElementById("button5");
-    const button6 = document.getElementById("button6");
-
+    updateCharacterButtons();
     await insertMovies();
+    updateMovieButtons();
     //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
-    document.querySelectorAll(".movie-button").forEach(button => {
-      button.addEventListener("click", function() {
-        checkMovieAnswer(this.innerText);
-        // Update score/counter here
-        counter++;
-        const scoreCounter = document.getElementById("score-value");
-        if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-        setTimeout(() => {
-          fetchRandomQuote();
-        }, 500); // short delay for UX
-      });
-    });
+  //   document.querySelectorAll(".movie-button").forEach(button => {
+  //     button.addEventListener("click", function() {
+  //       checkMovieAnswer(this.innerText);
+  //       console.log("counter value before increment:", counter);
+  //       counter ++;
+  //       console.log("counter value after increment:", counter);
+  //       const scoreCounter = document.getElementById("score-value");
+  //       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+  //       setTimeout(() => {
+  //         fetchRandomQuote();
+  //       }, 500); // short delay for UX
+  //     }, {once: true});
+  //   });
 
-    document.querySelectorAll(".character-button").forEach(button => {
-      button.addEventListener("click", function() {
-        checkCharAnswer(this.innerText);
-        // Update score/counter here
-        // const scoreCounter = document.getElementById("score-value");
-        // if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-      });
-    });  
+  //   document.querySelectorAll(".character-button").forEach(button => {
+  //     button.addEventListener("click", function() {
+  //       checkCharAnswer(this.innerText);
+  //       // Update score/counter here
+  //       const scoreCounter = document.getElementById("score-value");
+  //       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+  //     });
+  //   });
 
-    if(button4) button4.innerText = movieAnswerArray[0];
-    if(button5) button5.innerText = movieAnswerArray[1];
-    if(button6) button6.innerText = movieAnswerArray[2];
+  //   // if(button4) button4.innerText = movieAnswerArray[0];
+  //   // if(button5) button5.innerText = movieAnswerArray[1];
+  //   // if(button6) button6.innerText = movieAnswerArray[2];
 
-    document.querySelectorAll(".character-button").forEach(button => {
-      button.addEventListener("click", function() {
-          checkAnswer(this.innerText);
-      });
-  })
+  //   document.querySelectorAll(".character-button").forEach(button => {
+  //     button.addEventListener("click", function() {
+  //         checkAnswer(this.innerText);
+  //     });
+  // })
 
     console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
   } catch (e) {
@@ -209,6 +200,19 @@ async function fetchRandomQuote() {
   }
 }
 
+function updateCharacterButtons() {
+  const buttons = ["button1", "button2", "button3"].map(id => document.getElementById(id));
+  buttons.forEach((button, index) => {
+    if (button) { button.innerText = answerArray[index]; }
+})
+}
+
+function updateMovieButtons() {
+  const buttons = ["button4", "button5", "button6"].map(id => document.getElementById(id));
+  buttons.forEach((button, index) => {
+    if (button) { button.innerText = movieAnswerArray[index]; }
+  });
+}
 
 async function likeQuote() {
   if (!currentQuote || !currentCharacter) return console.warn("Nog niets geladen om te liken");
@@ -232,6 +236,40 @@ async function likeQuote() {
   }
 }
 
+function setupCharacterButtons() {
+  document.querySelectorAll(".character-button").forEach(button => {
+    button.removeEventListener("click", characterClickHandler);
+    button.addEventListener("click", characterClickHandler);
+  });
+}
+
+function setupMovieButtons() {
+  document.querySelectorAll(".movie-button").forEach(button => {
+    button.removeEventListener("click", movieClickHandler);
+    button.addEventListener("click", movieClickHandler);
+  });
+}
+
+function characterClickHandler(event) {
+  checkCharAnswer(event.target.innerText);
+}
+
+function movieClickHandler(event) {
+  checkMovieAnswer(event.target.innerText);
+  updateCounter();
+  setTimeout(fetchRandomQuote, 500);
+}
+
+function updateCounter() {
+  console.log("Counter before increment:", counter);
+  counter++;
+  console.log("Counter after increment:", counter);
+  const scoreCounter = document.getElementById("score-value");
+  if (scoreCounter) {
+    scoreCounter.innerText = `${score}/${counter}`;
+  }
+}
+
 function getRandomItems(array, numItems = 2) {
   let shuffled = array.sort(() => Math.random() - 0.5);
   return shuffled.slice(0, numItems);
@@ -243,31 +281,38 @@ function shuffleArray(array) {
 
 function checkCharAnswer(selectedAnswer){
   if(selectedAnswer === currentCharacter.name){
-      score = score + 0.5;
+      score += 0.5;
   }
 }
 
 function checkMovieAnswer(selectedAnswer){
- 
+ if(selectedAnswer === currentMovie.name){
+      score += 0.5;
+  }
 }
+
+// function refreshPage() {
+//   fetchMovies();
+//   fetchRandomQuote();
+//   setupCharacterButtons();
+//   setupMovieButtons();
+// }
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-
-  const scoreCounter = document.getElementById("score-value");
-  scoreCounter.innerText = `${score}/${counter}`;
-  
-  
-  
+  // const scoreCounter = document.getElementById("score-value");
+  // if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
 
   fetchMovies();
-  fetchRandomQuote(); // eerste quote direct
+  fetchRandomQuote();
+  setupCharacterButtons();
+  setupMovieButtons();
 });
 
 
