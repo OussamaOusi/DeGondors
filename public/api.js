@@ -79,6 +79,7 @@
 // }
 
 // public/10rounds.js
+
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
 const quoteUrl = "https://the-one-api.dev/v2/quote";
 const characterUrl = "https://the-one-api.dev/v2/character";
@@ -196,7 +197,6 @@ async function fetchRandomQuote() {
     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
   }
 }
-
 function updateCharacterButtons() {
   if (!answerArray || !Array.isArray(answerArray) || answerArray.length < 3) {
     console.warn("updateCharacterButtons: answerArray is not ready", answerArray);
@@ -437,32 +437,9 @@ function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const fetchBtn = document.getElementById("fetch");
-  const likeBtn  = document.getElementById("like-button");
-  const dislikeBtn = document.getElementById("dislike-button");
-  
-  if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
-  if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
-
-  if (currentMode === "suddendeath") {
-    startSuddenDeath();
-    setupSuddenDeathHandlers();
-  } else {
-    fetchMovies();
-    fetchRandomQuote();
-    setupCharacterButtons();
-    setupMovieButtons();
-  }
-});
-
-
-  if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
-  fetchRandomQuote();
-
 //like verwijderen favoriet
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".delete-fav").forEach(btn => {
+  document.querySelectorAll(".delete-favorite").forEach(btn => {
     btn.addEventListener("click", async () => {
         console.log("🔴 Verwijderknop is geklikt!");
       const li = btn.closest("li");
@@ -516,4 +493,24 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location = this.href;
     });
   });
+});
+  if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
+  fetchRandomQuote();
+document.addEventListener("DOMContentLoaded", () => {
+  const fetchBtn = document.getElementById("fetch");
+  const likeBtn  = document.getElementById("like-button");
+  const dislikeBtn = document.getElementById("dislike-button");
+  
+  if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
+  if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
+
+  if (currentMode === "suddendeath") {
+    startSuddenDeath();
+    setupSuddenDeathHandlers();
+  } else {
+    fetchMovies();
+    fetchRandomQuote();
+    setupCharacterButtons();
+    setupMovieButtons();
+  }
 });
