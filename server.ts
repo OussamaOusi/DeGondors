@@ -13,6 +13,8 @@ import favoritesRouter from "./routes/favoritesRouter";
 import leaderboardsRouter from "./routes/leaderboardsRouter";
 import profileRouter from "./routes/profileRouter";
 import { ObjectId } from "mongodb";
+import suddendeathRouter from "./routes/suddendeathRouter";
+import blitzRouter from "./routes/blitzRouter";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -70,7 +72,7 @@ app.post("/api/favorites/like", async (req: Request, res: Response): Promise<voi
 app.post("/api/scores", async (req, res) => {
   const userId = req.session.user?._id ;
   const {score} = req.body;
-  const mode = "10rounds";
+  const mode = req.body.mode; 
   if (!userId) {
     res.status(401).send("Niet ingelogd");
     return;
@@ -84,7 +86,7 @@ app.post("/api/scores", async (req, res) => {
     res.status(500).json({ message: "Error saving score" });
   }
 });
-app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, leaderboardsRouter, profileRouter);
+app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, leaderboardsRouter, profileRouter, favoritesRouter, suddendeathRouter, blitzRouter);
 
 // **Logout**-route
 app.post("/logout", (req, res) => {

@@ -95,6 +95,17 @@ let movieAnswerArray = null;
 let score = 0;
 let counter = 0;
 let currentUserId = "12345"; // Placeholder for user ID, replace with actual user ID logic
+let currentMode = "10rounds";
+
+if(window.location.pathname.includes("suddendeath")){
+  currentMode = "suddendeath";
+} else if (window.location.pathname.includes("blitz")){
+  currentMode = "blitz";
+} else if (window.location.pathname.includes("10rounds")){
+  currentMode = "10rounds";
+}
+
+console.log("Current gamemode:", currentMode);
 
 async function fetchMovies(){
   try{
@@ -278,7 +289,7 @@ function updateCounter() {
   }
   if(counter >= 10) {
     alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
-    sendScoreToServer(currentUserId, score);
+    sendScoreToServer(currentUserId, score, currentMode);
     score = 0; 
     counter = 0; 
     if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
@@ -286,11 +297,11 @@ function updateCounter() {
 
 }
 
-function sendScoreToServer(userId, score){
+function sendScoreToServer(userId, score, currentMode){
   fetch("/api/scores", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, score })
+    body: JSON.stringify({ userId, score, currentMode })
   })
   .then(res => res.json())
   .then(data => {

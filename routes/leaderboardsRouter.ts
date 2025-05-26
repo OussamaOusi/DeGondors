@@ -4,11 +4,11 @@ import { scoreCollection } from '../database';
 const router = express.Router();
 
 router.get('/leaderboards', async (req, res) => {
-  console.log("Fetching leaderboard for 10 Rounds mode");
+  console.log("Fetching leaderboard for all modes");
   const scores = await scoreCollection
     .aggregate([
       { $sort: { score: -1, date: 1 } },
-      { $limit: 10 },
+      { $limit: 100 }, 
       {
         $lookup: {
           from: "Users",
@@ -21,10 +21,12 @@ router.get('/leaderboards', async (req, res) => {
     ])
     .toArray();
 
+  
   const highscores = scores.map((entry, index) => ({
     position: index + 1,
     username: entry.user.email,
     score: entry.score,
+    mode: entry.mode
   }));
   res.render("leaderboards", { highscores });
   console.log("Leaderboard fetched successfully");

@@ -17,7 +17,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <% (highscores || []).forEach(entry => { %>
+                      <% (highscores || []).filter(entry => entry.mode === '10rounds').forEach(entry => { %>
                         <tr>
                             <td><%= entry.position %></td>
                             <td><%= entry.username %></td>
@@ -39,16 +39,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td>User1</td>
-                          <td>9999</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>User2</td>
-                        <td>9998</td>
-                    </tr>
+                     <% (highscores || []).filter(entry => entry.mode === 'blitz').forEach(entry => { %>
+                        <tr>
+                            <td><%= entry.position %></td>
+                            <td><%= entry.username %></td>
+                            <td><%= entry.score %></td>
+                        </tr>
+                      <% }) %>
                   </tbody>
               </table>
           </section>
@@ -64,16 +61,13 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr>
-                          <td>1</td>
-                          <td>User1</td>
-                          <td>9999</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>User2</td>
-                        <td>9998</td>
-                    </tr>
+                      <% (highscores || []).filter(entry => entry.mode === 'suddendeath').forEach(entry => { %>
+                        <tr>
+                            <td><%= entry.position %></td>
+                            <td><%= entry.username %></td>
+                            <td><%= entry.score %></td>
+                        </tr>
+                      <% }) %>
                   </tbody>
               </table>
           </section>
