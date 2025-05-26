@@ -297,11 +297,11 @@ function updateCounter() {
 
 }
 
-function sendScoreToServer(userId, score, currentMode){
+function sendScoreToServer(userId, score, mode){
   fetch("/api/scores", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, score, currentMode })
+    body: JSON.stringify({ userId, score, mode })
   })
   .then(res => res.json())
   .then(data => {
