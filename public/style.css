@@ -282,6 +282,7 @@ main {
     justify-content: center;
     padding: 2rem;
     text-align: center;
+    min-height: 0;
 }
 
 .container {
@@ -345,128 +346,56 @@ footer {
         -1px 1px 0 black,
         1px 1px 0 black;
     min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background-image: url("/images/green\ background.jpg");
     background-size: cover;
 }
 
 .answer-container {
+    flex: 1 1 auto;
     display: flex;
     justify-content: space-between;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    padding: 8px;
     flex-wrap: wrap;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     background-color: transparent;
-    border: 2px solid rgba(255, 255, 255);
+    border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 8px;
+    min-height: 0;
 }
 
 .answer-vert {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    padding: 8px;
     align-items: center;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
-}
-
-.answer-selection {
-    width: 40%;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    padding: 10px;
+    min-height: 0;
 }
 
 .reviewbutton-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
+    margin: 8px 0;
 }
-
-.like-btn, .dislike-btn {
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.like-btn:hover {
-    background-color: #4CAF50;
-    transform: scale(1.1);
-    border-color: #4CAF50;
-}
-
-.dislike-btn:hover {
-    background-color: #f44336;
-    transform: scale(1.1);
-    border-color: #f44336;
-}
-/* Blitz */
-.blitz-body {
-    font-family: 'Cinzel', serif;
-    background-color: #1a1a1a;
-    color: white;
-    min-height: 100vh;
-    background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
-    background-size: cover;
-}
-
-.blitz-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem;
-    position: relative;
-}
-
-.quiz-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.question-counter {
-    background-color: #ffd700;
-    text-shadow: none;
-    color: #333;
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-/* Suddendeath */
-.suddendeath-body {
-    font-family: 'Cinzel', serif;
-    background-image: url("/images/lotr-concept-art.jpg");
-    background-size: cover;
-    color: #d7c30c;
-    margin: 0;
-    padding: 0;
-}
-
-/*---------*/
 
 .quote-box {
+    min-height: 40px;
+    padding: 16px;
+    margin-bottom: 8px;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
     border-radius: 10px;
     margin-bottom: 2rem;
     position: relative;
-    min-height: 60px;
-  display: flex;
-  align-items: center;   /* Vertically center the text */
-  justify-content: center;
-  transition: background 0.2s;
+    display: flex;
+    align-items: center;   /* Vertically center the text */
+    justify-content: center;
+    transition: background 0.2s;
 }
 
 .quote-text {
@@ -645,11 +574,17 @@ th {
     background-size: cover;
     display: flex;
     justify-content: center;
-    height: 100vh;
-
+    height: 90%;
+    padding: 20px;
+    margin-top: 0;
+    /* --- Center index page content vertically and horizontally --- */
+    justify-content: center;
+    align-items: center;
 }
+
 .indexBodyNav{
     background-color: rgb(123, 0, 255);
+    margin-top: 0;
 }
 .containerLandingpage {
     display: flex;
@@ -658,6 +593,9 @@ th {
     justify-content: center;
     align-items: center;
     color: white;
+    /* --- Center index page content vertically and horizontally --- */
+    justify-content: center;
+    align-items: center;
 }
 
 .landingpageRow {
@@ -982,4 +920,206 @@ th {
     }
 
     /* Leaderboard */
+}
+
+/* --- 10rounds and suddendeath: Fit navbar, content, and footer on one screen, background scales --- */
+.d10rounds-body, .suddendeath-body {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  height: 100%;
+  padding: 8px;
+}
+
+.tenrounds-container, .suddendeath-container {
+  max-width: 900px;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 8px 8px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  min-height: 0;
+box-sizing: border-box;
+}
+
+header {
+  flex: 0 0 auto;
+  width: 100vw;
+  z-index: 2;
+}
+
+footer {
+  flex: 0 0 auto;
+  width: 100vw;
+  z-index: 2;
+  margin: 0;
+  position: relative;
+}
+
+.quiz-header {
+  margin-bottom: 8px;
+}
+
+.quote-box {
+  min-height: 40px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.answer-container {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 1);
+  border-radius: 8px;
+  min-height: 0;
+}
+
+.answer-vert {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 0;
+}
+
+.score-display {
+  position: static;
+  margin-top: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px 24px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.reviewbutton-container {
+  margin: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .tenrounds-container, .suddendeath-container, .answer-container, .answer-vert {
+    max-width: 100vw;
+    padding: 4px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tenrounds-container, .suddendeath-container, .answer-container, .answer-vert {
+    flex-direction: column;
+    gap: 5px;
+    max-width: 100vw;
+    padding: 2px;
+  }
+  .quiz-header {
+    margin-bottom: 4px;
+  }
+  .quote-box {
+    padding: 4px;
+    margin-bottom: 4px;
+  }
+  .score-display {
+    font-size: 1rem;
+    padding: 4px 8px;
+  }
+}
+
+/* --- Fit index page (LandingPage) navbar and content on one screen, no scroll, background covers --- */
+.indexBody {
+  min-height: 100vh;
+  height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-top: 0;
+  padding: 0;
+}
+
+.indexBodyNav {
+  flex: 0 0 auto;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.containerLandingpage {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100vw;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.landingpageRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.landingpageRow img {
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .containerLandingpage {
+    padding: 0 0.5rem;
+  }
+  .landingpageRow img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 600px) {
+  .containerLandingpage {
+    padding: 0 0.2rem;
+  }
+}
+
+/* --- Prevent scrolling on index page --- */
+.indexBody {
+  overflow: hidden !important;
+}
+
+html, body {
+  overflow: hidden !important;
+  height: 100vh;
 }
