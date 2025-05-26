@@ -1,47 +1,49 @@
-<%- include("partials/header") %>
+<%- include("partials/header", { title: "Blacklist" }) %>
+<body class="lotr-blacklist-body">
+<%- include("partials/nav") %>
+<main class="lotr-blacklist-main">
+  <h1 class="lotr-blacklist-title">Blacklist Quotes</h1>
 
-<body class="blacklist-body">
-    
-    <%- include("partials/nav") %>
-    <header class="character-header">
-        <button class="nav-button" id="prevBtn">← Vorige</button>
-        <h1>Gandalf</h1>
-        <button class="nav-button" id="nextBtn">Volgende →</button>
-    </header>
+  <% 
+    const groups = {};
+    blacklist.forEach(item => {
+      (groups[item.characterName] ||= []).push(item);
+    });
+    const filterName = filter;
+  %>
 
-    <main class="quotes-section">
-        <article class="quote">
-            <h3 class="quote-title">Quote 1</h3>
-            <blockquote class="quote-text">"End? No, the journey doesn't end here. Death is just another path, one that we all must take."</blockquote>
-            <section class="blacklist-reason">
-                <h4>Reden van blacklist:</h4>
-                <p>Deze quote is te melancholisch en past niet bij de vrolijke sfeer van onze community.</p>
-            </section>
-        </article>
-
-        <article class="quote">
-            <h3 class="quote-title">Quote 2</h3>
-            <blockquote class="quote-text">"All we have to decide is what to do with the time that is given to us."</blockquote>
-            <section class="blacklist-reason">
-                <h4>Reden van blacklist:</h4>
-                <p>Deze quote is te filosofisch en leidt af van de gameplay.</p>
-            </section>
-        </article>
-
-        <article class="quote">
-            <h3 class="quote-title">Quote 3</h3>
-            <blockquote class="quote-text">"A wizard is never late, nor is he early. He arrives precisely when he means to."</blockquote>
-            <section class="blacklist-reason">
-                <h4>Reden van blacklist:</h4>
-                <p>Deze quote is te vaak gebruikt en wordt als cliché beschouwd.</p>
-            </section>
-        </article>
-    </main>
-
-    <footer>
-        LOTR © 2025
-    </footer>
-
-    <script src="../public/script.js"></script>
+  <% Object.keys(groups).forEach(character => { 
+       const quotes = groups[character];
+       const wikiUrl = quotes[0].wikiUrl || "#";
+  %>
+    <section class="lotr-blacklist-group">
+      <header class="blacklist-group-header">
+        <% if (filterName === character) { %>
+          <span class="blacklist-character-name"><%= character %> (<%= quotes.length %>)</span>
+          <a href="/blacklist" class="blacklist-filter-reset">Alles</a>
+        <% } else { %>
+          <a href="/blacklist?character=<%= encodeURIComponent(character) %>" class="blacklist-character-name">
+            <%= character %> (<%= quotes.length %>)
+          </a>
+        <% } %>
+        <a href="<%= wikiUrl %>" class="blacklist-wiki-link" target="_blank" rel="noopener">Wiki</a>
+      </header>
+      <ul class="blacklist-quote-list">
+        <% quotes.forEach(item => { %>
+          <li class="blacklist-quote-item" data-id="<%= item._id %>">
+            <blockquote class="blacklist-quote-text">“<%= item.quote %>”</blockquote>
+            <div class="blacklist-reason">
+              <span class="blacklist-reason-label">Reden:</span>
+              <span class="blacklist-reason-content"><%= item.reason %></span>
+            </div>
+            <button class="btn delete-blacklist">Verwijder</button>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% }) %>
+</main>
+<%- include("partials/footer") %>
+<script src="/api.js" defer></script>
 </body>
 </html>

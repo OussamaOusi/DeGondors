@@ -230,7 +230,7 @@ async function likeQuote() {
   };
   console.log("📤 Like versturen:", favorite);
   try {
-    const res = await fetch("/api/favorites/like", {
+    const res = await fetch("/api/rounds/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(favorite)
@@ -240,6 +240,49 @@ async function likeQuote() {
     console.error("❌ Network error bij like:", e);
   }
 }
+async function dislikeQuote() {
+  console.log("🔄 dislikeQuote() aangeroepen");
+  if (!currentQuote || !currentCharacter) {
+    console.warn("⚠️ Geen quote/character geladen");
+    return;
+  }
+
+  const reason = prompt("Waarom vind je deze quote niet leuk?");
+  console.log("📋 Prompt returned:", reason);
+  if (!reason) {
+    alert("Je moet een reden invullen.");
+    return;
+  }
+
+  const payload = {
+    quote: currentQuote.dialog,
+    characterId: currentCharacter._id,
+    characterName: currentCharacter.name,
+    wikiUrl: currentCharacter.wikiUrl,
+    movie: currentQuote.movie,
+    reason
+  };
+  console.log("📤 Sending dislike payload:", payload);
+
+  try {
+    const res = await fetch("/api/rounds/dislike", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    console.log("↪ Server response status:", res.status);
+    console.log("↪ Server response body:", await res.text());
+  } catch (err) {
+    console.error("❌ Network error in dislikeQuote:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dislikeBtn = document.getElementById("dislike-button");
+  if (dislikeBtn) {
+    dislikeBtn.addEventListener("click", dislikeQuote);
+  }
+});
 
 function setupCharacterButtons() {
   document.querySelectorAll(".character-button").forEach(button => {
@@ -397,7 +440,8 @@ function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-
+  const dislikeBtn = document.getElementById("dislike-button");
+  
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
 
@@ -413,3 +457,63 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+  if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
+  fetchRandomQuote();
+
+//like verwijderen favoriet
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".delete-fav").forEach(btn => {
+    btn.addEventListener("click", async () => {
+        console.log("🔴 Verwijderknop is geklikt!");
+      const li = btn.closest("li");
+      const id = li.dataset.id;
+      if (!id) return;
+
+      if (!confirm("Weet je zeker dat je deze quote wilt verwijderen?")) return;
+
+      try {
+        const res = await fetch(`/favorites/${id}`, { method: "DELETE" });
+        const body = await res.json();
+        if (res.ok && body.success) {
+          li.remove();
+        } else {
+          alert(body.error || "Kon niet verwijderen");
+        }
+      } catch (e) {
+        console.error("Network error bij verwijderen:", e);
+      }
+    });
+  });
+});
+//dilike verwijderen blacklist
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".delete-blacklist").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const li = btn.closest("li");
+      const id = li.dataset.id;
+      if (!id) return;
+
+      if (!confirm("Weet je zeker dat je deze quote wilt verwijderen?")) return;
+
+      try {
+        const res = await fetch(`/blacklist/${id}`, { method: "DELETE" });
+        const body = await res.json();
+        if (res.ok && body.success) {
+          li.remove();
+        } else {
+          alert(body.error || "Kon niet verwijderen");
+        }
+      } catch (e) {
+        alert("Netwerkfout bij verwijderen");
+      }
+    });
+  });
+
+  // Filteren (optioneel: highlight de actieve filter)
+  document.querySelectorAll(".blacklist-character-name-link").forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location = this.href;
+    });
+  });
+});

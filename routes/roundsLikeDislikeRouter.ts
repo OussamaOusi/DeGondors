@@ -1,29 +1,42 @@
-import { Router, Request, Response } from "express";
-import { ObjectId } from "mongodb";
-import { BlacklistQuotesCollection } from "../database";
+import express, { Request, Response } from 'express';
+import { ObjectId } from 'mongodb';
+import { BlacklistQuotesCollection, favoriteQuotesCollection } from '../database';
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.post("/like", async (req, res) => {
   const userId = req.session.user?._id;
-  if (!userId) return res.redirect("/login");
-  const character = req.query.character as string | undefined;
+  if (!userId) {
+    res.status(401).send("Niet ingelogd");
+    return;
+  }
 
-  let filter: any = { userId };
-  if (character) filter.characterName = character;
+  const { quote, characterId, characterName, wikiUrl, movie } = req.body;
+  if (!quote || !characterId || !characterName) {
+    res.status(400).send("Verplichte velden ontbreken");
+    return;
+  }
 
-  const blacklist = await BlacklistQuotesCollection.find(filter).toArray();
-  res.render("blacklist", { blacklist, filter: character });
-});
+  const entry = {
+    userId: new ObjectId(userId),
+    quote,
+    characterId,
+    characterName,
+    wikiUrl,
+    movie,
+    createdAt: new Date()
+  };
 
-router.delete("/:id", async (req, res) => {
-  const userId = req.session.user?._id;
-  const id = req.params.id;
   try {
-    await BlacklistQuotesCollection.deleteOne({ _id: new ObjectId(id), userId });
+    await favoriteQuotesCollection.updateOne(
+      { userId: entry.userId, quote },
+      { $setOnInsert: entry },
+      { upsert: true }
+    );
     res.json({ success: true });
   } catch (err) {
-    res.status(500).json({ error: "Kon niet verwijderen" });
+    console.error("DB-fout bij like:", err);
+    res.status(500).send("Kon niet opslaan");
   }
 });
 
@@ -62,5 +75,4 @@ router.post("/dislike", async (req, res) => {
     res.status(500).send("Kon niet opslaan");
   }
 });
-
 export default router;

@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 
 const router = express.Router();
 
-router.get('/profile', (_req: Request, res: Response) => {
+router.get('/profile', (req, res) => {
   res.render('profile');
 });
 
