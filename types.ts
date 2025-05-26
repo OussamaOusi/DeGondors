@@ -13,4 +13,5 @@ export interface QuoteWithData {
     characterName: string;
     wikiUrl: string;
     movie?: string;
+    reason?: string; 
 }

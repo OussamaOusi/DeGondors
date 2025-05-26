@@ -1,42 +1,45 @@
-<%- include("partials/header") %>
+<%- include("partials/header", { title: "Favoriete Quotes" }) %>
+<body class="lotr-favorite-body">
+<%- include("partials/nav") %>
+<main class="lotr-favorite-main">
+  <h1 class="lotr-favorite-title">Favoriete Quotes</h1>
 
-<body class="favorites-body">
-    
-    <%- include("partials/nav") %>
+  <%
+    const groups = {};
+    favorites.forEach(item => {
+      (groups[item.characterName] ||= []).push(item);
+    });
+    const filterName = filter;
+  %>
 
-    <header class="character-header">
-        <button class="nav-button" id="prevBtn">← Vorige</button>
-        <h1>Gandalf</h1>
-        <button class="nav-button" id="nextBtn">Volgende →</button>
-    </header>
-
-    <main class="quotes-section">
-        <article class="quote">
-            <h3 class="quote-title">Quote 1</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
-
-        <article class="quote">
-            <h3 class="quote-title">Quote 2</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
-
-        <article class="quote">
-            <h3 class="quote-title">Quote 3</h3>
-            <blockquote class="quote-text">
-                Er is hier net genoeg ruimte voor enkele regels tekst. Zorg dat je boodschap helder en beknopt overkomt.
-            </blockquote>
-        </article>
-    </main>
-
-    <footer>
-        LOTR © 2025
-    </footer>
-
-    <script src="../public/script.js"></script>
+  <% Object.keys(groups).forEach(character => {
+       const quotes = groups[character];
+       const wikiUrl = quotes[0].wikiUrl || "#";
+  %>
+    <section class="lotr-favorite-group">
+      <header class="favorite-group-header">
+        <% if (filterName === character) { %>
+          <span class="favorite-character-name"><%= character %> (<%= quotes.length %>)</span>
+          <a href="/favorites" class="favorite-filter-reset">Alles</a>
+        <% } else { %>
+          <a href="/favorites?character=<%= encodeURIComponent(character) %>" class="favorite-character-name">
+            <%= character %> (<%= quotes.length %>)
+          </a>
+        <% } %>
+        <a href="<%= wikiUrl %>" class="favorite-wiki-link" target="_blank" rel="noopener">Wiki</a>
+      </header>
+      <ul class="favorite-quote-list">
+        <% quotes.forEach(item => { %>
+          <li class="favorite-quote-item" data-id="<%= item._id %>">
+            <blockquote class="favorite-quote-text">“<%= item.quote %>”</blockquote>
+            <button class="btn delete-favorite">Verwijder</button>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% }) %>
+</main>
+<%- include("partials/footer") %>
+<script src="/api.js" defer></script>
 </body>
 </html>
