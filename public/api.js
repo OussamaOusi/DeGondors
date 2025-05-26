@@ -96,6 +96,7 @@ let score = 0;
 let counter = 0;
 let currentUserId = "12345"; // Placeholder for user ID, replace with actual user ID logic
 let currentMode = "10rounds";
+let suddendeathActive = false;
 
 if(window.location.pathname.includes("suddendeath")){
   currentMode = "suddendeath";
@@ -132,12 +133,15 @@ async function fetchMovies(){
 }
 
 async function insertMovies(){
-  if(!currentQuote || !movieArray || !movieData){
+  if(!currentQuote || !movieArray || !movieData || !movieData.docs){
     console.log("insertMovies: missing data");
     return;
   }
   // Find the movie object that matches the quote's movie ID
-  const movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  let movieObj = null;
+  if (currentQuote.movie) {
+    movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  }
   currentMovie = movieObj;
   if (currentMovie) {
     console.log("Current movie for quote:", currentMovie.name);
@@ -147,7 +151,9 @@ async function insertMovies(){
     shuffleArray(movieAnswerArray);
   } else {
     console.log("No matching movie found for quote.");
+    // fallback: pick 3 random movies
     movieAnswerArray = getRandomItems(movieArray, 3);
+    currentMovie = { name: movieAnswerArray[0] };
   }
 }
 
@@ -157,7 +163,8 @@ async function fetchRandomQuote() {
   try {
     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
     const data = await res.json();
-    const random = data.docs[Math.floor(Math.random() * data.docs.length)];
+    const filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
+    const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
     currentQuote = random;
     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
     // Haal character op:
@@ -176,42 +183,13 @@ async function fetchRandomQuote() {
     updateCharacterButtons();
     await insertMovies();
     updateMovieButtons();
+    // Ensure Sudden Death handlers are set up after new quote/buttons
+    if (currentMode === "suddendeath") {
+      setupSuddenDeathHandlers();
+    }
     //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
-  //   document.querySelectorAll(".movie-button").forEach(button => {
-  //     button.addEventListener("click", function() {
-  //       checkMovieAnswer(this.innerText);
-  //       console.log("counter value before increment:", counter);
-  //       counter ++;
-  //       console.log("counter value after increment:", counter);
-  //       const scoreCounter = document.getElementById("score-value");
-  //       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-  //       setTimeout(() => {
-  //         fetchRandomQuote();
-  //       }, 500); // short delay for UX
-  //     }, {once: true});
-  //   });
-
-  //   document.querySelectorAll(".character-button").forEach(button => {
-  //     button.addEventListener("click", function() {
-  //       checkCharAnswer(this.innerText);
-  //       // Update score/counter here
-  //       const scoreCounter = document.getElementById("score-value");
-  //       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-  //     });
-  //   });
-
-  //   // if(button4) button4.innerText = movieAnswerArray[0];
-  //   // if(button5) button5.innerText = movieAnswerArray[1];
-  //   // if(button6) button6.innerText = movieAnswerArray[2];
-
-  //   document.querySelectorAll(".character-button").forEach(button => {
-  //     button.addEventListener("click", function() {
-  //         checkAnswer(this.innerText);
-  //     });
-  // })
-
     console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
   } catch (e) {
     console.error("❌ Fout bij laden quote/character:", e);
@@ -220,13 +198,21 @@ async function fetchRandomQuote() {
 }
 
 function updateCharacterButtons() {
+  if (!answerArray || !Array.isArray(answerArray) || answerArray.length < 3) {
+    console.warn("updateCharacterButtons: answerArray is not ready", answerArray);
+    return;
+  }
   const buttons = ["button1", "button2", "button3"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = answerArray[index]; }
-})
+  });
 }
 
 function updateMovieButtons() {
+  if (!movieAnswerArray || !Array.isArray(movieAnswerArray) || movieAnswerArray.length < 3) {
+    console.warn("updateMovieButtons: movieAnswerArray is not ready", movieAnswerArray);
+    return;
+  }
   const buttons = ["button4", "button5", "button6"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = movieAnswerArray[index]; }
@@ -333,6 +319,81 @@ function checkMovieAnswer(selectedAnswer){
   }
 }
 
+function startSuddenDeath() {
+  suddendeathActive = true;
+  score = 0;
+  counter = 0;
+  if (document.getElementById("score-value")) {
+    document.getElementById("score-value").innerText = `${score}/${counter}`;
+  }
+  fetchMovies();
+  fetchRandomQuote();
+}
+
+let sdSelectedChar = null;
+let sdSelectedMovie = null;
+
+function sdCharacterClickHandler(event) {
+  sdSelectedChar = event.target.innerText;
+  document.querySelectorAll(".character-button").forEach(b => b.classList.remove("selected"));
+  event.target.classList.add("selected");
+  if (sdSelectedMovie) {
+    checkSuddenDeathAnswers(sdSelectedChar, sdSelectedMovie);
+    sdSelectedChar = null;
+    sdSelectedMovie = null;
+  }
+}
+
+function sdMovieClickHandler(event) {
+  sdSelectedMovie = event.target.innerText;
+  document.querySelectorAll(".movie-button").forEach(b => b.classList.remove("selected"));
+  event.target.classList.add("selected");
+  if (sdSelectedChar) {
+    checkSuddenDeathAnswers(sdSelectedChar, sdSelectedMovie);
+    sdSelectedChar = null;
+    sdSelectedMovie = null;
+  }
+}
+
+function setupSuddenDeathHandlers() {
+  
+  document.querySelectorAll(".character-button").forEach(button => {
+    button.replaceWith(button.cloneNode(true));
+  });
+  document.querySelectorAll(".movie-button").forEach(button => {
+    button.replaceWith(button.cloneNode(true));
+  });
+  document.querySelectorAll(".character-button").forEach(button => {
+    button.addEventListener("click", sdCharacterClickHandler);
+  });
+  document.querySelectorAll(".movie-button").forEach(button => {
+    button.addEventListener("click", sdMovieClickHandler);
+  });
+}
+
+function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
+  counter++;
+  let correct = false;
+  if (
+    selectedChar === currentCharacter.name &&
+    selectedMovie === currentMovie.name
+  ) {
+    score++;
+    correct = true;
+    if (document.getElementById("score-value")) {
+      document.getElementById("score-value").innerText = `${score}/${counter}`;
+    }
+    setTimeout(fetchRandomQuote, 500);
+  } else {
+    suddendeathActive = false;
+    if (document.getElementById("score-value")) {
+      document.getElementById("score-value").innerText = `${score}/${counter}`;
+    }
+    alert(`Game over! Je score is: ${score}/${counter}`);
+    sendScoreToServer(currentUserId, score, currentMode);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
@@ -340,10 +401,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
 
-  fetchMovies();
-  fetchRandomQuote();
-  setupCharacterButtons();
-  setupMovieButtons();
+  if (currentMode === "suddendeath") {
+    startSuddenDeath();
+    setupSuddenDeathHandlers();
+  } else {
+    fetchMovies();
+    fetchRandomQuote();
+    setupCharacterButtons();
+    setupMovieButtons();
+  }
 });
 
 
