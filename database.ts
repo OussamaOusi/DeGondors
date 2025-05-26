@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { User } from "./types";
 import bcrypt from "bcrypt";
 
@@ -11,6 +11,7 @@ export const client = new MongoClient(MONGODB_URI);
 
 export const userCollection = client.db("DeGondors").collection<User>("Users");
 export const favoriteQuotesCollection = client.db("DeGondors").collection("FavoriteQuotes");
+export const scoreCollection = client.db("DeGondors").collection("Scores");
 
 async function exit() {
     try {
@@ -96,4 +97,12 @@ export async function registerUser(username: string, email: string, password: st
     });
 
     return true;
+}
+
+export async function saveScore(userId: ObjectId, score: number, date: Date = new Date()) {
+    await scoreCollection.insertOne({
+        userId,
+        score,
+        date
+    })
 }

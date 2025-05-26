@@ -94,10 +94,11 @@ let movieData = null;
 let movieAnswerArray = null;
 let score = 0;
 let counter = 0;
+let currentUserId = "12345"; // Placeholder for user ID, replace with actual user ID logic
 
 async function fetchMovies(){
   try{
-
+    console.log(currentUserId)
     console.log("Fetching movie data")
     const res = await fetch(movieUrl, {headers: { Authorization: `Bearer ${apiKey}`}});
     const data = await res.json();
@@ -268,6 +269,29 @@ function updateCounter() {
   if (scoreCounter) {
     scoreCounter.innerText = `${score}/${counter}`;
   }
+  if(counter >= 10) {
+    alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
+    sendScoreToServer(currentUserId, score);
+    score = 0; 
+    counter = 0; 
+    if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+  }
+
+}
+
+function sendScoreToServer(userId, score){
+  fetch("/api/scores", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, score })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Score succesvol verzonden:", data);
+  })
+  .catch(err => {
+    console.error("Fout bij verzenden score:", err);
+  });
 }
 
 function getRandomItems(array, numItems = 2) {
@@ -291,20 +315,9 @@ function checkMovieAnswer(selectedAnswer){
   }
 }
 
-// function refreshPage() {
-//   fetchMovies();
-//   fetchRandomQuote();
-//   setupCharacterButtons();
-//   setupMovieButtons();
-// }
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-  // const scoreCounter = document.getElementById("score-value");
-  // if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);

@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import path from "path";
 import session from "./public/session";
-import { connect, favoriteQuotesCollection } from "./database";
+import { connect, favoriteQuotesCollection, saveScore } from "./database";
 import indexRoutes from "./routes/indexRoutes";
 import apiRoutes from "./routes/apiRoutes";
 import loginRouter from "./routes/loginRouter";
@@ -67,6 +67,22 @@ app.post("/api/favorites/like", async (req: Request, res: Response): Promise<voi
   }
 });
 
+app.post("/api/scores", async (req, res) => {
+  const userId = req.session.user?._id ;
+  const {score} = req.body;
+  if (!userId) {
+    res.status(401).send("Niet ingelogd");
+    return;
+  }
+  
+  try{
+    await saveScore(userId, score);
+    res.status(200).json({ message: "Score saved" });
+  }
+  catch (err) {
+    res.status(500).json({ message: "Error saving score" });
+  }
+});
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, leaderboardsRouter, profileRouter);
 
 // **Logout**-route
