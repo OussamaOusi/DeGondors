@@ -5,7 +5,7 @@ import { secureMiddleware } from "../secureMiddleware";
 
 const router = Router();
 
-router.post("/like", async (req: Request, res: Response) => {
+router.post("/like", async (req, res) => {
   const userId = req.session.user?._id;
   if (!userId) {
     res.status(401).send("Niet ingelogd");
@@ -58,7 +58,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // GET /favorites?character=Naam
-router.get("/", secureMiddleware, async (req: Request, res: Response) => {
+router.get("/", secureMiddleware, async (req, res) => {
   const userId = req.session.user!._id;
   const filter = (req.query.character as string) || null;
 
@@ -79,7 +79,7 @@ router.get("/", secureMiddleware, async (req: Request, res: Response) => {
 });
 
 // DELETE /favorites/:id
-router.delete("/:id", secureMiddleware, async (req: Request, res: Response) => {
+router.delete("/:id", secureMiddleware, async (req, res) => {
   const userId = req.session.user!._id;
   const favId = req.params.id;
 

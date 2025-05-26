@@ -4,7 +4,7 @@ import { BlacklistQuotesCollection, favoriteQuotesCollection } from '../database
 
 const router = express.Router();
 
-router.post("/like", async (req: Request, res: Response) => {
+router.post("/like", async (req, res) => {
   const userId = req.session.user?._id;
   if (!userId) {
     res.status(401).send("Niet ingelogd");
@@ -40,7 +40,7 @@ router.post("/like", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/dislike", async (req: Request, res: Response) => {
+router.post("/dislike", async (req, res) => {
   const userId = req.session.user?._id;
   if (!userId) {
     res.status(401).send("Niet ingelogd");

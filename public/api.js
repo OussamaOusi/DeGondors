@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
   fetchRandomQuote();
 });
-//like verwijderen
+//like verwijderen favoriet
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".delete-fav").forEach(btn => {
     btn.addEventListener("click", async () => {
@@ -123,6 +123,38 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (e) {
         console.error("Network error bij verwijderen:", e);
       }
+    });
+  });
+});
+//dilike verwijderen blacklist
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".delete-blacklist").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const li = btn.closest("li");
+      const id = li.dataset.id;
+      if (!id) return;
+
+      if (!confirm("Weet je zeker dat je deze quote wilt verwijderen?")) return;
+
+      try {
+        const res = await fetch(`/blacklist/${id}`, { method: "DELETE" });
+        const body = await res.json();
+        if (res.ok && body.success) {
+          li.remove();
+        } else {
+          alert(body.error || "Kon niet verwijderen");
+        }
+      } catch (e) {
+        alert("Netwerkfout bij verwijderen");
+      }
+    });
+  });
+
+  // Filteren (optioneel: highlight de actieve filter)
+  document.querySelectorAll(".blacklist-character-name-link").forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      window.location = this.href;
     });
   });
 });

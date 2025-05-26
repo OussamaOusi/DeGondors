@@ -4,7 +4,30 @@ import { BlacklistQuotesCollection } from "../database";
 
 const router = Router();
 
-router.post("/dislike", async (req: Request, res: Response) => {
+router.get("/", async (req, res) => {
+  const userId = req.session.user?._id;
+  if (!userId) return res.redirect("/login");
+  const character = req.query.character as string | undefined;
+
+  let filter: any = { userId };
+  if (character) filter.characterName = character;
+
+  const blacklist = await BlacklistQuotesCollection.find(filter).toArray();
+  res.render("blacklist", { blacklist, filter: character });
+});
+
+router.delete("/:id", async (req, res) => {
+  const userId = req.session.user?._id;
+  const id = req.params.id;
+  try {
+    await BlacklistQuotesCollection.deleteOne({ _id: new ObjectId(id), userId });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Kon niet verwijderen" });
+  }
+});
+
+router.post("/dislike", async (req, res) => {
   const userId = req.session.user?._id;
   if (!userId) {
     res.status(401).send("Niet ingelogd");

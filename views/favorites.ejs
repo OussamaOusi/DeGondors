@@ -1,46 +1,45 @@
-<%- include("partials/header", { title: "Favoriete Quotes", bodyClass: "lotr-favorites-body" }) %>
+<%- include("partials/header", { title: "Favoriete Quotes" }) %>
+<body class="lotr-favorite-body">
 <%- include("partials/nav") %>
+<main class="lotr-favorite-main">
+  <h1 class="lotr-favorite-title">Favoriete Quotes</h1>
 
-<main class="favorites-page">
-  <div class="favorites-container">
-    <h1 class="favorites-title">Favoriete Quotes</h1>
+  <%
+    const groups = {};
+    favorites.forEach(item => {
+      (groups[item.characterName] ||= []).push(item);
+    });
+    const filterName = filter;
+  %>
 
-    <% 
-      const groups = {};
-      favorites.forEach(fav => {
-        if (!groups[fav.characterName]) groups[fav.characterName] = [];
-        groups[fav.characterName].push(fav);
-      });
-      const filterName = filter;
-    %>
-
-    <% Object.entries(groups).forEach(([character, quotes]) => { %>
-      <section class="character-group">
-        <header class="group-header">
-          <% if (filterName === character) { %>
-            <h2 class="character-name"><%= character %> (<%= quotes.length %>)</h2>
-            <a href="/favorites" class="filter-reset">Alles</a>
-          <% } else { %>
-            <a href="/favorites?character=<%= encodeURIComponent(character) %>" class="character-name">
-              <%= character %> (<%= quotes.length %>)
-            </a>
-          <% } %>
-          <a href="https://lotr.fandom.com/wiki/<%= encodeURIComponent(character.replace(/ /g,'_')) %>" 
-             class="wiki-link" target="_blank" rel="noopener">Wiki</a>
-        </header>
-
-        <ul class="quote-list">
-          <% quotes.forEach(fav => { %>
-            <li class="quote-item" data-id="<%= fav._id %>">
-              <p class="quote-text">“<%= fav.quote %>”</p>
-              <button class="btn delete-fav">Verwijder</button>
-            </li>
-          <% }) %>
-        </ul>
-      </section>
-    <% }) %>
-  </div>
+  <% Object.keys(groups).forEach(character => {
+       const quotes = groups[character];
+       const wikiUrl = quotes[0].wikiUrl || "#";
+  %>
+    <section class="lotr-favorite-group">
+      <header class="favorite-group-header">
+        <% if (filterName === character) { %>
+          <span class="favorite-character-name"><%= character %> (<%= quotes.length %>)</span>
+          <a href="/favorites" class="favorite-filter-reset">Alles</a>
+        <% } else { %>
+          <a href="/favorites?character=<%= encodeURIComponent(character) %>" class="favorite-character-name">
+            <%= character %> (<%= quotes.length %>)
+          </a>
+        <% } %>
+        <a href="<%= wikiUrl %>" class="favorite-wiki-link" target="_blank" rel="noopener">Wiki</a>
+      </header>
+      <ul class="favorite-quote-list">
+        <% quotes.forEach(item => { %>
+          <li class="favorite-quote-item" data-id="<%= item._id %>">
+            <blockquote class="favorite-quote-text">“<%= item.quote %>”</blockquote>
+            <button class="btn delete-favorite">Verwijder</button>
+          </li>
+        <% }) %>
+      </ul>
+    </section>
+  <% }) %>
 </main>
-
 <%- include("partials/footer") %>
 <script src="/api.js" defer></script>
+</body>
+</html>
