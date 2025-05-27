@@ -1,84 +1,3 @@
-// async function setupCharacterButtons() {
-//   document.querySelectorAll(".character-button").forEach(button => {
-//     button.onclick = function() {
-//       checkCharAnswer(this.innerText);
-//       counter++;
-//       const scoreCounter = document.getElementById("score-value");
-//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-//       setTimeout(() => {
-//         fetchRandomQuote();
-//       }, 500);
-//     };
-//   });
-// }
-
-// async function setupMovieButtons() {
-//   document.querySelectorAll(".movie-button").forEach(button => {
-//     button.onclick = function() {
-//       checkMovieAnswer(this.innerText);
-//       counter++;
-//       const scoreCounter = document.getElementById("score-value");
-//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-//       setTimeout(() => {
-//         fetchRandomQuote();
-//       }, 500);
-//     };
-//   });
-// }
-
-// async function loadQuoteAndCharacters() {
-//   const quoteEl = document.getElementById("quote-text");
-//   try {
-//     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
-//     const data = await res.json();
-//     const random = data.docs[Math.floor(Math.random() * data.docs.length)];
-//     currentQuote = random;
-//     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
-
-//     // Fetch all characters
-//     const charListRes = await fetch(`${characterUrl}`, { headers:{Authorization:`Bearer ${apiKey}`} });
-//     const charListData = await charListRes.json();
-//     characterNames = charListData.docs.map(character => character.name);
-
-//     // Fetch the character for the quote
-//     const charRes = await fetch(`${characterUrl}/${random.character}`, { headers:{Authorization:`Bearer ${apiKey}`} });
-//     const charData = await charRes.json();
-//     currentCharacter = charData.docs[0];
-//     answerArray = [currentCharacter.name, ...getRandomItems(characterNames)];
-//     shuffleArray(answerArray);
-
-//     const button1 = document.getElementById("button1");
-//     const button2 = document.getElementById("button2");
-//     const button3 = document.getElementById("button3");
-//     if(button1) button1.innerText = answerArray[0];
-//     if(button2) button2.innerText = answerArray[1];
-//     if(button3) button3.innerText = answerArray[2];
-
-//     setupCharacterButtons();
-//   } catch (e) {
-//     console.error("❌ Fout bij laden quote/character:", e);
-//     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
-//   }
-// }
-
-// async function loadMoviesForQuote() {
-//   await insertMovies();
-//   const button4 = document.getElementById("button4");
-//   const button5 = document.getElementById("button5");
-//   const button6 = document.getElementById("button6");
-//   if(button4) button4.innerText = movieAnswerArray[0];
-//   if(button5) button5.innerText = movieAnswerArray[1];
-//   if(button6) button6.innerText = movieAnswerArray[2];
-//   setupMovieButtons();
-// }
-
-// async function fetchRandomQuote() {
-//   await loadQuoteAndCharacters();
-//   await loadMoviesForQuote();
-//   console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
-// }
-
-// public/10rounds.js
 
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
 const quoteUrl = "https://the-one-api.dev/v2/quote";
@@ -134,28 +53,17 @@ async function fetchMovies(){
 }
 
 async function insertMovies(){
-  if(!currentQuote || !movieArray || !movieData || !movieData.docs){
-    console.log("insertMovies: missing data");
-    return;
+  if(!currentQuote || !movieArray || movieData){
+    console.log("test")
+   currentMovie = await movieArray.find(quote => quote.movie === movieData.docs._id);
   }
-  // Find the movie object that matches the quote's movie ID
-  let movieObj = null;
-  if (currentQuote.movie) {
-    movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
-  }
-  currentMovie = movieObj;
-  if (currentMovie) {
-    console.log("Current movie for quote:", currentMovie.name);
-    // Fill movieAnswerArray with the correct movie and random others
-    const otherMovies = movieData.docs.filter(m => m._id !== currentMovie._id).map(m => m.name);
-    movieAnswerArray = [currentMovie.name, ...getRandomItems(otherMovies)];
-    shuffleArray(movieAnswerArray);
-  } else {
-    console.log("No matching movie found for quote.");
-    // fallback: pick 3 random movies
-    movieAnswerArray = getRandomItems(movieArray, 3);
-    currentMovie = { name: movieAnswerArray[0] };
-  }
+  console.log("insert movie function:")
+  console.log(`current quote: ${currentQuote}`);
+  console.log(`movie array: ${movieArray}`);
+  console.log(`movie data: ${movieData}`);
+  currentMovie = movieArray.find(quote => quote.movie === movieData.docs._id);
+  console.log("Current movie:", currentMovie.name);
+  movieAnswerArray = [currentMovie, ...getRandomItems(movieArray)];
 }
 
 async function fetchRandomQuote() {
@@ -164,8 +72,7 @@ async function fetchRandomQuote() {
   try {
     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
     const data = await res.json();
-    const filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
-    const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
+    const random = data.docs[Math.floor(Math.random() * data.docs.length)];
     currentQuote = random;
     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
     // Haal character op:
@@ -184,10 +91,6 @@ async function fetchRandomQuote() {
     updateCharacterButtons();
     await insertMovies();
     updateMovieButtons();
-    // Ensure Sudden Death handlers are set up after new quote/buttons
-    if (currentMode === "suddendeath") {
-      setupSuddenDeathHandlers();
-    }
     //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
@@ -197,22 +100,15 @@ async function fetchRandomQuote() {
     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
   }
 }
+
 function updateCharacterButtons() {
-  if (!answerArray || !Array.isArray(answerArray) || answerArray.length < 3) {
-    console.warn("updateCharacterButtons: answerArray is not ready", answerArray);
-    return;
-  }
   const buttons = ["button1", "button2", "button3"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = answerArray[index]; }
-  });
+})
 }
 
 function updateMovieButtons() {
-  if (!movieAnswerArray || !Array.isArray(movieAnswerArray) || movieAnswerArray.length < 3) {
-    console.warn("updateMovieButtons: movieAnswerArray is not ready", movieAnswerArray);
-    return;
-  }
   const buttons = ["button4", "button5", "button6"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = movieAnswerArray[index]; }
@@ -230,7 +126,7 @@ async function likeQuote() {
   };
   console.log("📤 Like versturen:", favorite);
   try {
-    const res = await fetch("/api/rounds/like", {
+    const res = await fetch("/api/favorites/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(favorite)
@@ -240,49 +136,6 @@ async function likeQuote() {
     console.error("❌ Network error bij like:", e);
   }
 }
-async function dislikeQuote() {
-  console.log("🔄 dislikeQuote() aangeroepen");
-  if (!currentQuote || !currentCharacter) {
-    console.warn("⚠️ Geen quote/character geladen");
-    return;
-  }
-
-  const reason = prompt("Waarom vind je deze quote niet leuk?");
-  console.log("📋 Prompt returned:", reason);
-  if (!reason) {
-    alert("Je moet een reden invullen.");
-    return;
-  }
-
-  const payload = {
-    quote: currentQuote.dialog,
-    characterId: currentCharacter._id,
-    characterName: currentCharacter.name,
-    wikiUrl: currentCharacter.wikiUrl,
-    movie: currentQuote.movie,
-    reason
-  };
-  console.log("📤 Sending dislike payload:", payload);
-
-  try {
-    const res = await fetch("/api/rounds/dislike", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    console.log("↪ Server response status:", res.status);
-    console.log("↪ Server response body:", await res.text());
-  } catch (err) {
-    console.error("❌ Network error in dislikeQuote:", err);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const dislikeBtn = document.getElementById("dislike-button");
-  if (dislikeBtn) {
-    dislikeBtn.addEventListener("click", dislikeQuote);
-  }
-});
 
 function setupCharacterButtons() {
   document.querySelectorAll(".character-button").forEach(button => {
@@ -316,14 +169,13 @@ function updateCounter() {
   if (scoreCounter) {
     scoreCounter.innerText = `${score}/${counter}`;
   }
-  if(counter >= 10) {
+  if(counter >= 10 && currentMode === "10rounds"){ {
     alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
     sendScoreToServer(currentUserId, score, currentMode);
     score = 0;
     counter = 0;
     if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-  }
-
+  }}
 }
 
 function sendScoreToServer(userId, score, mode){
@@ -499,7 +351,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-  const dislikeBtn = document.getElementById("dislike-button");
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
@@ -514,3 +365,27 @@ document.addEventListener("DOMContentLoaded", () => {
     setupMovieButtons();
   }
 });
+
+//timer
+let timeleft = 60;
+const timerElement = document.getElementById("timer");
+if(currentMode === "blitz"){
+  
+
+const countdown = setInterval(() => {
+  console.log("Timer started");
+  console.log("Current mode: ", currentMode)
+    timeleft--;
+    timerElement.textContent = timeleft;
+    console.log(timeleft);
+    if(timeleft <= 0){
+      timeleft = 60;
+      alert("De tijd is om!");
+      sendScoreToServer(currentUserId, score, currentMode);
+      score = 0;
+      counter = 0;
+      if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
+
+      clearInterval(countdown);
+    }
+}, 1000);}
