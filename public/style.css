@@ -692,7 +692,7 @@ footer {
         1px 1px 0 black;
     min-height: 100vh;
     height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     background-image: url("/images/green\ background.jpg");
@@ -1271,7 +1271,7 @@ th {
 .d10rounds-body, .suddendeath-body {
   min-height: 100vh;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   background-size: cover;
@@ -1280,14 +1280,17 @@ th {
   box-sizing: border-box;
 }
 
+.suddendeath-body{
+  background-image: url("/images/lotr-concept-art.jpg");
+}
+
 main {
-  flex: 1 0 auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 0;
-  height: 100%;
   padding: 8px;
 }
 
@@ -1459,12 +1462,3 @@ footer {
   }
 }
 
-/* --- Prevent scrolling on index page --- */
-.indexBody {
-  overflow: hidden !important;
-}
-
-html, body {
-  overflow: hidden !important;
-  height: 100vh;
-}

@@ -319,8 +319,8 @@ function updateCounter() {
   if(counter >= 10) {
     alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
     sendScoreToServer(currentUserId, score, currentMode);
-    score = 0; 
-    counter = 0; 
+    score = 0;
+    counter = 0;
     if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
   }
 
@@ -399,7 +399,7 @@ function sdMovieClickHandler(event) {
 }
 
 function setupSuddenDeathHandlers() {
-  
+
   document.querySelectorAll(".character-button").forEach(button => {
     button.replaceWith(button.cloneNode(true));
   });
@@ -494,13 +494,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-  if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
-  fetchRandomQuote();
+  // if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
+  // fetchRandomQuote();
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
   const dislikeBtn = document.getElementById("dislike-button");
-  
+
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
 
