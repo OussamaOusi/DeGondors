@@ -847,7 +847,6 @@ footer {
     font-weight: bold;
 }
 
-/* Blitz */
 
 /*Leaderboard*/
 .leaderboardBody {
@@ -905,6 +904,7 @@ footer {
   position: relative;
   overflow: hidden;
   font-family: 'Segoe UI', 'Arial', sans-serif;
+  text-shadow: none;
 }
 
 .leaderboard:before {
@@ -944,10 +944,26 @@ footer {
   font-size: 1.1rem;
   color: #46371b;
   background: #fffbe9cc;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   padding: 0.7rem 0.5rem;
   text-align: center;
   border: none;
+}
+
+.leaderboard tr {
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #bfa53422;
+  transition: background 0.18s, box-shadow 0.18s;
+}
+
+.leaderboard tr:hover {
+  background: rgba(255, 243, 200, 0.92);
+  box-shadow: 0 4px 16px #bfa53444;
+}
+
+.leaderboard td, .leaderboard th {
+  border-radius: 8px;
 }
 
 .leaderboard th {
@@ -957,18 +973,31 @@ footer {
   border-bottom: 2px solid #bfa534;
 }
 
-.leaderboard_footer {
+.general_footer {
   background: linear-gradient(to bottom, black 0%, rgba(0,0,0,0) 100px);
-  color: white;
+  color: #e6d8b6;
   text-align: center;
   padding: 1rem;
   margin: 1rem auto 0 auto;
   font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
+  font-size: 1.18rem;
   border-top: none;
   border-bottom: none;
   width: 100vw;
   box-sizing: border-box;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 8px #000, 0 0 8px #bfa53455;
+}
+
+.general_footer p {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-shadow: inherit;
+  font-variant: small-caps;
+  opacity: 0.93;
 }
 
 @media (max-width: 1100px) {
@@ -1353,7 +1382,7 @@ footer {
 }
 
 /* --- 10rounds and suddendeath: Fit navbar, content, and footer on one screen, background scales --- */
-.d10rounds-body, .suddendeath-body {
+.d10rounds-body, .suddendeath-body, .blitz-body {
   min-height: 100vh;
   height: 100vh;
   /* overflow: hidden; */
@@ -1369,6 +1398,10 @@ footer {
   background-image: url("/images/lotr-concept-art.jpg");
 }
 
+.blitz-body {
+  background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
+}
+
 main {
   flex: 1;
   display: flex;
@@ -1379,7 +1412,7 @@ main {
   padding: 8px;
 }
 
-.tenrounds-container, .suddendeath-container {
+.tenrounds-container, .suddendeath-container, .blitz-container {
   max-width: 900px;
   width: 100vw;
   margin: 0 auto;
@@ -1408,7 +1441,29 @@ footer {
 }
 
 .quiz-header {
-  margin-bottom: 8px;
+  color: #e6d8b6;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem auto 0 auto;
+  font-family: 'Cinzel', serif;
+  font-size: 2.18rem;
+  border-top: none;
+  border-bottom: none;
+  width: 100vw;
+  box-sizing: border-box;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 8px #000, 0 0 8px #bfa53455;
+}
+
+.quiz-header h1 {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-shadow: inherit;
+  font-variant: small-caps;
+  opacity: 0.93;
 }
 
 .quote-box {
@@ -1424,13 +1479,22 @@ footer {
   gap: 10px;
   padding: 8px;
   flex-wrap: wrap;
-  max-width: 900px;
+  width: 900px;
   margin: 0 auto;
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, 1);
   border-radius: 8px;
   min-height: 0;
 }
+
+.answer-selection {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .answer-vert {
   display: flex;
@@ -1442,6 +1506,7 @@ footer {
   margin: 0 auto;
   min-height: 0;
 }
+
 
 .score-display {
   position: static;
