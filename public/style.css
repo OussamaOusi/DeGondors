@@ -730,7 +730,7 @@ footer {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    padding: 8px;
+    /* padding: 8px; */
     flex-wrap: wrap;
     max-width: 900px;
     margin: 0 auto;
@@ -757,11 +757,14 @@ footer {
 
 .quote-box {
     min-height: 40px;
-    padding: 16px;
+    width: 880px;
+    /* padding: 16px; */
     margin-bottom: 8px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     margin-bottom: 2rem;
+    margin-left: 35px;
+    color: white;
     position: relative;
     display: flex;
     align-items: center;   /* Vertically center the text */
@@ -774,8 +777,6 @@ footer {
     line-height: 1.6;
     margin: 0;
     text-align: center;
-    /* opacity: 0;
-    transition: opacity 0.3s; */
 }
 
 
@@ -795,6 +796,7 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: white;
     border: 3px solid #f1c40f;
+    margin: 40px;
 }
 
 .character-selection {
@@ -859,8 +861,8 @@ footer {
 
 .score-display {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 60px;
+    right: 50px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem 2rem;
     border-radius: 10px;
@@ -1466,10 +1468,12 @@ footer {
 
 .suddendeath-body{
   background-image: url("/images/lotr-concept-art.jpg");
+  color: #d7c30c;
 }
 
 .blitz-body {
   background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
+  color: #d7c30c;
 }
 
 main {
@@ -1493,7 +1497,8 @@ main {
   justify-content: center;
   flex: 1 0 auto;
   min-height: 0;
-box-sizing: border-box;
+  box-sizing: border-box;
+  
 }
 
 header {
@@ -1512,7 +1517,7 @@ footer {
 
 .quiz-header {
   color: #e6d8b6;
-  text-align: center;
+  text-align: start;
   padding: 1rem;
   margin: 1rem auto 0 auto;
   font-family: 'Cinzel', serif;
@@ -1545,8 +1550,8 @@ footer {
 .answer-container {
   flex: 0 0 auto;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
+  gap: 200px;
   padding: 8px;
   flex-wrap: wrap;
   width: 900px;
@@ -1562,7 +1567,7 @@ footer {
   flex-direction: column;
   padding: 8px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 
@@ -1575,16 +1580,6 @@ footer {
   max-width: 900px;
   margin: 0 auto;
   min-height: 0;
-}
-
-
-.score-display {
-  position: static;
-  margin-top: 8px;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px 24px;
-  border-radius: 10px;
-  font-size: 1.2rem;
 }
 
 .reviewbutton-container {
