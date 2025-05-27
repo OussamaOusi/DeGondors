@@ -1,4 +1,3 @@
-
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
 const quoteUrl = "https://the-one-api.dev/v2/quote";
 const characterUrl = "https://the-one-api.dev/v2/character";
@@ -72,7 +71,13 @@ async function fetchRandomQuote() {
   try {
     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
     const data = await res.json();
-    const random = data.docs[Math.floor(Math.random() * data.docs.length)];
+    // Filter quotes to only those with 100 characters or less
+    const filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
+    if (filteredQuotes.length === 0) {
+      if (quoteEl) quoteEl.textContent = "Geen korte quotes gevonden.";
+      return;
+    }
+    const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
     currentQuote = random;
     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
     // Haal character op:
@@ -170,8 +175,13 @@ function updateCounter() {
     scoreCounter.innerText = `${score}/${counter}`;
   }
   if(counter >= 10 && currentMode === "10rounds"){ {
-    alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
+    // alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
     sendScoreToServer(currentUserId, score, currentMode);
+    if (typeof showEndQuizPopup === 'function') {
+      showEndQuizPopup(score, currentMode);
+    } else {
+      setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+    }
     score = 0;
     counter = 0;
     if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
@@ -284,9 +294,110 @@ function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
     if (document.getElementById("score-value")) {
       document.getElementById("score-value").innerText = `${score}/${counter}`;
     }
-    alert(`Game over! Je score is: ${score}/${counter}`);
+    // alert(`Game over! Je score is: ${score}/${counter}`);
     sendScoreToServer(currentUserId, score, currentMode);
+    if (typeof showEndQuizPopup === 'function') {
+      showEndQuizPopup(score, currentMode);
+    } else {
+      setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+    }
   }
+}
+
+// Add popup HTML to the page (only once)
+function showEndQuizPopup(score, mode) {
+  let popup = document.getElementById('end-quiz-popup');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'end-quiz-popup';
+    popup.innerHTML = `
+      <div class="end-quiz-popup-content">
+        <h2>Quiz afgelopen!</h2>
+        <p>Je score is: <strong>${score}</strong></p>
+        <button id="play-again-btn">Speel opnieuw</button>
+        <button id="to-leaderboard-btn">Bekijk leaderboard</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+    // Basic styles for popup
+    const style = document.createElement('style');
+    style.innerHTML = `
+      #end-quiz-popup {
+        position: fixed; 
+        z-index: 9999; 
+        top: 0; 
+        left: 0; 
+        width: 100vw; 
+        height: 100vh;
+        background: rgba(10,10,10,0.92); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+      }
+      .end-quiz-popup-content {
+        background: linear-gradient(135deg, #23211a 80%, #bfa53422 100%);
+        color: #f8e6da;
+        border-radius: 18px;
+        padding: 2.5rem 2rem 2rem 2rem;
+        box-shadow: 0 8px 32px #000c, 0 0 0 8px #bfa53433;
+        text-align: center;
+        min-width: 260px;
+        max-width: 90vw;
+        letter-spacing: 1px;
+        font-family: 'Cinzel', 'Segoe UI', serif;
+        text-shadow: 0 2px 8px #000a;
+        font-size: 1.7rem;
+        border: 2px solid #bfa53455;
+      }
+      .end-quiz-popup-content h2 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 8px #000, 0 0 12px #bfa53455;
+      }
+      .end-quiz-popup-content p {
+        color: #f8e6da;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 1px 4px #000a;
+      }
+      .end-quiz-popup-content button {
+        margin: 1.2rem 0.7rem 0 0.7rem;
+        padding: 0.7rem 1.7rem;
+        font-size: 1.1rem;
+        border-radius: 8px; border: none;
+        background: linear-gradient(90deg, #bfa534 60%, #46371b 100%);
+        color: #fffbe9;
+        font-family: inherit;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 2px 8px #0006;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      }
+      .end-quiz-popup-content button:hover {
+        background: linear-gradient(90deg, #46371b 60%, #bfa534 100%);
+        color: #ffd700;
+        box-shadow: 0 4px 16px #bfa53444;
+      }
+    `;
+    document.head.appendChild(style);
+  } else {
+    popup.querySelector('p').innerHTML = `Je score is: <strong>${score}</strong>`;
+    popup.style.display = 'flex';
+  }
+  // Button handlers
+  document.getElementById('play-again-btn').onclick = function() {
+    popup.style.display = 'none';
+    if (mode === 'blitz') {
+      window.location.reload();
+    } else if (mode === '10rounds') {
+      window.location.reload();
+    } else if (mode === 'suddendeath') {
+      window.location.reload();
+    }
+  };
+  document.getElementById('to-leaderboard-btn').onclick = function() {
+    window.location.href = '/leaderboards';
+  };
 }
 
 //like verwijderen favoriet
@@ -370,22 +481,21 @@ document.addEventListener("DOMContentLoaded", () => {
 let timeleft = 60;
 const timerElement = document.getElementById("timer");
 if(currentMode === "blitz"){
-  
-
 const countdown = setInterval(() => {
-  console.log("Timer started");
-  console.log("Current mode: ", currentMode)
     timeleft--;
     timerElement.textContent = timeleft;
-    console.log(timeleft);
     if(timeleft <= 0){
       timeleft = 60;
-      alert("De tijd is om!");
+      // alert("De tijd is om!");
       sendScoreToServer(currentUserId, score, currentMode);
       score = 0;
       counter = 0;
-      if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-
+      if (typeof showEndQuizPopup === 'function') {
+        showEndQuizPopup(score, currentMode);
+      } else {
+        // fallback: show popup anyway
+        setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+      }
       clearInterval(countdown);
     }
 }, 1000);}
