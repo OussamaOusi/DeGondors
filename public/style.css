@@ -25,110 +25,136 @@ h1 {
     background-size: cover;
     background-position: center;
 }
-
-/* public/css/profile.css */
+ /* profiel */
 
 .profile-body {
-    background-image: url('/images/middle-earth-map.jpg');
+    font-family: 'Cinzel', serif;
+    background-image: url('/images/profile.jpg');
     background-size: cover;
     background-position: center;
     color: #f1e9d2;
-    font-family: 'Georgia', serif;
-  }
-  
-  .profile-wrapper {
-    max-width: 700px;
-    margin: 5rem auto;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2rem;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-wrapper {
+    max-width: 900px;
+    margin: 3rem auto;
+    background: rgba(43, 35, 19, 0.8);
+    padding: 3rem;
     border: 2px solid #d4af37;
     border-radius: 10px;
-    box-shadow: 0 0 15px #000;
-  }
-  
-  .profile-title {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+.profile-title {
     text-align: center;
     color: #d4af37;
     margin-bottom: 2rem;
-  }
-  
-  .profile-form label {
-    display: block;
-    margin-top: 1rem;
+    font-size: 2.5rem;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profile-label {
     font-weight: bold;
-  }
-  
-  .profile-form input,
-  .profile-form select {
+    color: #ffd700;
+}
+
+.profile-value {
+    flex-grow: 1;
+    margin-left: 1rem;
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #ffd700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.edit-btn:hover {
+    color: #d4af37;
+}
+
+/* Verstop de form standaard */
+.edit-form.hidden {
+    display: none;
+}
+
+.edit-form input,
+.edit-form select {
     width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
+    padding: 0.75rem;
+    margin-top: 1rem;
     border-radius: 5px;
     border: none;
-    background: #eae4d3;
+    background-color: #eae4d3;
     color: #333;
-  }
-  
-  .avatar-preview {
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
-  }
-  
-  .avatar-preview img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #d4af37;
-  }
-  
-  .btn-save,
-  .btn-logout,
-  .btn-delete {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.75rem;
     font-size: 1rem;
+}
+
+.btn-save,
+.btn-logout,
+.btn-delete {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    font-size: 1.1rem;
     font-weight: bold;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-  }
-  
-  .btn-save {
-    background: #d4af37;
+}
+
+.btn-save {
+    background-color: #d4af37;
     color: #000;
-  }
-  
-  .btn-save:hover {
-    background: #bfa534;
-  }
-  
-  .btn-logout {
-    background: #444;
+}
+
+.btn-save:hover {
+    background-color: #bfa534;
+}
+
+.btn-logout {
+    background-color: #444;
     color: white;
-  }
-  
-  .btn-logout:hover {
-    background: #666;
-  }
-  
-  .btn-delete {
-    background: #8b0000;
+}
+
+.btn-logout:hover {
+    background-color: #666;
+}
+
+.btn-delete {
+    background-color: #8b0000;
     color: white;
-  }
-  
-  .btn-delete:hover {
-    background: #a30000;
-  }
-  
-  .profile-actions {
+}
+
+.btn-delete:hover {
+    background-color: #a30000;
+}
+
+.profile-actions {
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 2rem;
-  }
-  
+}
 
 .lotr-favorite-body {
   background: #f7efe1;
@@ -605,7 +631,7 @@ nav {
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s;
 }
@@ -1057,16 +1083,60 @@ footer {
     align-items: center;
 }
 
+
 .landingpageRow {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
 }
 
 .landingpageRow img {
     width: 300px;
     height: 200px;
     border-radius: 8px;
+}
+
+.index-header {
+    background-color: #a64dffbd;
+    padding: 40px 50px;
+}
+
+
+.index-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+.index-logo img {
+    height: 60px;
+}
+
+.index-nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.index-nav-links a,
+.index-nav-links button {
+    color: white;
+    text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.index-nav-links a:hover,
+.index-nav-links button:hover {
+    background-color: rgb(139, 0, 127);
+    transform: scale(1.1); /* Laat de knop iets groter worden bij hover */
 }
 
 /* Registration Page */
