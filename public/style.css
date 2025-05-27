@@ -1143,7 +1143,7 @@ footer {
 .registrationBody {
     font-family: 'Cinzel', serif;
     text-shadow: none;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/landingspagina.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -1194,7 +1194,7 @@ footer {
 /* Loginpage Styling */
 .loginBody {
     font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/landingspagina.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
