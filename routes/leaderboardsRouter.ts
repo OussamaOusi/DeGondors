@@ -8,7 +8,7 @@ router.get('/leaderboards', async (req, res) => {
   const scores = await scoreCollection
     .aggregate([
       { $sort: { score: -1, date: 1 } },
-      { $limit: 100 }, 
+      { $limit: 7 }, 
       {
         $lookup: {
           from: "Users",

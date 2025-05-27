@@ -857,61 +857,146 @@ footer {
     color: white;
 }
 
-.leaderboards-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-
+/* --- LOTR Style Leaderboards Page --- */
+.leaderboardBody {
+  background: url('/images/art-artistic-artwork-fantasy-wallpaper-preview.jpg') center/cover no-repeat, #2d1a06;
+  min-height: 100vh;
+  font-family: 'Cinzel', 'Georgia', serif;
+  color: #f8e6da;
+  position: relative;
 }
 
 .page-header {
-    text-align: center;
-    padding: 2rem 0;
-    background-color: rgba(43, 35, 19, 0.8);
-    color: white;
-    margin-bottom: 2rem;
+  font-family: 'Cinzel', serif;
+  color: #ffd700;
+  text-shadow: 0 2px 8px #000, 0 0 20px #ffd70099;
+  letter-spacing: 2px;
+  background: rgba(43, 35, 19, 0.85);
+  border-radius: 12px;
+  margin: 2rem auto 2.5rem auto;
+  padding: 1.5rem 2rem;
+  max-width: 600px;
+  border: 3px solid #bfa534;
 }
 
-.game-mode {
-    background-color: #413620;
-    color: white;
-    padding: 1rem;
-    border-radius: 8px 8px 0 0;
-    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-
+.leaderboards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2.5rem;
+  margin: 0 auto;
+  padding: 2rem 0 3rem 0;
+  max-width: 1200px;
+  position: relative;
 }
 
 .leaderboard {
-    background: #7F5539;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: url('/images/favorieten.jpg') center/cover no-repeat, #f5ecd6;
+  border: 4px solid #bfa534;
+  border-radius: 18px 18px 40px 40px;
+  box-shadow: 0 8px 32px #0008, 0 0 0 8px #bfa53433;
+  padding: 2.2rem 1.5rem 2.5rem 1.5rem;
+  min-width: 320px;
+  max-width: 370px;
+  flex: 1 1 340px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+.leaderboard:before {
+  content: '';
+  position: absolute;
+  top: -30px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 80px;
+  background: url('/images/Logo.jpg') center/contain no-repeat;
+  opacity: 0.13;
+  pointer-events: none;
 }
 
-th,
-td {
-    padding: 0.75rem;
-    text-align: left;
-    color: #FFD791;
-    font-size: 20px;
+.game-mode {
+  font-family: 'Cinzel', serif;
+  color: #bfa534;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 8px #0006;
+  background: rgba(43, 35, 19, 0.7);
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #bfa534;
 }
 
-th {
-    color: white;
+.leaderboard table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+  background: transparent;
 }
 
+.leaderboard th, .leaderboard td {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-size: 1.1rem;
+  color: #46371b;
+  background: #fffbe9cc;
+  border-radius: 6px;
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  border: none;
+}
+
+.leaderboard th {
+  color: #bfa534;
+  font-size: 1.15rem;
+  background: #f5ecd6ee;
+  border-bottom: 2px solid #bfa534;
+}
+
+.leaderboard_footer {
+  background: linear-gradient(to bottom, black 0%, rgba(0,0,0,0) 100px);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem auto 0 auto;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  border-top: none;
+  border-bottom: none;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .leaderboards-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .leaderboard {
+    max-width: 95vw;
+    min-width: 260px;
+  }
+}
+@media (max-width: 600px) {
+  .page-header {
+    font-size: 1.2rem;
+    padding: 1rem 0.5rem;
+  }
+  .leaderboard {
+    padding: 1.2rem 0.5rem 1.5rem 0.5rem;
+    min-width: 180px;
+    max-width: 99vw;
+  }
+  .game-mode {
+    font-size: 1.1rem;
+    padding: 0.3rem 0;
+  }
+}
 /* LandingPage index.html */
 .indexBody {
     font-family: 'Cinzel', serif;
