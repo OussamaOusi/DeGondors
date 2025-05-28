@@ -13,7 +13,11 @@ router.get("/", async (req, res) => {
   if (character) filter.characterName = character;
 
   const blacklist = await BlacklistQuotesCollection.find(filter).toArray();
-  res.render("blacklist", { blacklist, filter: character });
+ res.render("blacklist", {
+  blacklist,
+  filter: character,
+  user: req.session.user 
+});
 });
 
 router.delete("/:id", async (req, res) => {

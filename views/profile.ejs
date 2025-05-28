@@ -1,5 +1,11 @@
-<%- include("partials/header") %>
-
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Home</title>
+</head>
   <body class="rpg-profile-body">
     <header>
       <%- include("partials/nav") %>
@@ -48,48 +54,74 @@
             <button class="rpg-btn-delete">Verwijder account</button>
           </form>
         </div>
-        <!-- CENTER PANEL: Character Image -->
-        <div class="rpg-center-panel">
-          <div class="character-selector">
-            <button class="arrow-btn" onclick="prevCharacter()">←</button>
 
-            <!-- 👇 HIER komt je afbeelding 👇 -->
-            <img id="characterImage" class="rpg-character-image"
-              src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>" alt="Character" />
+      <!-- CENTER PANEL: Character Image -->
+<div class="rpg-center-panel">
+  <div class="character-selector">
+    <button class="arrow-btn" onclick="prevCharacter()">←</button>
 
-            <button class="arrow-btn" onclick="nextCharacter()">→</button>
-          </div>
+ 
+    <img
+      id="characterImage"
+      class="rpg-character-image"
+      src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>"
+      alt="Character"
+    />
+
+    <button class="arrow-btn" onclick="nextCharacter()">→</button>
+  </div>
 
 
+  <p id="characterName" class="rpg-character-class visually-hidden">
+    <%= user?.characterName ?? '' %>
+  </p>
 
-          <form method="POST" action="/profile/avatar">
-            <input type="hidden" name="avatar" id="avatarInput" value="boogschutter.png" />
-            <button class="rpg-btn-avatar">Zet als profielfoto</button>
-          </form>
-
-          <!-- 👇 Zorg dat dit in het formulier zit of meegestuurd wordt 👇 -->
-          <input type="hidden" name="avatar" id="avatarInput" value="<%= user?.avatar ?? 'boogschutter.png' %>" />
-        </div>
-
+  <form method="POST" action="/profile/avatar">
+    <input type="hidden" name="avatar" id="avatarInput" value="<%= user?.avatar ?? 'boogschutter.png' %>" />
+    <button class="rpg-btn-avatar">Zet als profielfoto</button>
+  </form>
+</div>
         <!-- RIGHT PANEL: Stats -->
         <div class="rpg-right-panel">
           <h2 class="rpg-section-title">Stats</h2>
           <ul class="rpg-stats-list">
-            <li><a href="/leaderboards"><span>10 rounds:</span></a>
-              <%= best10Rounds %>
-            </li>
-            <li><a href="/leaderboards"><span>Blitz:</span></a>
-              <%= bestBlitz %>
-            </li>
-            <li><a href="/leaderboards"><span>Sudden Death:</span></a>
-              <%= bestSudden %>
-            </li>
-            <li><a href="/favorites"><span>Favoriete Quotes:</span></a>
-              <%= favoriteCount %>
-            </li>
-            <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a>
-              <%= blacklistCount %>
-            </li>
+            <ul class="rpg-stats-list">
+              <li><a href="/favorites"><span>Favoriete Quotes:</span></a>
+                <%= favoriteCount %>
+              </li>
+              <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a>
+                <%= blacklistCount %>
+              </li>
+              <li>
+                <a href="/leaderboards">
+                  <span>
+                    <img src="/images/profileImages/10_rounds-removebg-preview.png" alt="10 rounds icon"
+                      class="stats-icon" />
+                  </span>
+                </a>
+                <%= best10Rounds %>
+              </li>
+
+              <li>
+                <a href="/leaderboards">
+                  <span>
+                    <img src="/images/profileImages/Blitz-removebg-preview.png" alt="Blitz icon" class="stats-icon" />
+                  </span>
+                </a>
+                <%= bestBlitz %>
+              </li>
+
+              <li>
+                <a href="/leaderboards">
+                  <span>
+                    <img src="/images/profileImages/Sudden_Death-removebg-preview.png" alt="Sudden Death icon"
+                      class="stats-icon" />
+                  </span>
+                </a>
+                <%= bestSudden %>
+              </li>
+            </ul>
+
           </ul>
         </div>
       </div>
