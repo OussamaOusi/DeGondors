@@ -52,17 +52,20 @@ async function fetchMovies(){
 }
 
 async function insertMovies(){
-  if(!currentQuote || !movieArray || movieData){
-    console.log("test")
-   currentMovie = await movieArray.find(quote => quote.movie === movieData.docs._id);
+  if(!currentQuote || !movieArray || !movieData){
+    return;
   }
-  console.log("insert movie function:")
-  console.log(`current quote: ${currentQuote}`);
-  console.log(`movie array: ${movieArray}`);
-  console.log(`movie data: ${movieData}`);
-  currentMovie = movieArray.find(quote => quote.movie === movieData.docs._id);
-  console.log("Current movie:", currentMovie.name);
-  movieAnswerArray = [currentMovie, ...getRandomItems(movieArray)];
+  // Find the current movie object by matching the movie ID
+  const movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  if (!movieObj) {
+    console.warn('Current movie not found in movieData');
+    return;
+  }
+  currentMovie = movieObj;
+  // Filter out the correct movie from the array before picking random items
+  const otherMovies = movieArray.filter(name => name !== currentMovie.name);
+  movieAnswerArray = [currentMovie.name, ...getRandomItems(otherMovies)];
+  shuffleArray(movieAnswerArray);
 }
 
 async function fetchRandomQuote() {
@@ -477,6 +480,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+const characters = [
+  { name: "Aragorn", image: "Aragorn.webp" },
+  { name: "Sauron", image: "sauron.webp" },
+  { name: "Gandalf", image: "GandalfGrey.webp" },
+  { name: "Saruman", image: "sarumanTheWhite.png" },
+  { name: "Legolas", image: "legolas.png" },
+  { name: "Orc", image: "orc.png" },
+  { name: "Boromir", image: "boromir.png" },
+  { name: "Elven Ranger", image: "boogschutter.png" }
+];
+
+  let currentIndex = characters.findIndex(c => c.image === "boogschutter.png");
+
+  function updateCharacter() {
+    const char = characters[currentIndex];
+    document.getElementById("characterImage").src = `/images/profileImages/${char.image}`;
+    document.getElementById("characterName").textContent = char.name;
+    document.getElementById("avatarInput").value = char.image;
+  }
+
+  function prevCharacter() {
+    currentIndex = (currentIndex - 1 + characters.length) % characters.length;
+    updateCharacter();
+  }
+
+  function nextCharacter() {
+    currentIndex = (currentIndex + 1) % characters.length;
+    updateCharacter();
+  }
 //timer
 let timeleft = 60;
 const timerElement = document.getElementById("timer");

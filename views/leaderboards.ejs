@@ -16,9 +16,9 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <% let pos10 = 1; (highscores || []).filter(entry => entry.mode === '10rounds').forEach(entry => { %>
+                      <% (highscores['10rounds'] || []).forEach(entry => { %>
                         <tr>
-                            <td><%= pos10++ %></td>
+                            <td><%= entry.position %></td>
                             <td><%= entry.username %></td>
                             <td><%= entry.score %></td>
                         </tr>
@@ -38,9 +38,9 @@
                       </tr>
                   </thead>
                   <tbody>
-                     <% let posBlitz = 1; (highscores || []).filter(entry => entry.mode === 'blitz').forEach(entry => { %>
+                     <% (highscores['blitz'] || []).forEach(entry => { %>
                         <tr>
-                            <td><%= posBlitz++ %></td>
+                            <td><%= entry.position %></td>
                             <td><%= entry.username %></td>
                             <td><%= entry.score %></td>
                         </tr>
@@ -60,9 +60,9 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <% let posSD = 1; (highscores || []).filter(entry => entry.mode === 'suddendeath').forEach(entry => { %>
+                      <% (highscores['suddendeath'] || []).forEach(entry => { %>
                         <tr>
-                            <td><%= posSD++ %></td>
+                            <td><%= entry.position %></td>
                             <td><%= entry.username %></td>
                             <td><%= entry.score %></td>
                         </tr>

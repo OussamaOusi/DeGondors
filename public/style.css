@@ -25,135 +25,222 @@ h1 {
     background-size: cover;
     background-position: center;
 }
- /* profiel */
 
-.profile-body {
-    font-family: 'Cinzel', serif;
-    background-image: url('/images/profile.jpg');
-    background-size: cover;
-    background-position: center;
-    color: #f1e9d2;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
+/* RPG-stijl profielpagina LOTR */
+
+body.rpg-profile-body {
+  font-family: 'Cinzel', serif;
+  background-image: url('/images/profile.jpg');
+  background-size: cover;
+  color: #f5ecd4;
+  margin: 0;
+  padding: 0;
 }
 
-.profile-wrapper {
-    max-width: 900px;
-    margin: 3rem auto;
-    background: rgba(43, 35, 19, 0.8);
-    padding: 3rem;
-    border: 2px solid #d4af37;
+.lotr-profile-title {
+  color: #d4af37;
+  font-size: 2.3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px #60583d,
+    0 0 5px #a97c2f,
+    2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.rpg-profile-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 2rem;
+  padding: 3rem;
+  max-width: 1400px;
+  margin: auto;
+  background-color: rgba(20, 16, 10, 0.9);
+  border: 4px solid #d4af37;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #000;
+}
+
+.rpg-left-panel {
+  background-color: rgba(36, 28, 15, 0.9);
+  border-right: 2px solid #a5852d;
+
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.rpg-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.rpg-user-info p {
+  background-color: rgba(50, 40, 25, 0.9);
+  padding: 1rem;
+  border: 1px solid #7d6530;
+  border-radius: 6px;
+  color: #f5ecd4;
+  font-size: 0.95rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.rpg-label {
+  color: #ffd700;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* CENTER PANEL */
+.rpg-center-panel {
+  text-align: center;
+  padding: 1rem;
+}
+
+.rpg-character-name {
+  font-size: 2.2rem;
+  color: #ffd700;
+  margin-bottom: 1rem;
+}
+
+.rpg-character-image {
+  max-height: 500px; /* alles wordt netjes geschaald */
+  height: 500px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px #000);
+}
+
+.rpg-character-class {
+  font-size: 1.2rem;
+  color: #d4af37;
+  margin-top: 1rem;
+}
+
+.character-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.arrow-btn {
+  background: none;
+  border: 2px solid #d4af37;
+  color: #ffd700;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.arrow-btn:hover {
+  background-color: #d4af37;
+  color: #000;
+}
+
+
+/* RIGHT PANEL */
+.rpg-user-info input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.25rem;
+  border-radius: 5px;
+  border: 1px solid #7d6530;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  color: #333;
+  transition: border 0.3s;
+}
+
+.rpg-user-info input:focus {
+  outline: none;
+  border: 1px solid #d4af37;
+  box-shadow: 0 0 8px #d4af37;
+}
+.rpg-right-panel {
+  padding: 1rem;
+  background-color: rgba(36, 28, 15, 0.8);
+  border-left: 2px solid #a5852d;
+}
+
+.rpg-stats-list {
+  list-style: none;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.rpg-stats-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #7d6530;
+  color: #f8f5e1;
+}
+
+.rpg-stats-list li span {
+  font-weight: bold;
+  color: #d4af37;
+}
+
+.rpg-btn-logout,
+.rpg-btn-delete {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.rpg-btn-logout {
+  background-color: #444;
+  color: white;
+}
+
+.rpg-btn-logout:hover {
+  background-color: #666;
+}
+
+.rpg-btn-delete {
+  background-color: #8b0000;
+  color: white;
+}
+
+.rpg-btn-delete:hover {
+  background-color: #a30000;
+}
+
+
+/**/
+
+.lotr-xp-bar {
+    width: 100%;
+    background: #333;
+    height: 16px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    margin-top: 0.5rem;
 }
 
-.profile-title {
-    text-align: center;
-    color: #d4af37;
-    margin-bottom: 2rem;
-    font-size: 2.5rem;
-}
-
-.profile-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.profile-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.profile-label {
-    font-weight: bold;
-    color: #ffd700;
-}
-
-.profile-value {
-    flex-grow: 1;
-    margin-left: 1rem;
-}
-
-.edit-btn {
-    background: none;
-    border: none;
-    color: #ffd700;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-left: 1rem;
-}
-
-.edit-btn:hover {
-    color: #d4af37;
-}
-
-/* Verstop de form standaard */
-.edit-form.hidden {
-    display: none;
-}
-
-.edit-form input,
-.edit-form select {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 1rem;
-    border-radius: 5px;
-    border: none;
-    background-color: #eae4d3;
-    color: #333;
-    font-size: 1rem;
-}
-
-.btn-save,
-.btn-logout,
-.btn-delete {
-    width: 100%;
-    margin-top: 1.5rem;
-    padding: 0.75rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.btn-save {
-    background-color: #d4af37;
-    color: #000;
-}
-
-.btn-save:hover {
-    background-color: #bfa534;
-}
-
-.btn-logout {
-    background-color: #444;
-    color: white;
-}
-
-.btn-logout:hover {
-    background-color: #666;
-}
-
-.btn-delete {
-    background-color: #8b0000;
-    color: white;
-}
-
-.btn-delete:hover {
-    background-color: #a30000;
-}
-
-.profile-actions {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.lotr-xp-fill {
+    height: 100%;
+    background: linear-gradient(to right, #d4af37, #f1e9d2);
+    transition: width 0.4s ease;
 }
 
 .lotr-favorite-body {
@@ -757,7 +844,7 @@ footer {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    padding: 8px;
+    /* padding: 8px; */
     flex-wrap: wrap;
     max-width: 900px;
     margin: 0 auto;
@@ -784,11 +871,14 @@ footer {
 
 .quote-box {
     min-height: 40px;
-    padding: 16px;
+    width: 880px;
+    /* padding: 16px; */
     margin-bottom: 8px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     margin-bottom: 2rem;
+    margin-left: 35px;
+    color: white;
     position: relative;
     display: flex;
     align-items: center;   /* Vertically center the text */
@@ -801,8 +891,6 @@ footer {
     line-height: 1.6;
     margin: 0;
     text-align: center;
-    /* opacity: 0;
-    transition: opacity 0.3s; */
 }
 
 
@@ -822,6 +910,7 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: white;
     border: 3px solid #f1c40f;
+    margin: 40px;
 }
 
 .character-selection {
@@ -886,8 +975,8 @@ footer {
 
 .score-display {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 60px;
+    right: 50px;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem 2rem;
     border-radius: 10px;
@@ -1170,7 +1259,7 @@ footer {
 .registrationBody {
     font-family: 'Cinzel', serif;
     text-shadow: none;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/landingspagina.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -1221,7 +1310,7 @@ footer {
 /* Loginpage Styling */
 .loginBody {
     font-family: 'Cinzel', serif;
-    background-image: url("/images/Backgroundjpg.jpg");
+    background-image: url("/images/landingspagina.jpg");
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -1493,10 +1582,12 @@ footer {
 
 .suddendeath-body{
   background-image: url("/images/lotr-concept-art.jpg");
+  color: #d7c30c;
 }
 
 .blitz-body {
   background-image: url("/images/fantasy-art-the-lord-of-the-rings-rivendell-digital-art-wallpaper-preview.jpg");
+  color: #d7c30c;
 }
 
 main {
@@ -1520,7 +1611,8 @@ main {
   justify-content: center;
   flex: 1 0 auto;
   min-height: 0;
-box-sizing: border-box;
+  box-sizing: border-box;
+  
 }
 
 header {
@@ -1539,7 +1631,7 @@ footer {
 
 .quiz-header {
   color: #e6d8b6;
-  text-align: center;
+  text-align: start;
   padding: 1rem;
   margin: 1rem auto 0 auto;
   font-family: 'Cinzel', serif;
@@ -1572,8 +1664,8 @@ footer {
 .answer-container {
   flex: 0 0 auto;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: center;
+  gap: 200px;
   padding: 8px;
   flex-wrap: wrap;
   width: 900px;
@@ -1589,7 +1681,7 @@ footer {
   flex-direction: column;
   padding: 8px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 
@@ -1602,16 +1694,6 @@ footer {
   max-width: 900px;
   margin: 0 auto;
   min-height: 0;
-}
-
-
-.score-display {
-  position: static;
-  margin-top: 8px;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px 24px;
-  border-radius: 10px;
-  font-size: 1.2rem;
 }
 
 .reviewbutton-container {
