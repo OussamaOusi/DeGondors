@@ -64,9 +64,9 @@ app.set('views', path.join(__dirname, "views"));
 app.use(session);
 
 
-app.use("/api/rounds", roundsLikeDislikeRouter);
 app.use("/10rounds", tenRoundsRouter);
 app.use("/favorites", favoriteRouter);
+app.use("/api/rounds", roundsLikeDislikeRouter);
 app.use("/blacklist", blacklistRouter);
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, favoriteRouter);
 
