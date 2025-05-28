@@ -514,3 +514,33 @@ document.addEventListener("DOMContentLoaded", () => {
     setupMovieButtons();
   }
 });
+
+const characters = [
+  { name: "Aragorn", image: "Aragorn.webp" },
+  { name: "Sauron", image: "sauron.webp" },
+  { name: "Gandalf", image: "GandalfGrey.webp" },
+  { name: "Saruman", image: "sarumanTheWhite.png" },
+  { name: "Legolas", image: "legolas.png" },
+  { name: "Orc", image: "orc.png" },
+  { name: "Boromir", image: "boromir.png" },
+  { name: "Elven Ranger", image: "boogschutter.png" }
+];
+
+  let currentIndex = characters.findIndex(c => c.image === "boogschutter.png");
+
+  function updateCharacter() {
+    const char = characters[currentIndex];
+    document.getElementById("characterImage").src = `/images/profileImages/${char.image}`;
+    document.getElementById("characterName").textContent = char.name;
+    document.getElementById("avatarInput").value = char.image;
+  }
+
+  function prevCharacter() {
+    currentIndex = (currentIndex - 1 + characters.length) % characters.length;
+    updateCharacter();
+  }
+
+  function nextCharacter() {
+    currentIndex = (currentIndex + 1) % characters.length;
+    updateCharacter();
+  }

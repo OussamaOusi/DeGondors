@@ -1,73 +1,70 @@
 <%- include("partials/header") %>
 
-<body class="profile-body">
-    <header>
-        <%- include("partials/nav") %>
-    </header>
+<body class="rpg-profile-body">
+  <header>
+    <%- include("partials/nav") %>
+  </header>
 
-    <main>
-        <section class="profile-wrapper">
-            <h1 class="profile-title">Mijn Profiel</h1>
+  <main>
+    <h1 class="lotr-profile-title">Profiel</h1>
+    <div class="rpg-profile-container">
+      <!-- LEFT PANEL: User Info + Actions -->
+      <div class="rpg-left-panel">
+        <h2 class="rpg-section-title">Gebruiker</h2>
+        <form class="rpg-user-info" method="POST" action="/profile/update">
+  <label class="rpg-label">Gebruikersnaam:
+    <input type="text" name="username" value="<%= user?.username %>" required />
+  </label>
+  <label class="rpg-label">Email:
+    <input type="email" name="email" value="<%= user?.email %>" required />
+  </label>
+  <label class="rpg-label">Nieuw wachtwoord:
+    <input type="password" name="password" placeholder="Nieuw wachtwoord" />
+  </label>
+</form>
 
-            <div class="profile-info">
-                <div class="profile-item">
-                    <span class="profile-label">Gebruikersnaam:</span>
-                    <span class="profile-value" id="usernameDisplay"><%= user?.username %></span>
-                    <button class="edit-btn" onclick="editField('username')">🖉</button>
-                </div>
+        <form method="POST" action="/logout">
+          <button class="rpg-btn-logout">Log uit</button>
+        </form>
+        <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
+          <button class="rpg-btn-delete">Verwijder account</button>
+        </form>
+      </div>
 
-                <div class="profile-item">
-                    <span class="profile-label">Email:</span>
-                    <span class="profile-value" id="emailDisplay"><%= user?.email %></span>
-                    <button class="edit-btn" onclick="editField('email')">🖉</button>
-                </div>
+      <!-- CENTER PANEL: Character Image -->
+      <div class="rpg-center-panel">
+  <div class="character-selector">
+    <button class="arrow-btn" onclick="prevCharacter()">←</button>
+    
+    <img
+      id="characterImage"
+      class="rpg-character-image"
+      src="/images/profileImages/boogschutter.png"
+      alt="Character"
+    />
+    
+    <button class="arrow-btn" onclick="nextCharacter()">→</button>
+  </div>
+  <p id="characterName" class="rpg-character-class">Lvl <%= user?.level %> Ranger – Elf</p>
 
-                <div class="profile-item">
-                    <span class="profile-label">Avatar:</span>
-                    <span class="profile-value" id="avatarDisplay"><%= user?.avatar %></span>
-                    <button class="edit-btn" onclick="editField('avatar')">🖉</button>
-                </div>
+  <!-- Optional verborgen input voor form submit -->
+  <input type="hidden" name="avatar" id="avatarInput" value="boogschutter" />
+</div>
 
-                <form id="editForm" method="POST" action="/profile/update" class="edit-form hidden">
-                    <input type="text" id="usernameInput" name="username" placeholder="Nieuwe gebruikersnaam">
-                    <input type="email" id="emailInput" name="email" placeholder="Nieuwe email">
-                    <select name="avatar" id="avatarInput">
-                        <option value="aragorn">Aragorn</option>
-                        <option value="legolas">Legolas</option>
-                        <option value="gandalf">Gandalf</option>
-                        <option value="frodo">Frodo</option>
-                    </select>
-                    <button type="submit" class="btn-save">Opslaan</button>
-                </form>
+      <!-- RIGHT PANEL: Stats -->
+      <div class="rpg-right-panel">
+        <h2 class="rpg-section-title">Stats</h2>
+        <ul class="rpg-stats-list">
+           <li><a href="/leaderboards"><span>10 rounds:</span></a> <%= best10Rounds %></li>
+<li><a href="/leaderboards"><span>Blitz:</span></a> <%= bestBlitz %></li>
+<li><a href="/leaderboards"><span>Sudden Death:</span></a> <%= bestSudden %></li>
+  <li><a href="/favorites"><span>Favoriete Quotes:</span></a> <%= favoriteCount %></li>
+  <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a> <%= blacklistCount %></li>
+</ul>
+      </div>
+    </div>
+  </main>
 
-                <div class="profile-actions">
-                    <form method="POST" action="/logout">
-                        <button type="submit" class="btn-logout">Log uit</button>
-                    </form>
-                    <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
-                        <button type="submit" class="btn-delete">Verwijder account</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
+ <%- include("partials/footer") %>
 
-    <footer>
-        LOTR © 2025
-    </footer>
-
-    <script>
-        function editField(field) {
-            document.getElementById('editForm').classList.remove('hidden');
-
-            if (field === 'username') {
-                document.getElementById('usernameInput').value = document.getElementById('usernameDisplay').textContent;
-            } else if (field === 'email') {
-                document.getElementById('emailInput').value = document.getElementById('emailDisplay').textContent;
-            } else if (field === 'avatar') {
-                document.getElementById('avatarInput').value = document.getElementById('avatarDisplay').textContent.toLowerCase();
-            }
-        }
-    </script>
-</body>
-</html>
+ <script src="/api.js" defer></script>
