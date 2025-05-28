@@ -44,7 +44,8 @@ router.get('/leaderboards', async (req, res) => {
   });
  res.render("leaderboards", {
   highscores,
-  user: req.session.user 
+  user: req.session.user,
+  currentPath: '/leaderboards'
 });
   console.log("Highscores passed to leaderboards view:", highscores);
   console.log("Leaderboard fetched successfully");

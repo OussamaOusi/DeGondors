@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -428,7 +428,7 @@ body.lotr-favorite-body {
   min-height: 100vh;
   background: linear-gradient(135deg, #e7e2ce 0%, #b5a96d 100%);
   color: #46371b;
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   margin: 0;
   padding: 0;
   background: url('/images/favorieten.jpg') center/cover no-repeat fixed;
@@ -439,7 +439,7 @@ body.lotr-blacklist-body {
   min-height: 100vh;
   background: linear-gradient(125deg, #480e0e 0%, #b82222 100%);
   color: #fffbe9;
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   margin: 0;
   padding: 0;
   background: url('/images/one_ring_blacklist.jpg') center/cover no-repeat fixed;
@@ -450,6 +450,90 @@ body.lotr-favorite-body::-webkit-scrollbar {
 }
 
 /* --- VASTE NAV EN FOOTER --- */
+
+.nav-links a.active {
+  color: #d4af37;
+  
+}
+
+nav {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 90px;
+  background: linear-gradient(to bottom, #2a1e0e, #1e1408);
+  background: rgba(36, 24, 10, 0.5); /* iets doorzichtiger */
+  backdrop-filter: blur(8px);       /* verhoog de blur */
+  
+  color: #d4af37;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.1);
+  z-index: 1100;
+  border-bottom: 3px solid #8b6d1f;
+}
+
+.logo a {
+  color: #f9d86b;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  text-shadow:
+    0 1px 0 #fff3c2,
+    0 2px 0 #e5c04e,
+    0 3px 0 #c0a036,
+    0 4px 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+}
+
+.logo a:hover {
+  color: #ffe97a;
+  text-shadow:
+    0 1px 0 #fff8d6,
+    0 2px 3px #e8cc56,
+    0 0 15px #fffbcc;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: #f8f5e1;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.nav-links a.active {
+  color: #d4af37;
+  border-bottom: 2px solid #d4af37;
+  transform: translateY(-2px);
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+  transform: translateY(-1px);
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  box-shadow: 0 0 6px rgba(255, 223, 100, 0.6);
+}
 
 footer, .lotr-footer {
   position: fixed;
@@ -594,7 +678,7 @@ footer, .lotr-footer {
   transition: box-shadow 0.13s;
 }
 .favorite-quote-text {
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   font-size: 1.17rem;
   color: #46371b;
   line-height: 1.56;
@@ -723,7 +807,7 @@ footer, .lotr-footer {
   transition: box-shadow 0.13s;
 }
 .blacklist-quote-text {
-  font-family: 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   font-size: 1.17rem;
   color: #611616;
   line-height: 1.56;
@@ -826,6 +910,21 @@ nav {
     margin-top: 0;
     position: sticky;
 }
+
+
+.logo a {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #d4af37;
+  text-decoration: none;
+}
+
+.logo a:hover {
+  color: #f1c40f;
+  text-shadow: 0 0 10px #f1c40f;
+}
+
 
 .logo img {
     height: 50px;
@@ -1094,7 +1193,7 @@ footer {
 .leaderboardBody {
   background: url('/images/art-artistic-artwork-fantasy-wallpaper-preview.jpg') center/cover no-repeat, #2d1a06;
   min-height: 100vh;
-  font-family: 'Cinzel', 'Georgia', serif;
+  font-family: 'Cinzel', serif;
   color: #f8e6da;
   position: relative;
 }
@@ -1137,7 +1236,7 @@ footer {
   margin-bottom: 0;
   position: relative;
   overflow: hidden;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-family: 'Cinzel', serif;
   text-shadow: none;
 }
 
@@ -1174,7 +1273,7 @@ footer {
 }
 
 .leaderboard th, .leaderboard td {
-  font-family: 'Segoe UI', 'Arial', sans-serif;
+  font-family: 'Cinzel', serif;
   font-size: 1.1rem;
   color: #46371b;
   background: #fffbe9cc;
@@ -1282,7 +1381,7 @@ nav {
     justify-content: center;
     align-items: center;
     gap: 2.3rem;
-    font-family: 'Orbitron', Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     margin: 0;
     padding: 0.8rem 0;
     list-style: none;
@@ -1326,7 +1425,7 @@ nav {
 .nav-links-index button[type="submit"] {
     background: linear-gradient(110deg, #ff4444 50%, #9a0025 100%);
     color: #fff;
-    font-family: 'Orbitron', Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     font-size: 1.12rem;
     font-weight: bold;
     padding: 0.62em 1.5em;
@@ -1458,7 +1557,7 @@ nav {
     font-size: 2.8rem;
     margin-top: 3vw;
     margin-bottom: 2vw;
-    font-family: 'Orbitron', 'Cinzel', Arial, sans-serif;
+    font-family: 'Cinzel', serif;
     font-weight: bold;
     letter-spacing: 1.5px;
     text-shadow: 0 0 17px #ffb800bb, 0 1px 12px #a3f3a7a6;
@@ -1997,7 +2096,7 @@ footer {
 
 .quiz-header h1 {
   margin: 0;
-  font-family: inherit;
+  font-family: 'Cinzel', serif;
   font-size: inherit;
   color: inherit;
   letter-spacing: inherit;
@@ -2077,7 +2176,7 @@ footer {
     transform 0.15s;
   outline: none;
   position: relative;
-  font-family: 'Cinzel', 'Georgia', serif;
+  font-family: 'Cinzel', serif;
 }
 
 .like-btn:hover, .like-btn:focus {
