@@ -26,13 +26,13 @@ async function exit() {
 
 export async function connect() {
     await client.connect();
-    await createInitialUser();
+    /*await createInitialUser();*/
     console.log("Connected to database");
     process.on("SIGINT", exit);
 }
 
 const saltRounds : number = 10;
-
+/*
 async function createInitialUser() {
     if (await userCollection.countDocuments() > 0) {
         return;
@@ -47,7 +47,7 @@ async function createInitialUser() {
         password: await bcrypt.hash(password, saltRounds),
         role: "ADMIN"
     });
-}
+}*/
 
 export async function login(email: string, password: string) {
     console.log("-- login() called met email =", email);
@@ -75,7 +75,7 @@ export async function login(email: string, password: string) {
     }
 }
 
-export async function registerUser(username: string, email: string, password: string, confirmPassword: string) {
+export async function registerUser(username: string, email: string, password: string, confirmPassword: string, avatar?: string) {
     if (!username || !email || !password || !confirmPassword) {
         throw new Error("Alle velden zijn verplicht.");
     }
@@ -92,9 +92,11 @@ export async function registerUser(username: string, email: string, password: st
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await userCollection.insertOne({
+        username,
         email,
         password: hashedPassword,
         role: "USER",
+        avatar
     });
 
     return true;
