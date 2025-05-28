@@ -4,6 +4,25 @@ import { BlacklistQuotesCollection, favoriteQuotesCollection } from '../database
 
 const router = express.Router();
 
+router.get("/blacklist", async (req: Request, res: Response) => {
+  console.log("Ophalen van blacklist voor gebruiker");
+  try{
+    const userId = req.session.user?._id;
+    if (!userId) {
+      res.status(401).send("Niet ingelogd");
+      console.log("Gebruiker niet ingelogd, kan blacklist niet ophalen");
+      return;
+    }
+
+    const blacklist = await BlacklistQuotesCollection.find({ userId: new ObjectId(userId) }).toArray();
+    res.json(blacklist);
+  }
+  catch (err) {
+    console.error("DB-fout bij ophalen blacklist:", err);
+    res.status(500).send("Kon blacklist niet ophalen");
+  }
+});
+
 router.post("/like", async (req, res) => {
   const userId = req.session.user?._id;
   if (!userId) {
