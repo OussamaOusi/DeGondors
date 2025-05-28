@@ -113,7 +113,7 @@ function updateCharacterButtons() {
   const buttons = ["button1", "button2", "button3"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = answerArray[index]; }
-})
+  })
 }
 
 function updateMovieButtons() {
@@ -134,7 +134,7 @@ async function likeQuote() {
   };
   console.log("📤 Like versturen:", favorite);
   try {
-    const res = await fetch("/api/favorites/like", {
+    const res = await fetch("/api/rounds/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(favorite)
@@ -144,6 +144,32 @@ async function likeQuote() {
     console.error("❌ Network error bij like:", e);
   }
 }
+
+// ---- DISLIKE functie toegevoegd ----
+async function dislikeQuote(reason) {
+  if (!currentQuote || !currentCharacter) return console.warn("Nog niets geladen om te disliken");
+  if (!reason) return alert("Je moet een reden opgeven voor dislike!");
+  const data = {
+    quote: currentQuote.dialog,
+    characterId: currentCharacter._id,
+    characterName: currentCharacter.name,
+    wikiUrl: currentCharacter.wikiUrl,
+    movie: currentQuote.movie,
+    reason: reason
+  };
+  console.log("📤 Dislike versturen:", data);
+  try {
+    const res = await fetch("/api/rounds/dislike", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    console.log("↪ Server antwoord:", await res.text());
+  } catch (e) {
+    console.error("❌ Network error bij dislike:", e);
+  }
+}
+// ---- EINDE DISLIKE functie ----
 
 function setupCharacterButtons() {
   document.querySelectorAll(".character-button").forEach(button => {
@@ -460,14 +486,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-  // if (dislikeBtn) {dislikeBtn.addEventListener("click", dislikeQuote);}
-  // fetchRandomQuote();
+
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
+
+  // ---- HIER: Dislike knop handler toevoegen ----
+  const dislikeBtn = document.getElementById("dislike-button");
+  if (dislikeBtn) {
+    dislikeBtn.addEventListener("click", () => {
+      const reason = prompt("Waarom vind je deze quote niet leuk?");
+      if (reason) {
+        dislikeQuote(reason);
+      }
+    });
+  }
+  // ---- EINDE Dislike knop handler ----
 
   if (currentMode === "suddendeath") {
     startSuddenDeath();
@@ -480,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// ... rest van je code (voor character/avatar en timer blijft hetzelfde) ...
 const characters = [
   { name: "Aragorn", image: "Aragorn.webp" },
   { name: "Sauron", image: "sauron.webp" },
@@ -491,24 +529,24 @@ const characters = [
   { name: "Elven Ranger", image: "boogschutter.png" }
 ];
 
-  let currentIndex = characters.findIndex(c => c.image === "boogschutter.png");
+let currentIndex = characters.findIndex(c => c.image === "boogschutter.png");
 
-  function updateCharacter() {
-    const char = characters[currentIndex];
-    document.getElementById("characterImage").src = `/images/profileImages/${char.image}`;
-    document.getElementById("characterName").textContent = char.name;
-    document.getElementById("avatarInput").value = char.image;
-  }
+function updateCharacter() {
+  const char = characters[currentIndex];
+  document.getElementById("characterImage").src = `/images/profileImages/${char.image}`;
+  document.getElementById("characterName").textContent = char.name;
+  document.getElementById("avatarInput").value = char.image;
+}
 
-  function prevCharacter() {
-    currentIndex = (currentIndex - 1 + characters.length) % characters.length;
-    updateCharacter();
-  }
+function prevCharacter() {
+  currentIndex = (currentIndex - 1 + characters.length) % characters.length;
+  updateCharacter();
+}
 
-  function nextCharacter() {
-    currentIndex = (currentIndex + 1) % characters.length;
-    updateCharacter();
-  }
+function nextCharacter() {
+  currentIndex = (currentIndex + 1) % characters.length;
+  updateCharacter();
+}
 //timer
 let timeleft = 60;
 const timerElement = document.getElementById("timer");

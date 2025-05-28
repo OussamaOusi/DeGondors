@@ -243,149 +243,191 @@ body.rpg-profile-body {
     transition: width 0.4s ease;
 }
 
-.lotr-favorite-body {
-  height: 100vh;
+/* =============== LOTR FAVORITES =============== */
+body.lotr-favorite-body {
   min-height: 100vh;
+  background: linear-gradient(135deg, #e7e2ce 0%, #b5a96d 100%);
+  color: #46371b;
+  font-family: 'Georgia', serif;
   margin: 0;
   padding: 0;
-  overflow: hidden;           /* Verberg pagina scrollbars */
-  display: flex;
-  flex-direction: column;
+  background: url('/images/favorieten.jpg') center/cover no-repeat fixed;
+  scrollbar-width: none;
+}
+
+body.lotr-blacklist-body {
+  min-height: 100vh;
+  background: linear-gradient(125deg, #480e0e 0%, #b82222 100%);
+  color: #fffbe9;
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background: url('/images/one_ring_blacklist.jpg') center/cover no-repeat fixed;
+  -ms-overflow-style: none;
+}
+body.lotr-favorite-body::-webkit-scrollbar {
+  display: none !important; 
+}
+/* --- VASTE NAV EN FOOTER --- */
+nav, .lotr-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  background: url('/images/favorieten.jpg') center/cover no-repeat;
+  z-index: 1000;
+  background: rgba(40, 27, 10, 0.98);
+  box-shadow: 0 4px 12px #0006;
 }
-
-.lotr-favorite-main {
-  flex: 1 1 auto;
-  overflow-y: auto;           /* Verticaal scrollen BINNEN main */
-  overflow-x: hidden;         /* NOOIT horizontale scroll */
-  max-width: 670px;
-  margin: 0 auto;
-  padding: 4rem 1.5rem 5rem 1.5rem;
-  width: 100%;
-  box-sizing: border-box;
-  scrollbar-width: none;      /* Firefox */
-}
-
-/* Titel */
-.lotr-favorite-title {
-  font-family: 'Cinzel', serif;
+footer, .lotr-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1100;
+  height: 54px;   /* pas deze hoogte aan je echte footer aan! */
+  background: #24180a;
   color: #bfa534;
-  font-size: 2.3rem;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px #d4af3799;
+  font-family: 'Cinzel', serif;
+  font-size: 1.09em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -5px 14px #0004;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Favoriete groep (karakter + quotes) */
+/* MAIN CONTENT padding zodat niets onder nav/footer verdwijnt */
+.lotr-favorite-main,
+.lotr-blacklist-main {
+  max-width: 730px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 12px;    /* nav (stel bij aan je eigen hoogte + evt. h1) */
+  padding-bottom: 70px;  /* footer */
+  min-height: 100vh;
+}
+
+.lotr-favorite-title,
+.lotr-blacklist-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4rem;
+  text-align: center;
+  letter-spacing: 1.2px;
+  margin: 2.1rem 0 2.7rem 0;
+  text-shadow: 0 2px 12px #ffd70070, 0 1px 1px #fff;
+}
+
+/* FAVORITE */
+.lotr-favorite-title { color: #bfa534; text-shadow: 0 2px 12px #d4af3770, 0 1px 1px #fff; }
 .lotr-favorite-group {
-  background: #f5ecd6;
+  background: #46371bd8;
   border-left: 7px solid #bfa534;
-  border-radius: 10px;
-  margin-bottom: 2.2rem;
-  padding: 1.3rem 2.2rem 1rem 2.2rem;
-  box-shadow: 0 2px 10px #bfa53422;
+  border-radius: 12px;
+  margin-bottom: 2.7rem;
+  padding: 1.2rem 2.2rem 1rem 2.2rem;
+  box-shadow: 0 2px 12px #bfa53427, 0 5px 28px #fff1;
   width: 100%;
   box-sizing: border-box;
 }
-
-
-/* Header met naam en knoppen */
 .favorite-group-header {
   display: flex;
   align-items: center;
   gap: 1.1rem;
   margin-bottom: 1.1rem;
   flex-wrap: wrap;
+  padding: 0.25em 0.2em 0.2em 0.2em;
 }
-
 .favorite-character-name {
-  font-size: 1.32rem;
-  color: #bfa534;
+  font-size: 1.23rem;
+  color: #ffdf77 !important;
   font-family: 'Cinzel', serif;
   font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 1px 3px #0004;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 7px #211, 0 2px 7px #fff9;
+  background: rgba(70, 55, 27, 0.12);
+  padding: 0.07em 0.45em;
+  border-radius: 7px;
+  display: inline-block;
+  border-bottom: 2px solid #bfa53433;
+  transition: background 0.13s, color 0.13s;
 }
-
 .favorite-character-name:hover,
 .favorite-character-name:focus {
-  color: #8c6e44;
+  color: #e9bc41 !important;
   text-decoration: underline;
+  background: #392b13c7;
 }
-
-/* Alles knop */
 .favorite-filter-reset {
   background: #bfa534;
-  color: #fff;
+  color: #fffbe9;
   border: none;
-  border-radius: 6px;
-  padding: 0.35em 1.2em;
+  border-radius: 7px;
+  padding: 0.3em 1.15em;
   font-weight: bold;
-  font-family: inherit;
   font-size: 1em;
   cursor: pointer;
-  margin-left: 0.5em;
+  margin-left: 0.6em;
   box-shadow: 0 2px 8px #0001;
   text-decoration: none;
   outline: none;
-  transition: background 0.16s, color 0.16s;
+  transition: background 0.18s, color 0.18s;
 }
-.favorite-filter-reset:hover, .favorite-filter-reset:focus {
+.favorite-filter-reset:hover,
+.favorite-filter-reset:focus {
   background: #46371b;
   color: #faf3c2;
 }
-
-/* Wiki knop */
+/* --------- HIER GEEN margin-left: auto --------- */
 .favorite-wiki-link {
-  color: #fff;
-  background: #bfa534;
-  padding: 0.28em 1em;
-  border-radius: 5px;
+  color: #fffbe9 !important;
+  background: #bfa534 !important;
+  border: 2px solid #ffedac;
+  border-radius: 7px;
   font-size: 1em;
   text-decoration: none;
-  transition: background 0.16s, color 0.16s;
   font-weight: bold;
+  padding: 0.25em 1em;
+  /* margin-left: auto;  <-- DIT NIET MEER DOEN! */
+  text-shadow: 0 1px 6px #0009;
+  box-shadow: 0 2px 8px #bfa53455;
+  opacity: 1 !important;
+  transition: background 0.15s, color 0.15s;
 }
-.favorite-wiki-link:hover, .favorite-wiki-link:focus {
-  background: #46371b;
-  color: #bfa534;
+.favorite-wiki-link:hover,
+.favorite-wiki-link:focus {
+  background: #fffbe9 !important;
+  color: #bfa534 !important;
 }
-
-/* Quote lijst en items */
 .favorite-quote-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  
 }
-
 .favorite-quote-item {
-  background: #fffbe9;
+  background: #fffbe9e8;
   border-left: 4px solid #bfa534;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   width: 100%;
-  min-width: 250px;
+  min-width: 230px;
   max-width: 100%;
   padding: 1.1rem 1.2rem 0.9rem 1.2rem;
   box-sizing: border-box;
   position: relative;
-  box-shadow: 0 2px 7px #d4af3733;
+  box-shadow: 0 2px 8px #d4af3712;
   transition: box-shadow 0.13s;
 }
-
 .favorite-quote-text {
   font-family: 'Georgia', serif;
-  font-size: 1.12rem;
-  color: #3b2f2f;
+  font-size: 1.17rem;
+  color: #46371b;
   line-height: 1.56;
   margin: 0 0 0.45em 0;
-  text-shadow: 0 1px 3px #d4af3711;
+  text-shadow: 0 1px 3px #fff2, 0 1px 7px #bfa53412;
 }
-
-/* Verwijderknop direct onder quote */
 .btn.delete-favorite {
   display: block;
   margin: 1.1rem auto 0 auto;
@@ -393,247 +435,132 @@ body.rpg-profile-body {
   color: #46371b;
   border: none;
   border-radius: 6px;
-  padding: 0.65em 2em;
+  padding: 0.6em 2em;
   font-weight: bold;
-  font-family: inherit;
-  font-size: 1.04em;
+  font-size: 1.02em;
   cursor: pointer;
-  transition: background 0.16s, color 0.16s, box-shadow 0.18s;
+  transition: background 0.14s, color 0.14s, box-shadow 0.13s;
   box-shadow: 0 2px 10px #bfa53422;
 }
-.btn.delete-favorite:hover, .btn.delete-favorite:focus {
+.btn.delete-favorite:hover,
+.btn.delete-favorite:focus {
   background: #46371b;
   color: #fffbe9;
-  box-shadow: 0 2px 18px #bfa53477;
+  box-shadow: 0 2px 16px #bfa53444;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .lotr-favorite-main {
-    max-width: 99vw;
-    padding: 2.5rem 0.5rem 4.5rem 0.5rem;
-    max-height: 60vh;
-  }
-  .lotr-favorite-group {
-    padding: 1.1rem 1rem 0.8rem 1rem;
-  }
-}
-@media (max-width: 600px) {
-  .lotr-favorite-title {
-    font-size: 1.14rem;
-    padding: 1.2rem 0 1.2rem 0;
-  }
-  .lotr-favorite-group {
-    padding: 1rem 0.5rem 0.6rem 0.5rem;
-    border-radius: 7px;
-  }
-  .favorite-group-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  .btn.delete-favorite {
-    width: 97%;
-    min-width: unset;
-    font-size: 0.98em;
-  }
-  .favorite-quote-item {
-    padding: 0.8rem 0.5rem 0.7rem 0.5rem;
-  }
-}
-
-/* Footer altijd onderaan */
-.lotr-favorite-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.lotr-favorite-main {
-  flex: 1;
-}
-footer, .lotr-footer {
-  flex-shrink: 0;
-}
-
-/* ———————————————————————————————————————
-   Favorites – “Alles” en “Wiki” buttons styling
-   ——————————————————————————————————————— */
-/* ============================================================
-   Favorites – force new default & hover for “Alles” en “Wiki”
-   ============================================================ */
-main.favorites-page .filter-reset,
-main.favorites-page .wiki-link {
-  background: #5a3e1b !important;    /* donkerder bruin op hover */
-  color: #faf3c2    !important;
-  font-weight: 600    !important;
-  padding: 0.2rem 0.6rem !important;
-  border-radius: 0.3rem !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
-  text-decoration: none !important;
-}
-
-/* nieuwe hover-state */
-main.favorites-page .filter-reset:hover,
-main.favorites-page .wiki-link:hover {
-  background: #5a3e1b !important;    /* donkerder bruin op hover */
-  color: #faf3c2    !important;      /* lichtgeel/wit op hover */
-  background: #d4af37 !important;    /* gouden achtergrond */
-  color: #fff         !important; 
-}
-
-/*blacklist*/
-
-.lotr-blacklist-body {
-  height: 100vh;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background: url('/images/one_ring_blacklist.jpg') center/cover no-repeat;
-}
-
-.lotr-blacklist-main {
-  flex: 1 1 auto;
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-width: 670px;
-  margin: 0 auto;
+/* =============== BLACKLIST PAGE STYLING =============== */
+.lotr-blacklist-title { color: #ffd700; }
+.lotr-blacklist-group {
+  background: #611616e0;
+  border-left: 7px solid #ffd700;
+  border-radius: 12px;
+  margin-bottom: 2.7rem;
+  padding: 1.2rem 2.2rem 1rem 2.2rem;
+  box-shadow: 0 2px 12px #ffd70027, 0 5px 28px #fff1;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 1.5rem 3rem 1.5rem; /* Alleen zijkanten + bottom, geen padding-top! */
-  scrollbar-width: none; 
 }
-
-/* Titel */
-.lotr-blacklist-title {
-   height: 72px;           /* Pas aan naar de hoogte die je voor je h1 wilt */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  flex-shrink: 0;
-  font-family: 'Cinzel', serif;
-  color: white;
-  font-size: 2.3rem;
-  text-align: center;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px #180000b7;
-  background: transparent;
-}
-
-/* Blacklist group (karakter + quotes) */
-.lotr-blacklist-group {
-  background: #611616;
-  border-left: 7px solid #bfa534;
-  border-radius: 10px;
-  margin-bottom: 2.2rem;
-  padding: 1.3rem 2.2rem 1rem 2.2rem;
-  box-shadow: 0 2px 10px #2d010188;
-  width: 100%; /* Maakt de groep net zo breed als de main container */
-  box-sizing: border-box;
-}
-.lotr-blacklist-group:first-child {
-  margin-top: 20rem; /* Of desnoods 2rem als je wilt */
-}
-
-/* Header met naam en knoppen */
 .blacklist-group-header {
   display: flex;
   align-items: center;
   gap: 1.1rem;
   margin-bottom: 1.1rem;
   flex-wrap: wrap;
+  padding: 0.25em 0.2em 0.2em 0.2em;
 }
-
 .blacklist-character-name {
-  font-size: 1.32rem;
-  color: #ffd700;
+  font-size: 1.23rem;
+  color: #ffd700 !important;
   font-family: 'Cinzel', serif;
   font-weight: bold;
-  letter-spacing: 1px;
-  text-shadow: 0 1px 3px #0007;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 7px #211, 0 2px 7px #fff9;
+  background: rgba(97, 22, 22, 0.10);
+  padding: 0.07em 0.45em;
+  border-radius: 7px;
+  display: inline-block;
+  border-bottom: 2px solid #ffd70033;
+  transition: background 0.13s, color 0.13s;
 }
-
 .blacklist-character-name:hover,
 .blacklist-character-name:focus {
-  color: #bfa534;
+  color: #e9bc41 !important;
   text-decoration: underline;
+  background: #a32a2ac7;
 }
-
-/* Alles knop */
 .blacklist-filter-reset {
-  background: #b22222;
-  color: #fff;
+  background: #ffd700;
+  color: #611616;
   border: none;
-  border-radius: 6px;
-  padding: 0.35em 1.2em;
+  border-radius: 7px;
+  padding: 0.3em 1.15em;
   font-weight: bold;
-  font-family: inherit;
   font-size: 1em;
   cursor: pointer;
-  margin-left: 0.5em;
+  margin-left: 0.6em;
   box-shadow: 0 2px 8px #0001;
   text-decoration: none;
   outline: none;
-  transition: background 0.16s, color 0.16s;
+  transition: background 0.18s, color 0.18s;
 }
-.blacklist-filter-reset:hover, .blacklist-filter-reset:focus {
-  background: #ffd700;
-  color: #721111;
+.blacklist-filter-reset:hover,
+.blacklist-filter-reset:focus {
+  background: #611616;
+  color: #ffd700;
 }
-
-/* Wiki knop */
+/* --------- HIER GEEN margin-left: auto --------- */
 .blacklist-wiki-link {
-  color: #fff;
-  background: #bfa534;
-  padding: 0.28em 1em;
-  border-radius: 5px;
+  color: #611616 !important;
+  background: #ffd700 !important;
+  border: 2px solid #fffbe9;
+  border-radius: 7px;
   font-size: 1em;
   text-decoration: none;
-  transition: background 0.16s, color 0.16s;
   font-weight: bold;
+  padding: 0.25em 1em;
+  /* margin-left: auto;   <-- DIT NIET MEER DOEN! */
+  text-shadow: 0 1px 6px #0009;
+  box-shadow: 0 2px 8px #ffd70055;
+  opacity: 1 !important;
+  transition: background 0.15s, color 0.15s;
 }
-.blacklist-wiki-link:hover, .blacklist-wiki-link:focus {
-  background: #ffd700;
-  color: #611616;
+.blacklist-wiki-link:hover,
+.blacklist-wiki-link:focus {
+  background: #fffbe9 !important;
+  color: #a32a2a !important;
 }
-
-/* Quote lijst en items */
 .blacklist-quote-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-
-/* Quotes altijd gelijke breedte! */
 .blacklist-quote-item {
-  background: #852424;
+  background: #fffbe9e8;
   border-left: 4px solid #ffd700;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   width: 100%;
-  min-width: 250px;
+  min-width: 230px;
   max-width: 100%;
   padding: 1.1rem 1.2rem 0.9rem 1.2rem;
   box-sizing: border-box;
   position: relative;
-  box-shadow: 0 2px 7px #1a000074;
+  box-shadow: 0 2px 8px #ffd70012;
   transition: box-shadow 0.13s;
 }
-
 .blacklist-quote-text {
   font-family: 'Georgia', serif;
-  font-size: 1.12rem;
-  color: #fffbe9;
+  font-size: 1.17rem;
+  color: #611616;
   line-height: 1.56;
   margin: 0 0 0.45em 0;
-  text-shadow: 0 1px 3px #0004;
+  text-shadow: 0 1px 3px #fff2, 0 1px 7px #ffd70012;
 }
-
 .blacklist-reason {
   margin-top: 0.3rem;
   padding-left: 0.5rem;
-  border-left: 2px solid #bfa534;
+  border-left: 2px solid #ffd700;
 }
 .blacklist-reason-label {
   font-weight: bold;
@@ -642,82 +569,78 @@ main.favorites-page .wiki-link:hover {
   margin-right: 0.3em;
 }
 .blacklist-reason-content {
-  color: #ffe9a0;
+  color: #ffd700;
+  background: rgba(97,22,22,0.65);
+  padding: 0.12em 0.7em 0.12em 0.4em;
+  border-radius: 5px;
   font-style: italic;
+  font-size: 1.05em;
+  display: inline-block;
+  margin-top: 0.13em;
+  word-break: break-word;
 }
-
-/* Verwijderknop direct onder quote */
 .btn.delete-blacklist {
   display: block;
   margin: 1.1rem auto 0 auto;
-  background: #bfa534;
+  background: #ffd700;
   color: #611616;
   border: none;
   border-radius: 6px;
-  padding: 0.65em 2em;
+  padding: 0.6em 2em;
   font-weight: bold;
-  font-family: inherit;
-  font-size: 1.04em;
+  font-size: 1.02em;
   cursor: pointer;
-  transition: background 0.16s, color 0.16s, box-shadow 0.18s;
-  box-shadow: 0 2px 10px #bfa53422;
+  transition: background 0.14s, color 0.14s, box-shadow 0.13s;
+  box-shadow: 0 2px 10px #ffd70022;
 }
-.btn.delete-blacklist:hover, .btn.delete-blacklist:focus {
-  background: #ffd700;
-  color: #b22222;
-  box-shadow: 0 2px 18px #bfa53499;
+.btn.delete-blacklist:hover,
+.btn.delete-blacklist:focus {
+  background: #611616;
+  color: #ffd700;
+  box-shadow: 0 2px 16px #ffd70044;
 }
 
-/* Responsive */
+/* =============== Responsive =============== */
 @media (max-width: 900px) {
+  .lotr-favorite-main,
   .lotr-blacklist-main {
     max-width: 99vw;
-    padding: 2.5rem 0.5rem 4.5rem 0.5rem;
+    padding: 2rem 0.6rem 4rem 0.6rem;
   }
+  .lotr-favorite-group,
   .lotr-blacklist-group {
-    padding: 1.1rem 1rem 0.8rem 1rem;
+    padding: 1rem 0.7rem 0.7rem 0.7rem;
   }
 }
 @media (max-width: 600px) {
+  .lotr-favorite-title,
   .lotr-blacklist-title {
-    font-size: 1.14rem;
+    font-size: 1.13rem;
     padding: 1.2rem 0 1.2rem 0;
   }
+  .lotr-favorite-group,
   .lotr-blacklist-group {
-    padding: 1rem 0.5rem 0.6rem 0.5rem;
-    border-radius: 7px;
+    padding: 0.7rem 0.4rem 0.6rem 0.4rem;
+    border-radius: 6px;
   }
+  .favorite-group-header,
   .blacklist-group-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
+  .btn.delete-favorite,
   .btn.delete-blacklist {
-    width: 97%;
+    width: 96%;
     min-width: unset;
-    font-size: 0.98em;
+    font-size: 0.97em;
   }
+  .favorite-quote-item,
   .blacklist-quote-item {
     padding: 0.8rem 0.5rem 0.7rem 0.5rem;
   }
 }
 
-/* Footer altijd onderaan */
-.lotr-blacklist-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.lotr-blacklist-main {
-  flex: 1;
-}
-footer, .lotr-footer {
-  height: 48px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Navbar */
 nav {
@@ -863,10 +786,6 @@ footer {
     max-width: 900px;
     margin: 0 auto;
     min-height: 0;
-}
-
-.reviewbutton-container {
-    margin: 8px 0;
 }
 
 .quote-box {
@@ -1697,9 +1616,134 @@ footer {
 }
 
 .reviewbutton-container {
-  margin: 8px 0;
+  display: flex;
+  gap: 2.2rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0 1rem 0;
 }
 
+/* Basisknop */
+.like-btn,
+.dislike-btn {
+  font-size: 2.4rem;
+  background: linear-gradient(135deg, #46371b 40%, #bfa534 100%);
+  color: #fffbe9;
+  border: 3px solid #bfa534;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px #bfa53433, 0 0 0 5px #bfa53422 inset;
+  cursor: pointer;
+  transition: 
+    background 0.19s, 
+    color 0.17s, 
+    box-shadow 0.18s, 
+    transform 0.15s;
+  outline: none;
+  position: relative;
+  font-family: 'Cinzel', 'Georgia', serif;
+}
+
+.like-btn:hover, .like-btn:focus {
+  background: linear-gradient(135deg, #bfa534 70%, #46371b 100%);
+  color: #ffd700;
+  transform: translateY(-5px) scale(1.07);
+  box-shadow: 0 8px 32px #bfa53477, 0 0 0 9px #46371b33 inset;
+  border-color: #ffd700;
+}
+.dislike-btn:hover, .dislike-btn:focus {
+  background: linear-gradient(135deg, #8c1818 50%, #bfa534 100%);
+  color: #ffd700;
+  transform: translateY(-5px) scale(1.07);
+  box-shadow: 0 8px 32px #d4af3777, 0 0 0 9px #61161644 inset;
+  border-color: #ffd700;
+}
+/* Medium devices (tablets & sm desktops, max-width 1100px) */
+@media (max-width: 1100px) {
+  .tenrounds-container, .suddendeath-container, .blitz-container {
+    max-width: 99vw;
+    padding: 10px 2vw 18px 2vw;
+  }
+  .answer-container {
+    width: 99vw;
+    gap: 45px;
+    padding: 8px 0;
+  }
+}
+
+/* Small screens (mobiel & small tablets, max-width 700px) */
+@media (max-width: 700px) {
+  .quiz-header {
+    font-size: 1.1rem;
+    padding: 0.7rem 0 0.5rem 0;
+  }
+  .tenrounds-container, .suddendeath-container, .blitz-container {
+    max-width: 99vw;
+    padding: 3px 1vw 10px 1vw;
+    border-radius: 7px;
+  }
+  .answer-container {
+    gap: 14px;
+    flex-direction: column;
+    width: 96vw;
+    border-radius: 8px;
+    padding: 4px 1vw 10px 1vw;
+  }
+  .reviewbutton-container {
+    gap: 1rem;
+    margin: 1rem 0 1rem 0;
+  }
+  .like-btn, .dislike-btn {
+    font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+  }
+  .character-button, .movie-button {
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+  }
+  .score-display {
+    font-size: 1.01rem;
+    padding: 0.45em 0.7em;
+    border-radius: 7px;
+  }
+  .quote-box {
+    font-size: 1.03rem;
+    padding: 0.6rem 0.3rem 0.62rem 0.3rem;
+  }
+}
+
+/* Very small screens (oude telefoons, max-width 440px) */
+@media (max-width: 440px) {
+  .quiz-header { font-size: 0.83rem; }
+  .answer-selection h2 { font-size: 0.87rem; }
+  .tenrounds-container, .suddendeath-container, .blitz-container {
+    border-radius: 4px;
+    padding: 2px 1vw 5px 1vw;
+  }
+  .character-button, .movie-button {
+    font-size: 0.76rem;
+    padding: 0.21rem 0.5rem;
+    border-radius: 4px;
+  }
+  .like-btn, .dislike-btn {
+    font-size: 1.0rem;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Extra: Glow on focus for accessibility */
+.like-btn:focus-visible,
+.dislike-btn:focus-visible {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
 @media (max-width: 900px) {
   .tenrounds-container, .suddendeath-container, .answer-container, .answer-vert {
     max-width: 100vw;
