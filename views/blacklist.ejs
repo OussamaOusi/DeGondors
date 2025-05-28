@@ -10,7 +10,7 @@
  <header>
       <%- include("partials/nav") %>
     </header>
-  <h1 class="lotr-profile-title">Blacklisted Quotes</h1>
+  <h1 class="lotr-favorite-title">Blacklisted Quotes</h1>
 <main class="lotr-blacklist-main">
 
   <%
@@ -36,7 +36,7 @@
       <header class="blacklist-group-header">
         <% if (filterName === character) { %>
           <span class="blacklist-character-name"><%= character %> (<%= quotes.length %>)</span>
-          <a href="/blacklist" class="blacklist-filter-reset">Alles</a>
+          <a href="/blacklist" class="blacklist-filter-reset">Terug</a>
         <% } else { %>
           <a href="/blacklist?character=<%= encodeURIComponent(character) %>" class="blacklist-character-name">
             <%= character %> (<%= quotes.length %>)

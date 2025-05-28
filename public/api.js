@@ -27,6 +27,24 @@ if(window.location.pathname.includes("suddendeath")){
 
 console.log("Current gamemode:", currentMode);
 
+document.addEventListener('DOMContentLoaded', function () {
+  // Selecteer ALLE images met id 'wrongImg'
+  document.querySelectorAll('#wrongImg').forEach(img => {
+    img.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('lockedGameModal').style.display = 'flex';
+    });
+  });
+  // Sluit knop
+  document.getElementById('closeModalBtn').addEventListener('click', function() {
+    document.getElementById('lockedGameModal').style.display = 'none';
+  });
+  // Sluiten op klik buiten popup
+  document.getElementById('lockedGameModal').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+});
+
 async function fetchMovies(){
   try{
     console.log(currentUserId)

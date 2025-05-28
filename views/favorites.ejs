@@ -10,7 +10,7 @@
  <header>
       <%- include("partials/nav") %>
     </header>
- <h1 class="lotr-profile-title">Favoriete Quotes</h1>
+ <h1 class="lotr-favorite-title">Favoriete Quotes</h1>
 <main class="lotr-favorite-main">
 
   <%
@@ -36,7 +36,7 @@
       <header class="favorite-group-header">
         <% if (filterName === character) { %>
           <span class="favorite-character-name"><%= character %> (<%= quotes.length %>)</span>
-          <a href="/favorites" class="favorite-filter-reset">Alles</a>
+          <a href="/favorites" class="favorite-filter-reset">Terug</a>
         <% } else { %>
           <a href="/favorites?character=<%= encodeURIComponent(character) %>" class="favorite-character-name">
             <%= character %> (<%= quotes.length %>)
@@ -57,8 +57,8 @@
 </main>
 
 <script src="/api.js" defer></script>
-</body>
 <%- include("partials/footer") %>
+</body>
 
 
  

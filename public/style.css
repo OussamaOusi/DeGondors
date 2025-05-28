@@ -53,7 +53,6 @@ body.rpg-profile-body {
 }
 
 .lotr-profile-title {
-  color: #d4af37;
   font-size: 2.3rem;
   text-align: center;
   margin-bottom: 2rem;
@@ -433,6 +432,7 @@ body.lotr-favorite-body {
   padding: 0;
   background: url('/images/favorieten.jpg') center/cover no-repeat fixed;
   scrollbar-width: none;
+  overflow: hidden;
 }
 
 body.lotr-blacklist-body {
@@ -443,16 +443,14 @@ body.lotr-blacklist-body {
   margin: 0;
   padding: 0;
   background: url('/images/one_ring_blacklist.jpg') center/cover no-repeat fixed;
+  overflow: hidden;
   -ms-overflow-style: none;
-}
-body.lotr-favorite-body::-webkit-scrollbar {
-  display: none !important; 
 }
 
 /* --- VASTE NAV EN FOOTER --- */
 
 footer, .lotr-footer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   left: 0;
   width: 100vw;
@@ -479,22 +477,30 @@ footer, .lotr-footer {
   width: 100%;
   box-sizing: border-box;
   padding-top: 12px;    /* nav (stel bij aan je eigen hoogte + evt. h1) */
-  padding-bottom: 70px;  /* footer */
+  padding-bottom: 40vh;  /* footer */
+  padding-top: 45vh; 
   min-height: 100vh;
+  max-height: 10vh;           /* of wat je wil */
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .lotr-favorite-title,
 .lotr-blacklist-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   text-align: center;
-  letter-spacing: 1.2px;
-  margin: 2.1rem 0 2.7rem 0;
-  text-shadow: 0 2px 12px #ffd70070, 0 1px 1px #fff;
+  margin-bottom: 2rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 5px #60583d,
+    0 0 5px #a97c2f,
+    2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* FAVORITE */
-.lotr-favorite-title { color: #bfa534; text-shadow: 0 2px 12px #d4af3770, 0 1px 1px #fff; }
+.lotr-favorite-title { color: white; text-shadow: 0 2px 12px #d4af3770, 0 1px 1px #fff; }
 .lotr-favorite-group {
   background: #46371bd8;
   border-left: 7px solid #bfa534;
@@ -623,7 +629,7 @@ footer, .lotr-footer {
 }
 
 /* =============== BLACKLIST PAGE STYLING =============== */
-.lotr-blacklist-title { color: #ffd700; }
+.lotr-blacklist-title { color: white; }
 .lotr-blacklist-group {
   background: #611616e0;
   border-left: 7px solid #ffd700;
@@ -663,8 +669,8 @@ footer, .lotr-footer {
   background: #a32a2ac7;
 }
 .blacklist-filter-reset {
-  background: #ffd700;
-  color: #611616;
+  background: #611616;
+  color: white;
   border: none;
   border-radius: 7px;
   padding: 0.3em 1.15em;
@@ -679,8 +685,8 @@ footer, .lotr-footer {
 }
 .blacklist-filter-reset:hover,
 .blacklist-filter-reset:focus {
-  background: #611616;
-  color: #ffd700;
+  background: #ffd700;
+  color: white;
 }
 /* --------- HIER GEEN margin-left: auto --------- */
 .blacklist-wiki-link {
@@ -1480,6 +1486,56 @@ body.indexBody {
     transform: scale(0.97) rotate(-2deg);
     filter: brightness(0.97);
 }
+/* Pop-up modal styling */
+.locked-game-modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(24,10,40,0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.locked-game-content {
+  background: linear-gradient(130deg, #311a4a 90%, #c73632 120%);
+  color: #fffbe9;
+  padding: 2.2rem 2.5rem 1.7rem 2.5rem;
+  border-radius: 14px;
+  text-align: center;
+  font-family: 'Orbitron', Arial, sans-serif;
+  box-shadow: 0 8px 40px #b222226a, 0 0 0 6px #ffd70044;
+  border: 2px solid #ffcc00;
+  min-width: 250px;
+}
+.locked-game-content h2 {
+  color: #ffd700;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.locked-game-content p {
+  margin-bottom: 1.6rem;
+  color: #ffd8b0;
+  font-size: 1.18rem;
+}
+.locked-game-content button {
+  background: linear-gradient(90deg, #b22222 70%, #ffd700 100%);
+  color: #fffbe9;
+  font-size: 1.1em;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 0.7em 2.3em;
+  border-radius: 9px;
+  border: 2px solid #ffd700;
+  cursor: pointer;
+  transition: background 0.17s, color 0.15s, box-shadow 0.18s;
+}
+.locked-game-content button:hover {
+  background: linear-gradient(90deg, #ffd700 80%, #b22222 100%);
+  color: #611616;
+  box-shadow: 0 2px 12px #ffd70088;
+}
 
 
 /* Registration Page */
@@ -1977,7 +2033,6 @@ footer {
   width: 100vw;
   z-index: 2;
   margin: 0;
-  position: relative;
 }
 
 .quiz-header {

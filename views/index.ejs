@@ -1,24 +1,31 @@
 <%- include("partials/header") %>
-<%- include("partials/navIndex") %>
+    <%- include("partials/navIndex") %>
 
-<body class="indexBody">
+        <body class="indexBody">
 
-    <main>
-        <section class="containerLandingpage">
-            <h1 class="lotr-titel">Kies een game en verken de wereld...</h1>
-            <article class="landingpageRow">
-                <img id="wrongImg" src="/images/fifaLogo.png" alt="">
-                <a href="/home">
-                    <img id="rightImg" src="/images/lotrLogo.jpeg" alt="LOTR">
-                </a>
-                <img id="wrongImg" src="/images/pokemonLogo.png" alt="">
-                <img id="wrongImg" src="/images/mgtLogo.png" alt="">
-                <img id="wrongImg" src="/images/legoMastersLogo.jpeg" alt="">
-                <img id="wrongImg" src="/images/fortniteLogo.jpeg" alt="">
-            </article>
-        </section>
-        
-    </main>
-</body>
+            <main>
+                <div id="lockedGameModal" class="locked-game-modal" style="display: none;">
+                    <div class="locked-game-content">
+                        <h2>Toegang geweigerd!</h2>
+                        <p>Deze game is nog niet beschikbaar. Kies een andere!</p>
+                        <button id="closeModalBtn">OK</button>
+                    </div>
+                </div>
+                <section class="containerLandingpage">
+                    <h1 class="lotr-titel">Kies een game en verken de wereld...</h1>
+                    <article class="landingpageRow">
+                        <img id="wrongImg" src="/images/fifaLogo.png" alt="">
+                        <a href="/home">
+                            <img id="rightImg" src="/images/lotrLogo.jpeg" alt="LOTR">
+                        </a>
+                        <img id="wrongImg" src="/images/pokemonLogo.png" alt="">
+                        <img id="wrongImg" src="/images/mgtLogo.png" alt="">
+                        <img id="wrongImg" src="/images/legoMastersLogo.jpeg" alt="">
+                        <img id="wrongImg" src="/images/fortniteLogo.jpeg" alt="">
+                    </article>
+                </section>
 
-</html>
+            </main>
+        </body>
+        <script src="/api.js" defer></script>
+        </html>
