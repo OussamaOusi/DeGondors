@@ -1,70 +1,100 @@
 <%- include("partials/header") %>
 
-<body class="rpg-profile-body">
-  <header>
-    <%- include("partials/nav") %>
-  </header>
+  <body class="rpg-profile-body">
+    <header>
+      <%- include("partials/nav") %>
+    </header>
 
-  <main>
-    <h1 class="lotr-profile-title">Profiel</h1>
-    <div class="rpg-profile-container">
-      <!-- LEFT PANEL: User Info + Actions -->
-      <div class="rpg-left-panel">
-        <h2 class="rpg-section-title">Gebruiker</h2>
-        <form class="rpg-user-info" method="POST" action="/profile/update">
-  <label class="rpg-label">Gebruikersnaam:
-    <input type="text" name="username" value="<%= user?.username %>" required />
-  </label>
-  <label class="rpg-label">Email:
-    <input type="email" name="email" value="<%= user?.email %>" required />
-  </label>
-  <label class="rpg-label">Nieuw wachtwoord:
-    <input type="password" name="password" placeholder="Nieuw wachtwoord" />
-  </label>
-</form>
+    <main>
+      <h1 class="lotr-profile-title">Profiel</h1>
+      <div class="rpg-profile-container">
+        <!-- LEFT PANEL: User Info + Actions -->
+        <div class="rpg-left-panel">
+          <h2 class="rpg-section-title">Gebruiker</h2>
+          <a href="?edit=true" class="edit-icon" title="Bewerk profiel">&#9998;</a>
+          <div class="rpg-user-info">
+            <% if (editMode) { %>
+              <form method="POST" action="/profile/update" class="rpg-user-info-edit">
+                <label>Gebruikersnaam:
+                  <input type="text" name="username" value="<%= user?.username %>" required />
+                </label>
+                <label>Email:
+                  <input type="email" name="email" value="<%= user?.email %>" required />
+                </label>
+                <label>Wachtwoord:
+                  <input type="password" name="password" placeholder="Nieuw wachtwoord" />
+                </label>
+                <button type="submit" class="rpg-btn-save">Opslaan</button>
+              </form>
+              <% } else { %>
+                <div class="rpg-user-info">
+                  <p><span class="rpg-label">Gebruikersnaam:</span>
+                    <%= user?.username %>
+                  </p>
+                  <p><span class="rpg-label">Email:</span>
+                    <%= user?.email %>
+                  </p>
+                  <p><span class="rpg-label">Wachtwoord:</span> ********</p>
+                </div>
+                <% } %>
 
-        <form method="POST" action="/logout">
-          <button class="rpg-btn-logout">Log uit</button>
-        </form>
-        <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
-          <button class="rpg-btn-delete">Verwijder account</button>
-        </form>
+          </div>
+
+          <form method="POST" action="/logout">
+            <button class="rpg-btn-logout">Log uit</button>
+          </form>
+          <form method="POST" action="/profile/delete"
+            onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
+            <button class="rpg-btn-delete">Verwijder account</button>
+          </form>
+        </div>
+        <!-- CENTER PANEL: Character Image -->
+        <div class="rpg-center-panel">
+          <div class="character-selector">
+            <button class="arrow-btn" onclick="prevCharacter()">←</button>
+
+            <!-- 👇 HIER komt je afbeelding 👇 -->
+            <img id="characterImage" class="rpg-character-image"
+              src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>" alt="Character" />
+
+            <button class="arrow-btn" onclick="nextCharacter()">→</button>
+          </div>
+
+
+
+          <form method="POST" action="/profile/avatar">
+            <input type="hidden" name="avatar" id="avatarInput" value="boogschutter.png" />
+            <button class="rpg-btn-avatar">Zet als profielfoto</button>
+          </form>
+
+          <!-- 👇 Zorg dat dit in het formulier zit of meegestuurd wordt 👇 -->
+          <input type="hidden" name="avatar" id="avatarInput" value="<%= user?.avatar ?? 'boogschutter.png' %>" />
+        </div>
+
+        <!-- RIGHT PANEL: Stats -->
+        <div class="rpg-right-panel">
+          <h2 class="rpg-section-title">Stats</h2>
+          <ul class="rpg-stats-list">
+            <li><a href="/leaderboards"><span>10 rounds:</span></a>
+              <%= best10Rounds %>
+            </li>
+            <li><a href="/leaderboards"><span>Blitz:</span></a>
+              <%= bestBlitz %>
+            </li>
+            <li><a href="/leaderboards"><span>Sudden Death:</span></a>
+              <%= bestSudden %>
+            </li>
+            <li><a href="/favorites"><span>Favoriete Quotes:</span></a>
+              <%= favoriteCount %>
+            </li>
+            <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a>
+              <%= blacklistCount %>
+            </li>
+          </ul>
+        </div>
       </div>
+    </main>
 
-      <!-- CENTER PANEL: Character Image -->
-      <div class="rpg-center-panel">
-  <div class="character-selector">
-    <button class="arrow-btn" onclick="prevCharacter()">←</button>
-    
-    <img
-      id="characterImage"
-      class="rpg-character-image"
-      src="/images/profileImages/boogschutter.png"
-      alt="Character"
-    />
-    
-    <button class="arrow-btn" onclick="nextCharacter()">→</button>
-  </div>
-  <p id="characterName" class="rpg-character-class">Lvl <%= user?.level %> Ranger – Elf</p>
+    <%- include("partials/footer") %>
 
-  <!-- Optional verborgen input voor form submit -->
-  <input type="hidden" name="avatar" id="avatarInput" value="boogschutter" />
-</div>
-
-      <!-- RIGHT PANEL: Stats -->
-      <div class="rpg-right-panel">
-        <h2 class="rpg-section-title">Stats</h2>
-        <ul class="rpg-stats-list">
-           <li><a href="/leaderboards"><span>10 rounds:</span></a> <%= best10Rounds %></li>
-<li><a href="/leaderboards"><span>Blitz:</span></a> <%= bestBlitz %></li>
-<li><a href="/leaderboards"><span>Sudden Death:</span></a> <%= bestSudden %></li>
-  <li><a href="/favorites"><span>Favoriete Quotes:</span></a> <%= favoriteCount %></li>
-  <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a> <%= blacklistCount %></li>
-</ul>
-      </div>
-    </div>
-  </main>
-
- <%- include("partials/footer") %>
-
- <script src="/api.js" defer></script>
+      <script src="/api.js" defer></script>

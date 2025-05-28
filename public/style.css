@@ -98,6 +98,17 @@ body.rpg-profile-body {
   margin-bottom: 0.25rem;
 }
 
+.edit-icon {
+  margin-left: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: gold;
+  font-size: 1.2rem;
+}
+.edit-icon:hover {
+  color: orange;
+}
+
 /* CENTER PANEL */
 .rpg-center-panel {
   text-align: center;
