@@ -1,85 +1,3 @@
-// async function setupCharacterButtons() {
-//   document.querySelectorAll(".character-button").forEach(button => {
-//     button.onclick = function() {
-//       checkCharAnswer(this.innerText);
-//       counter++;
-//       const scoreCounter = document.getElementById("score-value");
-//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-//       setTimeout(() => {
-//         fetchRandomQuote();
-//       }, 500);
-//     };
-//   });
-// }
-
-// async function setupMovieButtons() {
-//   document.querySelectorAll(".movie-button").forEach(button => {
-//     button.onclick = function() {
-//       checkMovieAnswer(this.innerText);
-//       counter++;
-//       const scoreCounter = document.getElementById("score-value");
-//       if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-//       setTimeout(() => {
-//         fetchRandomQuote();
-//       }, 500);
-//     };
-//   });
-// }
-
-// async function loadQuoteAndCharacters() {
-//   const quoteEl = document.getElementById("quote-text");
-//   try {
-//     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
-//     const data = await res.json();
-//     const random = data.docs[Math.floor(Math.random() * data.docs.length)];
-//     currentQuote = random;
-//     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
-
-//     // Fetch all characters
-//     const charListRes = await fetch(`${characterUrl}`, { headers:{Authorization:`Bearer ${apiKey}`} });
-//     const charListData = await charListRes.json();
-//     characterNames = charListData.docs.map(character => character.name);
-
-//     // Fetch the character for the quote
-//     const charRes = await fetch(`${characterUrl}/${random.character}`, { headers:{Authorization:`Bearer ${apiKey}`} });
-//     const charData = await charRes.json();
-//     currentCharacter = charData.docs[0];
-//     answerArray = [currentCharacter.name, ...getRandomItems(characterNames)];
-//     shuffleArray(answerArray);
-
-//     const button1 = document.getElementById("button1");
-//     const button2 = document.getElementById("button2");
-//     const button3 = document.getElementById("button3");
-//     if(button1) button1.innerText = answerArray[0];
-//     if(button2) button2.innerText = answerArray[1];
-//     if(button3) button3.innerText = answerArray[2];
-
-//     setupCharacterButtons();
-//   } catch (e) {
-//     console.error("❌ Fout bij laden quote/character:", e);
-//     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
-//   }
-// }
-
-// async function loadMoviesForQuote() {
-//   await insertMovies();
-//   const button4 = document.getElementById("button4");
-//   const button5 = document.getElementById("button5");
-//   const button6 = document.getElementById("button6");
-//   if(button4) button4.innerText = movieAnswerArray[0];
-//   if(button5) button5.innerText = movieAnswerArray[1];
-//   if(button6) button6.innerText = movieAnswerArray[2];
-//   setupMovieButtons();
-// }
-
-// async function fetchRandomQuote() {
-//   await loadQuoteAndCharacters();
-//   await loadMoviesForQuote();
-//   console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
-// }
-
-// public/10rounds.js
-
 const apiKey = "RGcOPi2oQ79fO1Ai2PGE";
 const quoteUrl = "https://the-one-api.dev/v2/quote";
 const characterUrl = "https://the-one-api.dev/v2/character";
@@ -134,28 +52,20 @@ async function fetchMovies(){
 }
 
 async function insertMovies(){
-  if(!currentQuote || !movieArray || !movieData || !movieData.docs){
-    console.log("insertMovies: missing data");
+  if(!currentQuote || !movieArray || !movieData){
     return;
   }
-  // Find the movie object that matches the quote's movie ID
-  let movieObj = null;
-  if (currentQuote.movie) {
-    movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  // Find the current movie object by matching the movie ID
+  const movieObj = movieData.docs.find(movie => movie._id === currentQuote.movie);
+  if (!movieObj) {
+    console.warn('Current movie not found in movieData');
+    return;
   }
   currentMovie = movieObj;
-  if (currentMovie) {
-    console.log("Current movie for quote:", currentMovie.name);
-    // Fill movieAnswerArray with the correct movie and random others
-    const otherMovies = movieData.docs.filter(m => m._id !== currentMovie._id).map(m => m.name);
-    movieAnswerArray = [currentMovie.name, ...getRandomItems(otherMovies)];
-    shuffleArray(movieAnswerArray);
-  } else {
-    console.log("No matching movie found for quote.");
-    // fallback: pick 3 random movies
-    movieAnswerArray = getRandomItems(movieArray, 3);
-    currentMovie = { name: movieAnswerArray[0] };
-  }
+  // Filter out the correct movie from the array before picking random items
+  const otherMovies = movieArray.filter(name => name !== currentMovie.name);
+  movieAnswerArray = [currentMovie.name, ...getRandomItems(otherMovies)];
+  shuffleArray(movieAnswerArray);
 }
 
 async function fetchRandomQuote() {
@@ -164,7 +74,12 @@ async function fetchRandomQuote() {
   try {
     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
     const data = await res.json();
+    // Filter quotes to only those with 100 characters or less
     const filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
+    if (filteredQuotes.length === 0) {
+      if (quoteEl) quoteEl.textContent = "Geen korte quotes gevonden.";
+      return;
+    }
     const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
     currentQuote = random;
     if (quoteEl) quoteEl.textContent = `"${random.dialog}"`;
@@ -184,10 +99,6 @@ async function fetchRandomQuote() {
     updateCharacterButtons();
     await insertMovies();
     updateMovieButtons();
-    // Ensure Sudden Death handlers are set up after new quote/buttons
-    if (currentMode === "suddendeath") {
-      setupSuddenDeathHandlers();
-    }
     //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
@@ -197,22 +108,15 @@ async function fetchRandomQuote() {
     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
   }
 }
+
 function updateCharacterButtons() {
-  if (!answerArray || !Array.isArray(answerArray) || answerArray.length < 3) {
-    console.warn("updateCharacterButtons: answerArray is not ready", answerArray);
-    return;
-  }
   const buttons = ["button1", "button2", "button3"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = answerArray[index]; }
-  });
+})
 }
 
 function updateMovieButtons() {
-  if (!movieAnswerArray || !Array.isArray(movieAnswerArray) || movieAnswerArray.length < 3) {
-    console.warn("updateMovieButtons: movieAnswerArray is not ready", movieAnswerArray);
-    return;
-  }
   const buttons = ["button4", "button5", "button6"].map(id => document.getElementById(id));
   buttons.forEach((button, index) => {
     if (button) { button.innerText = movieAnswerArray[index]; }
@@ -230,7 +134,7 @@ async function likeQuote() {
   };
   console.log("📤 Like versturen:", favorite);
   try {
-    const res = await fetch("/api/rounds/like", {
+    const res = await fetch("/api/favorites/like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(favorite)
@@ -240,49 +144,6 @@ async function likeQuote() {
     console.error("❌ Network error bij like:", e);
   }
 }
-async function dislikeQuote() {
-  console.log("🔄 dislikeQuote() aangeroepen");
-  if (!currentQuote || !currentCharacter) {
-    console.warn("⚠️ Geen quote/character geladen");
-    return;
-  }
-
-  const reason = prompt("Waarom vind je deze quote niet leuk?");
-  console.log("📋 Prompt returned:", reason);
-  if (!reason) {
-    alert("Je moet een reden invullen.");
-    return;
-  }
-
-  const payload = {
-    quote: currentQuote.dialog,
-    characterId: currentCharacter._id,
-    characterName: currentCharacter.name,
-    wikiUrl: currentCharacter.wikiUrl,
-    movie: currentQuote.movie,
-    reason
-  };
-  console.log("📤 Sending dislike payload:", payload);
-
-  try {
-    const res = await fetch("/api/rounds/dislike", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    console.log("↪ Server response status:", res.status);
-    console.log("↪ Server response body:", await res.text());
-  } catch (err) {
-    console.error("❌ Network error in dislikeQuote:", err);
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const dislikeBtn = document.getElementById("dislike-button");
-  if (dislikeBtn) {
-    dislikeBtn.addEventListener("click", dislikeQuote);
-  }
-});
 
 function setupCharacterButtons() {
   document.querySelectorAll(".character-button").forEach(button => {
@@ -316,14 +177,18 @@ function updateCounter() {
   if (scoreCounter) {
     scoreCounter.innerText = `${score}/${counter}`;
   }
-  if(counter >= 10) {
-    alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
+  if(counter >= 10 && currentMode === "10rounds"){ {
+    // alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
     sendScoreToServer(currentUserId, score, currentMode);
+    if (typeof showEndQuizPopup === 'function') {
+      showEndQuizPopup(score, currentMode);
+    } else {
+      setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+    }
     score = 0;
     counter = 0;
     if (scoreCounter) scoreCounter.innerText = `${score}/${counter}`;
-  }
-
+  }}
 }
 
 function sendScoreToServer(userId, score, mode){
@@ -432,9 +297,110 @@ function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
     if (document.getElementById("score-value")) {
       document.getElementById("score-value").innerText = `${score}/${counter}`;
     }
-    alert(`Game over! Je score is: ${score}/${counter}`);
+    // alert(`Game over! Je score is: ${score}/${counter}`);
     sendScoreToServer(currentUserId, score, currentMode);
+    if (typeof showEndQuizPopup === 'function') {
+      showEndQuizPopup(score, currentMode);
+    } else {
+      setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+    }
   }
+}
+
+// Add popup HTML to the page (only once)
+function showEndQuizPopup(score, mode) {
+  let popup = document.getElementById('end-quiz-popup');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'end-quiz-popup';
+    popup.innerHTML = `
+      <div class="end-quiz-popup-content">
+        <h2>Quiz afgelopen!</h2>
+        <p>Je score is: <strong>${score}</strong></p>
+        <button id="play-again-btn">Speel opnieuw</button>
+        <button id="to-leaderboard-btn">Bekijk leaderboard</button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+    // Basic styles for popup
+    const style = document.createElement('style');
+    style.innerHTML = `
+      #end-quiz-popup {
+        position: fixed; 
+        z-index: 9999; 
+        top: 0; 
+        left: 0; 
+        width: 100vw; 
+        height: 100vh;
+        background: rgba(10,10,10,0.92); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+      }
+      .end-quiz-popup-content {
+        background: linear-gradient(135deg, #23211a 80%, #bfa53422 100%);
+        color: #f8e6da;
+        border-radius: 18px;
+        padding: 2.5rem 2rem 2rem 2rem;
+        box-shadow: 0 8px 32px #000c, 0 0 0 8px #bfa53433;
+        text-align: center;
+        min-width: 260px;
+        max-width: 90vw;
+        letter-spacing: 1px;
+        font-family: 'Cinzel', 'Segoe UI', serif;
+        text-shadow: 0 2px 8px #000a;
+        font-size: 1.7rem;
+        border: 2px solid #bfa53455;
+      }
+      .end-quiz-popup-content h2 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 8px #000, 0 0 12px #bfa53455;
+      }
+      .end-quiz-popup-content p {
+        color: #f8e6da;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 1px 4px #000a;
+      }
+      .end-quiz-popup-content button {
+        margin: 1.2rem 0.7rem 0 0.7rem;
+        padding: 0.7rem 1.7rem;
+        font-size: 1.1rem;
+        border-radius: 8px; border: none;
+        background: linear-gradient(90deg, #bfa534 60%, #46371b 100%);
+        color: #fffbe9;
+        font-family: inherit;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 2px 8px #0006;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      }
+      .end-quiz-popup-content button:hover {
+        background: linear-gradient(90deg, #46371b 60%, #bfa534 100%);
+        color: #ffd700;
+        box-shadow: 0 4px 16px #bfa53444;
+      }
+    `;
+    document.head.appendChild(style);
+  } else {
+    popup.querySelector('p').innerHTML = `Je score is: <strong>${score}</strong>`;
+    popup.style.display = 'flex';
+  }
+  // Button handlers
+  document.getElementById('play-again-btn').onclick = function() {
+    popup.style.display = 'none';
+    if (mode === 'blitz') {
+      window.location.reload();
+    } else if (mode === '10rounds') {
+      window.location.reload();
+    } else if (mode === 'suddendeath') {
+      window.location.reload();
+    }
+  };
+  document.getElementById('to-leaderboard-btn').onclick = function() {
+    window.location.href = '/leaderboards';
+  };
 }
 
 //like verwijderen favoriet
@@ -499,7 +465,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch");
   const likeBtn  = document.getElementById("like-button");
-  const dislikeBtn = document.getElementById("dislike-button");
 
   if (fetchBtn) fetchBtn.addEventListener("click", fetchRandomQuote);
   if (likeBtn)  likeBtn.addEventListener("click", likeQuote);
@@ -544,3 +509,25 @@ const characters = [
     currentIndex = (currentIndex + 1) % characters.length;
     updateCharacter();
   }
+//timer
+let timeleft = 60;
+const timerElement = document.getElementById("timer");
+if(currentMode === "blitz"){
+const countdown = setInterval(() => {
+    timeleft--;
+    timerElement.textContent = timeleft;
+    if(timeleft <= 0){
+      timeleft = 60;
+      // alert("De tijd is om!");
+      sendScoreToServer(currentUserId, score, currentMode);
+      score = 0;
+      counter = 0;
+      if (typeof showEndQuizPopup === 'function') {
+        showEndQuizPopup(score, currentMode);
+      } else {
+        // fallback: show popup anyway
+        setTimeout(() => showEndQuizPopup(score, currentMode), 100);
+      }
+      clearInterval(countdown);
+    }
+}, 1000);}

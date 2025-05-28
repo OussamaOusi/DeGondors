@@ -16,10 +16,9 @@ router.post("/login", async (req, res) => {
     try {
         console.log("loggin in?")
         let user: User = await login(email, password);
-        console.log("User logged in")
         delete user.password;
         req.session.user = user;
-        res.redirect("/")
+        res.redirect("/home")
     } catch (e: any) {
         res.redirect("/login");
     }
