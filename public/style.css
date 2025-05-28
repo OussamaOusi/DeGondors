@@ -455,41 +455,62 @@ body.lotr-favorite-body::-webkit-scrollbar {
   color: #d4af37;
   
 }
-
 nav {
   position: relative;
   top: 0;
   left: 0;
   width: 100vw;
   height: 90px;
-  background: linear-gradient(to bottom, #2a1e0e, #1e1408);
-  background: rgba(36, 24, 10, 0.5); /* iets doorzichtiger */
-  backdrop-filter: blur(8px);       /* verhoog de blur */
-  
+  background: rgba(36, 24, 10, 0.5);
+  backdrop-filter: blur(8px);
   color: #d4af37;
   font-family: 'Cinzel', serif;
   font-size: 1.2em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* centraal uitlijnen nav-links */
   padding: 0 2rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.1);
   z-index: 1100;
   border-bottom: 3px solid #8b6d1f;
+  position: sticky;
+  top: 0;
 }
 
+/* Zet de .logo helemaal links */
+nav .logo {
+  position: absolute;
+  left: 2rem;
+}
+
+nav .logo a {
+  font-size: 1.5rem;
+  color: #dfd9c3;
+  text-decoration: none;
+}
+
+/* Centreer de links */
+nav .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Avatar styling als je die nog niet hebt */
+.nav-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
 .logo a {
-  color: #f9d86b;
+   color: #e6d8b6;
   font-size: 2rem;
-  font-weight: bold;
   text-decoration: none;
   font-family: 'Cinzel', serif;
-  text-shadow:
-    0 1px 0 #fff3c2,
-    0 2px 0 #e5c04e,
-    0 3px 0 #c0a036,
-    0 4px 10px rgba(0, 0, 0, 0.8);
   letter-spacing: 1px;
+  
 }
 
 .logo a:hover {
@@ -509,7 +530,6 @@ nav {
 .nav-links a {
   color: #f8f5e1;
   text-decoration: none;
-  font-weight: bold;
   font-size: 1.1rem;
   transition: color 0.3s ease, transform 0.2s ease;
   position: relative;
@@ -900,16 +920,6 @@ footer, .lotr-footer {
 
 
 /* Navbar */
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to top, black 0%, rgba(0,0,0,0) 200px);
-    padding: 1rem;        
-    margin: 1rem auto;
-    margin-top: 0;
-    position: sticky;
-}
 
 
 .logo a {
