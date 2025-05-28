@@ -4,7 +4,9 @@ import { registerUser } from '../database';
 const router = Router();
 
 router.get("/registration", (req, res) => {
-    res.render("registration");
+   res.render("registration", {
+  currentPath: req.path
+});
 });
 
 router.post("/register", async (req, res) => {

@@ -16,7 +16,8 @@ router.get("/", async (req, res) => {
  res.render("blacklist", {
   blacklist,
   filter: character,
-  user: req.session.user 
+  user: req.session.user,
+  currentPath: "/blacklist"
 });
 });
 

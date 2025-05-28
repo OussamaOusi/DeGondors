@@ -4,7 +4,10 @@ import { secureMiddleware } from '../secureMiddleware';
 const router = Router();
 
 router.get('/home', secureMiddleware, (_req: Request, res: Response) => {
-  res.render('home', {user: _req.session.user});
+  res.render('home', {
+  user: _req.session.user,
+  currentPath: '/home'
+});
 });
 
 export default router;

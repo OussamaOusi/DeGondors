@@ -106,6 +106,7 @@ router.get("/profile", async (req, res) => {
       bestSudden,
       favoriteCount,
       blacklistCount,
+      currentPath: '/profile'
     });
   } catch (error) {
     console.error("❌ Fout in /profile route:", error);

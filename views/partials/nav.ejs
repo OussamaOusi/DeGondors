@@ -1,13 +1,15 @@
 <nav>
   <section class="logo">
+        <a href="/">De Gonders</a>
   </section>
   <section class="nav-links">
-    <a href="/home" class="active">Quiz</a>
-    <a href="/leaderboards">Leaderboards</a>
-    <a href="/favorites">Favoriete quotes</a>
-    <a href="/blacklist">Blacklisted quotes</a>
-    <a href="/profile" class="profile-nav-link">
-  <img src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>" alt="Profielfoto" class="nav-avatar" />Profiel
-</a>
+    <a href="/home" class="<%= currentPath === '/home' ? 'active' : '' %>">Quiz</a>
+    <a href="/leaderboards" class="<%= currentPath === '/leaderboards' ? 'active' : '' %>">Leaderboards</a>
+    <a href="/favorites" class="<%= currentPath === '/favorites' ? 'active' : '' %>">Favorite quotes</a>
+    <a href="/blacklist" class="<%= currentPath === '/blacklist' ? 'active' : '' %>">Blacklisted quotes</a>
+    <a href="/profile" class="profile-nav-link <%= currentPath === '/profile' ? 'active' : '' %>">
+      <img src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>" alt="Profielfoto" class="nav-avatar" />
+      Profiel
+    </a>
   </section>
 </nav>

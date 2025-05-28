@@ -14,7 +14,9 @@ import express from 'express';
 const router = express.Router();
 
 router.get("/", async(req, res) =>  {
-  res.render("index");
+  res.render("index", {
+  currentPath: req.path
+});
 });
 
 export default router;

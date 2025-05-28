@@ -74,7 +74,8 @@ router.get("/", secureMiddleware, async (req, res) => {
 
   res.render("favorites", {
     favorites: favs,
-    filter, // kan null zijn
+    filter, 
+     currentPath: "/favorites"
   });
 });
 
