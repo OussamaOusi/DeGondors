@@ -1,18 +1,25 @@
 <%- include("partials/header", { title: "Favoriete Quotes" }) %>
 <body class="lotr-favorite-body">
 <%- include("partials/nav") %>
+<h1 class="lotr-favorite-title">Favoriete Quotes</h1>
 <main class="lotr-favorite-main">
-  <h1 class="lotr-favorite-title">Favoriete Quotes</h1>
 
   <%
+    // Maak groups per character
     const groups = {};
     favorites.forEach(item => {
       (groups[item.characterName] ||= []).push(item);
     });
+
+    // Sorteer characters op aantal quotes, meeste ONDERAAN
+    const sortedCharacters = Object.keys(groups).sort((a, b) => {
+      return groups[a].length - groups[b].length;
+    });
+
     const filterName = filter;
   %>
 
-  <% Object.keys(groups).forEach(character => {
+  <% sortedCharacters.forEach(character => {
        const quotes = groups[character];
        const wikiUrl = quotes[0].wikiUrl || "#";
   %>
@@ -43,4 +50,3 @@
 <script src="/api.js" defer></script>
 </body>
 <%- include("partials/footer") %>
-
