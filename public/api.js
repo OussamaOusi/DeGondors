@@ -75,8 +75,11 @@ async function fetchRandomQuote() {
     const res = await fetch(quoteUrl, { headers: { Authorization: `Bearer ${apiKey}` } });
     const data = await res.json();
     // Filter quotes to only those with 100 characters or less
-    const filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
-    if (filteredQuotes.length === 0) {
+    console.log("Ophalen filtered quotes")
+    let filteredQuotes = data.docs.filter(q => q.dialog && q.dialog.length <= 100);
+    console.log("Gefilterde quotes:", filteredQuotes);
+    filteredQuotes = await getNonBlacklistedQuotes(filteredQuotes);
+     if (filteredQuotes.length === 0) {
       if (quoteEl) quoteEl.textContent = "Geen korte quotes gevonden.";
       return;
     }
@@ -99,7 +102,6 @@ async function fetchRandomQuote() {
     updateCharacterButtons();
     await insertMovies();
     updateMovieButtons();
-    //shuffleArray(movieAnswerArray);
     console.log(" fetched movie data")
     console.log(movieAnswerArray)
     console.log("✅ Quote + character geladen:", currentQuote, currentCharacter);
@@ -107,6 +109,26 @@ async function fetchRandomQuote() {
     console.error("❌ Fout bij laden quote/character:", e);
     if (quoteEl) quoteEl.textContent = "Fout bij laden quote.";
   }
+}
+
+async function getNonBlacklistedQuotes(apiQuotes){
+  const res = await fetch("/api/rounds/blacklist");
+  const blacklist = await res.json();
+
+  console.log("Ophalen van de blacklist---------------");
+  console.log("Blacklisted quotes:", blacklist);
+  if (!blacklist || blacklist.length === 0) {
+    console.log("Geen blacklist gevonden, alle quotes zijn toegestaan.");
+    return apiQuotes; // Return all quotes if no blacklist
+  }
+  const blacklistedDialogs = new Set(blacklist.map(item => item.quote));
+
+  const filtered = apiQuotes.filter(quote => !blacklistedDialogs.has(quote.dialog));
+  // Log which blacklisted quotes were removed
+  const removed = apiQuotes.filter(quote => blacklistedDialogs.has(quote.dialog));
+  console.log("Quotes removed by blacklist:", removed.map(q => q.dialog));
+  console.log("Quotes remaining after blacklist:", filtered.map(q => q.dialog));
+  return filtered;
 }
 
 function updateCharacterButtons() {
@@ -169,6 +191,8 @@ async function dislikeQuote(reason) {
     console.error("❌ Network error bij dislike:", e);
   }
 }
+
+
 // ---- EINDE DISLIKE functie ----
 
 function setupCharacterButtons() {
@@ -204,7 +228,6 @@ function updateCounter() {
     scoreCounter.innerText = `${score}/${counter}`;
   }
   if(counter >= 10 && currentMode === "10rounds"){ {
-    // alert("Je hebt 10 rondes gespeeld! Je score is: " + score + "/" + counter);
     sendScoreToServer(currentUserId, score, currentMode);
     if (typeof showEndQuizPopup === 'function') {
       showEndQuizPopup(score, currentMode);
@@ -323,7 +346,6 @@ function checkSuddenDeathAnswers(selectedChar, selectedMovie) {
     if (document.getElementById("score-value")) {
       document.getElementById("score-value").innerText = `${score}/${counter}`;
     }
-    // alert(`Game over! Je score is: ${score}/${counter}`);
     sendScoreToServer(currentUserId, score, currentMode);
     if (typeof showEndQuizPopup === 'function') {
       showEndQuizPopup(score, currentMode);
@@ -556,7 +578,6 @@ const countdown = setInterval(() => {
     timerElement.textContent = timeleft;
     if(timeleft <= 0){
       timeleft = 60;
-      // alert("De tijd is om!");
       sendScoreToServer(currentUserId, score, currentMode);
       score = 0;
       counter = 0;

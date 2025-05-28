@@ -70,7 +70,7 @@ app.use("/api/rounds", roundsLikeDislikeRouter);
 app.use("/blacklist", blacklistRouter);
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, favoriteRouter);
 
-//sessions moet gefixt worden
+//session moet gefixt worden
 app.post("/logout", async(req, res) => {
     console.log(">>> Voor destroy:", req.session);  
     req.session.destroy(() => {
