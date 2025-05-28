@@ -1,18 +1,25 @@
 <%- include("partials/header", { title: "Blacklist" }) %>
 <body class="lotr-blacklist-body">
 <%- include("partials/nav") %>
-<main class="lotr-blacklist-main">
   <h1 class="lotr-blacklist-title">Blacklist Quotes</h1>
+<main class="lotr-blacklist-main">
 
-  <% 
+  <%
+    // Maak groups per character
     const groups = {};
     blacklist.forEach(item => {
       (groups[item.characterName] ||= []).push(item);
     });
+
+    // Sorteer characters op aantal quotes, degene met meeste quotes ONDERAAN
+    const sortedCharacters = Object.keys(groups).sort((a, b) => {
+      return groups[a].length - groups[b].length;
+    });
+
     const filterName = filter;
   %>
 
-  <% Object.keys(groups).forEach(character => { 
+  <% sortedCharacters.forEach(character => {
        const quotes = groups[character];
        const wikiUrl = quotes[0].wikiUrl || "#";
   %>
@@ -45,4 +52,3 @@
 </main>
 <script src="/api.js" defer></script>
 <%- include("partials/footer") %>
-
