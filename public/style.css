@@ -1513,6 +1513,7 @@ nav {
     position: relative;
 }
 
+
 /* LOTR (groene glow bij hover) */
 .landingpageRow a:hover > #rightImg {
     box-shadow: 0 0 34px 13px #25ff00c7, 0 0 44px 21px #b8ff00a0;
