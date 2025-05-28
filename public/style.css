@@ -29,7 +29,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  color: white; /* of je link-kleur */
+  color: white; 
   text-decoration: none;
 }
 
@@ -152,7 +152,7 @@ body.rpg-profile-body {
   padding: 0.7rem;
   border-radius: 4px;
   border: 1px solid #a5852d;
-  background-color: rgba(255, 248, 225, 0.85); /* zachter, niet wit */
+  background-color: rgba(255, 248, 225, 0.85); 
   font-family: 'Cinzel', serif;
   font-size: 0.9rem;
   color: #333;
@@ -404,9 +404,6 @@ body.rpg-profile-body {
 }
 
 
-
-/**/
-
 .lotr-xp-bar {
     width: 100%;
     background: #333;
@@ -422,7 +419,7 @@ body.rpg-profile-body {
     transition: width 0.4s ease;
 }
 
-/* =============== LOTR FAVORITES =============== */
+/* LOTR FAVORITES */
 body.lotr-favorite-body {
   min-height: 100vh;
   background: linear-gradient(135deg, #e7e2ce 0%, #b5a96d 100%);
@@ -447,7 +444,7 @@ body.lotr-blacklist-body {
   -ms-overflow-style: none;
 }
 
-/* --- VASTE NAV EN FOOTER --- */
+/*  VASTE NAV EN FOOTER */
 
 .nav-links a.active {
   color: #d4af37;
@@ -466,7 +463,7 @@ nav {
   font-size: 1.2em;
   display: flex;
   align-items: center;
-  justify-content: center; /* centraal uitlijnen nav-links */
+  justify-content: center; 
   padding: 0 2rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.1);
   z-index: 1100;
@@ -475,7 +472,7 @@ nav {
   top: 0;
 }
 
-/* Zet de .logo helemaal links */
+
 nav .logo {
   position: absolute;
   left: 2rem;
@@ -487,14 +484,13 @@ nav .logo a {
   text-decoration: none;
 }
 
-/* Centreer de links */
 nav .nav-links {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-/* Avatar styling als je die nog niet hebt */
+
 .nav-avatar {
   width: 24px;
   height: 24px;
@@ -559,7 +555,7 @@ footer, .lotr-footer {
   left: 0;
   width: 100vw;
   z-index: 1100;
-  height: 54px;   /* pas deze hoogte aan je echte footer aan! */
+  height: 54px;   
   background: #24180a;
   color: #bfa534;
   font-family: 'Cinzel', serif;
@@ -573,18 +569,16 @@ footer, .lotr-footer {
   padding: 0;
 }
 
-/* MAIN CONTENT padding zodat niets onder nav/footer verdwijnt */
 .lotr-favorite-main,
 .lotr-blacklist-main {
   max-width: 730px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
-  padding-top: 12px;    /* nav (stel bij aan je eigen hoogte + evt. h1) */
-  padding-bottom: 40vh;  /* footer */
+  padding-top: 12px;   
+  padding-bottom: 40vh;  
   padding-top: 45vh; 
   min-height: 100vh;
-  max-height: 10vh;           /* of wat je wil */
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -663,7 +657,7 @@ footer, .lotr-footer {
   background: #46371b;
   color: #faf3c2;
 }
-/* --------- HIER GEEN margin-left: auto --------- */
+
 .favorite-wiki-link {
   color: #fffbe9 !important;
   background: #bfa534 !important;
@@ -673,7 +667,6 @@ footer, .lotr-footer {
   text-decoration: none;
   font-weight: bold;
   padding: 0.25em 1em;
-  /* margin-left: auto;  <-- DIT NIET MEER DOEN! */
   text-shadow: 0 1px 6px #0009;
   box-shadow: 0 2px 8px #bfa53455;
   opacity: 1 !important;
@@ -732,7 +725,7 @@ footer, .lotr-footer {
   box-shadow: 0 2px 16px #bfa53444;
 }
 
-/* =============== BLACKLIST PAGE STYLING =============== */
+/* BLACKLIST PAGE STYLING  */
 .lotr-blacklist-title { color: white; }
 .lotr-blacklist-group {
   background: #611616e0;
@@ -792,7 +785,7 @@ footer, .lotr-footer {
   background: #ffd700;
   color: white;
 }
-/* --------- HIER GEEN margin-left: auto --------- */
+
 .blacklist-wiki-link {
   color: #611616 !important;
   background: #ffd700 !important;
@@ -802,7 +795,6 @@ footer, .lotr-footer {
   text-decoration: none;
   font-weight: bold;
   padding: 0.25em 1em;
-  /* margin-left: auto;   <-- DIT NIET MEER DOEN! */
   text-shadow: 0 1px 6px #0009;
   box-shadow: 0 2px 8px #ffd70055;
   opacity: 1 !important;
@@ -883,7 +875,6 @@ footer, .lotr-footer {
   box-shadow: 0 2px 16px #ffd70044;
 }
 
-/* =============== Responsive =============== */
 @media (max-width: 900px) {
   .lotr-favorite-main,
   .lotr-blacklist-main {
@@ -926,8 +917,6 @@ footer, .lotr-footer {
 
 
 /* Navbar */
-
-
 .logo a {
   font-family: 'Cinzel', serif;
   font-size: 1.8rem;
@@ -1043,7 +1032,6 @@ footer {
         1px 1px 0 black;
     min-height: 100vh;
     height: 100vh;
-    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     background-image: url("/images/green\ background.jpg");
@@ -1055,7 +1043,6 @@ footer {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    /* padding: 8px; */
     flex-wrap: wrap;
     max-width: 900px;
     margin: 0 auto;
@@ -1079,7 +1066,6 @@ footer {
 .quote-box {
     min-height: 40px;
     width: 880px;
-    /* padding: 16px; */
     margin-bottom: 8px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -1088,7 +1074,7 @@ footer {
     color: white;
     position: relative;
     display: flex;
-    align-items: center;   /* Vertically center the text */
+    align-items: center;  
     justify-content: center;
     transition: background 0.2s;
 }
@@ -1205,7 +1191,6 @@ footer {
     color: white;
 }
 
-/* --- LOTR Style Leaderboards Page --- */
 .leaderboardBody {
   background: url('/images/art-artistic-artwork-fantasy-wallpaper-preview.jpg') center/cover no-repeat, #2d1a06;
   min-height: 100vh;
@@ -1391,7 +1376,6 @@ nav {
     background: transparent;
 }
 
-/* LET OP: nieuwe class! */
 .nav-links-index {
     display: flex;
     justify-content: center;
@@ -1490,7 +1474,7 @@ nav {
     }
 }
 
-/* LandingPage index.html */
+/* LandingPage */
 .landingpageRow {
     display: flex;
     flex-wrap: wrap;
@@ -1519,20 +1503,17 @@ nav {
     position: relative;
 }
 
-
-/* LOTR (groene glow bij hover) */
 .landingpageRow a:hover > #rightImg {
     box-shadow: 0 0 34px 13px #25ff00c7, 0 0 44px 21px #b8ff00a0;
     transform: scale(1.11) rotate(-1.8deg);
     filter: brightness(1.12) saturate(1.19);
     z-index: 3;
 }
-/* LOTR accent als niet-gehovered */
+
 .landingpageRow a > #rightImg {
     border: 2.5px solid #bfa534;
 }
 
-/* Rest: rode glow bij hover (exclusief LOTR) */
 #wrongImg:hover {
     box-shadow: 0 0 38px 13px #ff2424cc, 0 0 64px 17px #c40000a9;
     transform: scale(1.11) rotate(-2deg);
@@ -1574,11 +1555,10 @@ nav {
     }
 }
 
-/* Titel met arcadestijl glow */
 .lotr-titel {
     color: #fff5e1;
     font-size: 2.8rem;
-    margin-top: 200px; /* naar boven duwen */
+    margin-top: 200px; 
     margin-bottom: 2vw;
     font-family: 'Cinzel', serif;
     font-weight: bold;
@@ -1606,12 +1586,11 @@ body.indexBody {
     color: #f5e9df;
 }
 
-/* Pop-effect bij click */
 .landingpageRow img:active {
     transform: scale(0.97) rotate(-2deg);
     filter: brightness(0.97);
 }
-/* Pop-up modal styling */
+
 .locked-game-modal {
   position: fixed;
   z-index: 9999;
@@ -1662,8 +1641,6 @@ body.indexBody {
   box-shadow: 0 2px 12px #ffd70088;
 }
 
-
-/* Registration Page */
 body.registrationBody {
     background: linear-gradient(160deg, #170234 0%, #251a46 60%, #190447 100%);
     min-height: 100vh;
@@ -1768,7 +1745,6 @@ body.registrationBody {
     box-shadow: 0 7px 16px #ffc4008b, 0 0 0 2px #ffcc0049 inset;
 }
 
-/* Responsive: */
 @media (max-width: 550px) {
     .registration-article {
         padding: 24px 6vw 18px 6vw;
@@ -1779,8 +1755,6 @@ body.registrationBody {
     }
 }
 
-
-/* Loginpage Styling */
 body.loginBody {
     background: linear-gradient(160deg, #190447 0%, #251a46 60%, #170234 100%);
     min-height: 100vh;
@@ -1892,7 +1866,6 @@ body.loginBody {
     text-shadow: 0 0 7px #000a;
 }
 
-/* Responsive: */
 @media (max-width: 550px) {
     .login-article {
         padding: 24px 8vw 18px 8vw;
@@ -1903,9 +1876,6 @@ body.loginBody {
     }
 }
 
-
-/* Media queries */
-
 @media (max-width: 1024px) {
     .leaderboards-container {
         grid-template-columns: repeat(2, 1fr);
@@ -1914,7 +1884,6 @@ body.loginBody {
 
 @media (max-width: 768px) {
 
-    /* Navbar */
     nav {
         flex-direction: column;
         align-items: center;
@@ -1934,7 +1903,6 @@ body.loginBody {
         padding: 0.5rem;
     }
 
-    /* Header */
     .character-header {
         flex-direction: column;
         gap: 0.5rem;
@@ -1946,7 +1914,6 @@ body.loginBody {
         margin: 0.5rem 0;
     }
 
-    /* Quotes sectie */
     .quotes-section {
         padding: 0 0.5rem;
     }
@@ -1963,7 +1930,6 @@ body.loginBody {
         font-size: 0.9rem;
     }
 
-    /* Blitz */
     .blitz-container {
         padding: 0.5rem;
     }
@@ -1977,7 +1943,6 @@ body.loginBody {
         grid-template-columns: 1fr;
     }
 
-    /* Landing Page */
     .landingpageRow {
         flex-direction: column;
         gap: 10px;
@@ -1987,8 +1952,6 @@ body.loginBody {
         width: 100%;
         height: auto;
     }
-
-    /* Registration en Login */
     .registration-article,
     .login-article {
         width: 90%;
@@ -2025,7 +1988,6 @@ body.loginBody {
 
 @media (max-width: 480px) {
 
-    /* Extra kleine schermen */
     .character-header h1 {
         font-size: 1.5rem;
     }
@@ -2095,15 +2057,11 @@ body.loginBody {
     td {
         min-width: 100px;
     }
-
-    /* Leaderboard */
 }
 
-/* --- 10rounds and suddendeath: Fit navbar, content, and footer on one screen, background scales --- */
 .d10rounds-body, .suddendeath-body, .blitz-body {
   min-height: 100vh;
   height: 100vh;
-  /* overflow: hidden; */
   display: flex;
   flex-direction: column;
   background-size: cover;
@@ -2143,8 +2101,7 @@ main {
   justify-content: center;
   flex: 1 0 auto;
   min-height: 0;
-  box-sizing: border-box;
-  
+  box-sizing: border-box; 
 }
 
 header {
@@ -2215,7 +2172,6 @@ footer {
   justify-content: space-around;
 }
 
-
 .answer-vert {
   display: flex;
   flex-direction: column;
@@ -2235,7 +2191,6 @@ footer {
   margin: 1.5rem 0 1rem 0;
 }
 
-/* Basisknop */
 .like-btn,
 .dislike-btn {
   font-size: 2.4rem;
@@ -2274,7 +2229,7 @@ footer {
   box-shadow: 0 8px 32px #d4af3777, 0 0 0 9px #61161644 inset;
   border-color: #ffd700;
 }
-/* Medium devices (tablets & sm desktops, max-width 1100px) */
+
 @media (max-width: 1100px) {
   .tenrounds-container, .suddendeath-container, .blitz-container {
     max-width: 99vw;
@@ -2287,7 +2242,6 @@ footer {
   }
 }
 
-/* Small screens (mobiel & small tablets, max-width 700px) */
 @media (max-width: 700px) {
   .quiz-header {
     font-size: 1.1rem;
@@ -2330,7 +2284,6 @@ footer {
   }
 }
 
-/* Very small screens (oude telefoons, max-width 440px) */
 @media (max-width: 440px) {
   .quiz-header { font-size: 0.83rem; }
   .answer-selection h2 { font-size: 0.87rem; }
@@ -2350,7 +2303,6 @@ footer {
   }
 }
 
-/* Extra: Glow on focus for accessibility */
 .like-btn:focus-visible,
 .dislike-btn:focus-visible {
   outline: 2px solid #ffd700;
@@ -2383,7 +2335,6 @@ footer {
   }
 }
 
-/* --- Fit index page (LandingPage) navbar and content on one screen, no scroll, background covers --- */
 .indexBody {
   min-height: 100vh;
   height: 100vh;
