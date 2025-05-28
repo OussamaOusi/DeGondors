@@ -70,7 +70,6 @@ app.use("/api/rounds", roundsLikeDislikeRouter);
 app.use("/blacklist", blacklistRouter);
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, favoriteRouter);
 
-//session moet gefixt worden
 app.post("/logout", async(req, res) => {
     console.log(">>> Voor destroy:", req.session);  
     req.session.destroy(() => {
@@ -98,12 +97,10 @@ app.post("/api/scores", async (req, res) => {
 });
 app.use( loginRouter, indexRoutes, apiRoutes, registrationRouter, homeRouter, roundsRouter, blacklistRouter, leaderboardsRouter, profileRouter, favoritesRouter, suddendeathRouter, blitzRouter);
 
-// **Logout**-route
 app.post("/logout", (req, res) => {
   req.session.destroy(() => res.redirect("/"));
 });
 
-// Start server
 app.listen(app.get("port"), async () => {
   await connect();
   console.log(`Server draait op http://localhost:${app.get("port")}`);

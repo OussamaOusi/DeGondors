@@ -14,13 +14,11 @@
 <main class="lotr-blacklist-main">
 
   <%
-    // Maak groups per character
     const groups = {};
     blacklist.forEach(item => {
       (groups[item.characterName] ||= []).push(item);
     });
 
-    // Sorteer characters op aantal quotes, degene met meeste quotes ONDERAAN
     const sortedCharacters = Object.keys(groups).sort((a, b) => {
       return groups[a].length - groups[b].length;
     });
@@ -48,10 +46,10 @@
         <% quotes.forEach(item => { %>
           <li class="blacklist-quote-item" data-id="<%= item._id %>">
             <blockquote class="blacklist-quote-text">“<%= item.quote %>”</blockquote>
-            <div class="blacklist-reason">
+            <article class="blacklist-reason">
               <span class="blacklist-reason-label">Reden:</span>
               <span class="blacklist-reason-content"><%= item.reason %></span>
-            </div>
+            </article>
             <button class="btn delete-blacklist">Verwijder</button>
           </li>
         <% }) %>

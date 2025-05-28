@@ -14,13 +14,11 @@
 <main class="lotr-favorite-main">
 
   <%
-    // Maak groups per character
     const groups = {};
     favorites.forEach(item => {
       (groups[item.characterName] ||= []).push(item);
     });
-
-    // Sorteer characters op aantal quotes, meeste ONDERAAN
+    
     const sortedCharacters = Object.keys(groups).sort((a, b) => {
       return groups[a].length - groups[b].length;
     });

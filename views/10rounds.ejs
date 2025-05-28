@@ -14,23 +14,20 @@
 
     <main>
         <section class="tenrounds-container">
-            <!-- Header met vraagnummer -->
-            <div class="quiz-header">
+
+            <header class="quiz-header">
                 <h1>10 Rounds</h1>
-            </div>
+            </header>
 
-            <!-- Quote -->
-            <div class="quote-box">
+            <section class="quote-box">
                 <p id="quote-text" class="quote-text"></p>
-            </div>
+            </section>
 
-            <!-- Like/Dislike buttons direct onder de quote -->
-            <div class="reviewbutton-container">
+            <section class="reviewbutton-container">
                 <button class="like-btn" id="like-button">👍</button>
                 <button class="dislike-btn" id="dislike-button">👎</button>
-            </div>
+            </section>
 
-            <!-- Karakterkeuzes -->
             <section class="answer-container">
                 <section class="answer-selection">
                     <h2>Karakter: </h2>
@@ -40,7 +37,6 @@
                         <button id="button3" class="character-button">Optie 3</button>
                     </article> 
                 </section>
-
                 <section class="answer-selection">
                     <h2>Film: </h2>
                     <article class="answer-vert">
@@ -51,13 +47,14 @@
                 </section>                                       
             </section>
 
-            <!-- Score display -->
-            <div class="score-display">
+            <section class="score-display">
                 <span class="score-text">Score:</span>
                 <span id="score-value" class="score-value">0/0</span>
-            </div>               
+            </section>
 
         </section>
         <script src="/api.js" defer></script>
     </main>
-<%- include("partials/footer") %>
+    <%- include("partials/footer") %>
+</body>
+</html>

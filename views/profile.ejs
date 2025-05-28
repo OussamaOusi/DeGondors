@@ -7,127 +7,112 @@
     <title>profiel</title>
 </head>
 <header>
-      <%- include("partials/nav") %>
-    </header>
-  <body class="rpg-profile-body">
-   
-    <main>
-      <h1 class="lotr-profile-title">Profiel</h1>
-      <div class="rpg-profile-container">
-        <!-- LEFT PANEL: User Info + Actions -->
-        <div class="rpg-left-panel">
-          <h2 class="rpg-section-title">Gebruiker</h2>
-          <a href="?edit=true" class="edit-icon" title="Bewerk profiel">&#9998;</a>
-          <div class="rpg-user-info">
-            <% if (editMode) { %>
-              <form method="POST" action="/profile/update" class="rpg-user-info-edit">
-                <label>Gebruikersnaam:
-                  <input type="text" name="username" value="<%= user?.username %>" required />
-                </label>
-                <label>Email:
-                  <input type="email" name="email" value="<%= user?.email %>" required />
-                </label>
-                <label>Wachtwoord:
-                  <input type="password" name="password" placeholder="Nieuw wachtwoord" />
-                </label>
-                <button type="submit" class="rpg-btn-save">Opslaan</button>
-              </form>
-              <% } else { %>
-                <div class="rpg-user-info">
-                  <p><span class="rpg-label">Gebruikersnaam:</span>
-                    <%= user?.username %>
-                  </p>
-                  <p><span class="rpg-label">Email:</span>
-                    <%= user?.email %>
-                  </p>
-                  <p><span class="rpg-label">Wachtwoord:</span> ********</p>
-                </div>
+    <%- include("partials/nav") %>
+</header>
+<body class="rpg-profile-body">
+<main>
+    <h1 class="lotr-profile-title">Profiel</h1>
+    <section class="rpg-profile-container">
+        
+        <aside class="rpg-left-panel">
+            <h2 class="rpg-section-title">Gebruiker</h2>
+            <a href="?edit=true" class="edit-icon" title="Bewerk profiel">&#9998;</a>
+            <section class="rpg-user-info">
+                <% if (editMode) { %>
+                    <form method="POST" action="/profile/update" class="rpg-user-info-edit">
+                        <label>Gebruikersnaam:
+                            <input type="text" name="username" value="<%= user?.username %>" required />
+                        </label>
+                        <label>Email:
+                            <input type="email" name="email" value="<%= user?.email %>" required />
+                        </label>
+                        <label>Wachtwoord:
+                            <input type="password" name="password" placeholder="Nieuw wachtwoord" />
+                        </label>
+                        <button type="submit" class="rpg-btn-save">Opslaan</button>
+                    </form>
+                <% } else { %>
+                    <article class="rpg-user-info">
+                        <p><span class="rpg-label">Gebruikersnaam:</span>
+                            <%= user?.username %>
+                        </p>
+                        <p><span class="rpg-label">Email:</span>
+                            <%= user?.email %>
+                        </p>
+                        <p><span class="rpg-label">Wachtwoord:</span> ********</p>
+                    </article>
                 <% } %>
+            </section>
+            <form method="POST" action="/logout">
+                <button class="rpg-btn-logout">Log uit</button>
+            </form>
+            <form method="POST" action="/profile/delete" onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
+                <button class="rpg-btn-delete">Verwijder account</button>
+            </form>
+        </aside>
 
-          </div>
+        <section class="rpg-center-panel">
+            <section class="character-selector">
+                <button class="arrow-btn" onclick="prevCharacter()">←</button>
+                <img
+                    id="characterImage"
+                    class="rpg-character-image"
+                    src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>"
+                    alt="Character"
+                />
+                <button class="arrow-btn" onclick="nextCharacter()">→</button>
+            </section>
+            <p id="characterName" class="rpg-character-class visually-hidden">
+                <%= user?.characterName ?? '' %>
+            </p>
+            <form method="POST" action="/profile/avatar">
+                <input type="hidden" name="avatar" id="avatarInput" value="<%= user?.avatar ?? 'boogschutter.png' %>" />
+                <button class="rpg-btn-avatar">Zet als profielfoto</button>
+            </form>
+        </section>
 
-          <form method="POST" action="/logout">
-            <button class="rpg-btn-logout">Log uit</button>
-          </form>
-          <form method="POST" action="/profile/delete"
-            onsubmit="return confirm('Weet je zeker dat je je account wilt verwijderen?')">
-            <button class="rpg-btn-delete">Verwijder account</button>
-          </form>
-        </div>
-
-      <!-- CENTER PANEL: Character Image -->
-<div class="rpg-center-panel">
-  <div class="character-selector">
-    <button class="arrow-btn" onclick="prevCharacter()">←</button>
-
- 
-    <img
-      id="characterImage"
-      class="rpg-character-image"
-      src="/images/profileImages/<%= user?.avatar ?? 'boogschutter.png' %>"
-      alt="Character"
-    />
-
-    <button class="arrow-btn" onclick="nextCharacter()">→</button>
-  </div>
-
-
-  <p id="characterName" class="rpg-character-class visually-hidden">
-    <%= user?.characterName ?? '' %>
-  </p>
-
-  <form method="POST" action="/profile/avatar">
-    <input type="hidden" name="avatar" id="avatarInput" value="<%= user?.avatar ?? 'boogschutter.png' %>" />
-    <button class="rpg-btn-avatar">Zet als profielfoto</button>
-  </form>
-</div>
-        <!-- RIGHT PANEL: Stats -->
-        <div class="rpg-right-panel">
-          <h2 class="rpg-section-title">Stats</h2>
-          <ul class="rpg-stats-list">
+        <aside class="rpg-right-panel">
+            <h2 class="rpg-section-title">Stats</h2>
             <ul class="rpg-stats-list">
-              <li><a href="/favorites"><span>Favoriete Quotes:</span></a>
-                <%= favoriteCount %>
-              </li>
-              <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a>
-                <%= blacklistCount %>
-              </li>
-               <h2 class="rpg-section-title2">Mijn highscores</h2>
-              <li>
-                <a href="/leaderboards">
-                  <span>
-                    <img src="/images/profileImages/10_rounds-removebg-preview.png" alt="10 rounds icon"
-                      class="stats-icon" />
-                  </span>
-                </a>
-                <%= best10Rounds %>
-              </li>
-
-              <li>
-                <a href="/leaderboards">
-                  <span>
-                    <img src="/images/profileImages/Blitz-removebg-preview.png" alt="Blitz icon" class="stats-icon" />
-                  </span>
-                </a>
-                <%= bestBlitz %>
-              </li>
-
-              <li>
-                <a href="/leaderboards">
-                  <span>
-                    <img src="/images/profileImages/Sudden_Death-removebg-preview.png" alt="Sudden Death icon"
-                      class="stats-icon" />
-                  </span>
-                </a>
-                <%= bestSudden %>
-              </li>
+                <li><a href="/favorites"><span>Favoriete Quotes:</span></a>
+                    <%= favoriteCount %>
+                </li>
+                <li><a href="/blacklist"><span>Blacklisted Quotes:</span></a>
+                    <%= blacklistCount %>
+                </li>
+                <h2 class="rpg-section-title2">Mijn highscores</h2>
+                <li>
+                    <a href="/leaderboards">
+                        <span>
+                            <img src="/images/profileImages/10_rounds-removebg-preview.png" alt="10 rounds icon"
+                                class="stats-icon" />
+                        </span>
+                    </a>
+                    <%= best10Rounds %>
+                </li>
+                <li>
+                    <a href="/leaderboards">
+                        <span>
+                            <img src="/images/profileImages/Blitz-removebg-preview.png" alt="Blitz icon" class="stats-icon" />
+                        </span>
+                    </a>
+                    <%= bestBlitz %>
+                </li>
+                <li>
+                    <a href="/leaderboards">
+                        <span>
+                            <img src="/images/profileImages/Sudden_Death-removebg-preview.png" alt="Sudden Death icon"
+                                class="stats-icon" />
+                        </span>
+                    </a>
+                    <%= bestSudden %>
+                </li>
             </ul>
+        </aside>
 
-          </ul>
-        </div>
-      </div>
-    </main>
-
-    <%- include("partials/footer") %>
-
-      <script src="/api.js" defer></script>
+    </section>
+</main>
+<%- include("partials/footer") %>
+<script src="/api.js" defer></script>
+</body>
+</html>

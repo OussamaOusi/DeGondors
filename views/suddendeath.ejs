@@ -7,28 +7,26 @@
     <title>suddendeath</title>
 </head>
 
-
 <body class="suddendeath-body">
     <header>
         <%- include("partials/nav") %>
     </header>
     <main>
         <section class="suddendeath-container">
-            <!-- Header met vraagnummer -->
-            <div class="quiz-header">
+
+            <header class="quiz-header">
                 <h1>Suddendeath</h1>
-            </div>
+            </header>
             
-            <!-- Quote -->
-            <div class="quote-box">
+            <section class="quote-box">
                 <p id="quote-text" class="quote-text"></p>
-            </div>
+            </section>
             
-            <div class="reviewbutton-container">
+            <section class="reviewbutton-container">
                 <button class="like-btn" id="like-button">👍</button>
                 <button class="dislike-btn" id="dislike-button">👎</button>
-            </div>
-            <!-- Karakterkeuzes -->
+            </section>
+            
             <section class="answer-container">
                 <section class="answer-selection">
                     <h2>Karakter:</h2>
@@ -38,7 +36,6 @@
                         <button id="button3" class="character-button">Optie 3</button>
                     </article> 
                 </section>
-
                 <section class="answer-selection">
                     <h2>Film:</h2>
                     <article class="answer-vert">
@@ -49,15 +46,16 @@
                 </section>                                       
             </section>
 
-            <!-- Score display -->
-            <div class="score-display">
+            <section class="score-display">
                 <span class="score-text">Score:</span>
                 <span id="score-value" class="score-value">0/0</span>
-            </div>
+            </section>
         </section>
 
         <section>
-                <script src="/api.js" defer></script>
-            </section>
+            <script src="/api.js" defer></script>
+        </section>
     </main>
-<%- include("partials/footer") %>
+    <%- include("partials/footer") %>
+</body>
+</html>
