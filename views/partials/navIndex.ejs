@@ -1,12 +1,12 @@
 <header class="header-nav-index">
-    <nav>
-        <section class="nav-links-index">
-            <a href="/">Home</a>
-            <a href="/registration">Registratie</a>
-            <a href="/login">Login</a>
-            <form action="/logout" method="post" style="display:inline">
-                <button type="submit">Logout</button>
-            </form>
-        </section>
-    </nav>
+  <nav>
+    <section class="nav-links-index">
+      <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a>
+      <a href="/registration" class="<%= currentPath === '/registration' ? 'active' : '' %>">Registratie</a>
+      <a href="/login" class="<%= currentPath === '/login' ? 'active' : '' %>">Login</a>
+      <form action="/logout" method="post" style="display:inline">
+        <button type="submit">Logout</button>
+      </form>
+    </section>
+  </nav>
 </header>

@@ -6,7 +6,9 @@ import { User } from '../types';
 const router = express.Router();
 
 router.get("/login", async (req, res) => {
-    res.render("login");
+   res.render("login", {
+  currentPath: req.path
+});
 });
 
 router.post("/login", async (req, res) => {

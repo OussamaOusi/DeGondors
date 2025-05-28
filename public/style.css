@@ -1432,6 +1432,12 @@ nav {
     padding: 0;
 }
 
+.nav-links-index a.active {
+  color: #ffffff;
+  text-shadow: 0 0 5px #ffffff;
+  border-bottom: 2px solid #d4af37;
+}
+
 .nav-links-index button[type="submit"] {
     background: linear-gradient(110deg, #ff4444 50%, #9a0025 100%);
     color: #fff;
