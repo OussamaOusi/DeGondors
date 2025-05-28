@@ -2,8 +2,8 @@ import express, { Request, Response } from 'express';
 
 const router = express.Router();
 
-router.get('/blitz', (_req: Request, res: Response) => {
-  res.render('blitz');
+router.get('/blitz', (req: Request, res: Response) => {
+  res.render('blitz', { user: req.session.user });
 });
 
 export default router;

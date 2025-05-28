@@ -42,7 +42,10 @@ router.get('/leaderboards', async (req, res) => {
         mode: entry.mode
       }));
   });
-  res.render("leaderboards", { highscores });
+ res.render("leaderboards", {
+  highscores,
+  user: req.session.user 
+});
   console.log("Highscores passed to leaderboards view:", highscores);
   console.log("Leaderboard fetched successfully");
 });
